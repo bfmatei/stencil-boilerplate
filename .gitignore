@@ -2,7 +2,6 @@
 .sass-cache/
 dist/
 node_modules/
-www/
 .stylelint-cache
 
 # IDEs
