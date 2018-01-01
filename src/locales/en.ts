@@ -1,7 +1,4 @@
 export default {
-  header: {
-    index: 'This is the header'
-  },
   menu: {
     index: 'This is the menu'
   },

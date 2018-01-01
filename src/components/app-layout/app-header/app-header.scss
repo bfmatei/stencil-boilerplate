@@ -1,4 +1,29 @@
-/* stylelint-disable color-no-hex */
 app-header {
-  display: block;
+  color: rgb(53, 64, 82);
+  background-color: var(--white);
+  box-sizing: border-box;
+  box-shadow:
+    rgba(0, 0, 0, 0.12) 0 1px 6px,
+    rgba(0, 0, 0, 0.12) 0 1px 4px;
+  width: 100%;
+  display: flex;
+  padding: 0 24px;
+  height: 64px;
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  & .menuButton {
+    background: none;
+    user-select: none;
+    border: 0;
+    padding: 12px;
+    width: 24px;
+    height: 24px;
+    margin: 8px 0 0 -16px;
+    color: rgb(53, 64, 82);
+    cursor: pointer;
+    outline: none;
+  }
 }

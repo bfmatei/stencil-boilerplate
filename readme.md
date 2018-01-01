@@ -21,3 +21,6 @@ Please note that this boilerplate is built for web apps rather than public websi
 
 ## Credits
 * Original CSS Reset - [Eric Meyer](https://meyerweb.com/eric/tools/css/reset/) 
+* Icons
+   * [Material Design Icons](https://materialdesignicons.com)
+   * [Material-UI](http://www.material-ui.com/)

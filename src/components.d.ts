@@ -498,3 +498,64 @@ declare global {
   }
 }
 
+
+import {
+  SvgIcon as SvgIcon
+} from './components/svg-icons/svg-icon/svg-icon';
+
+declare global {
+  interface HTMLSvgIconElement extends SvgIcon, HTMLElement {
+  }
+  var HTMLSvgIconElement: {
+    prototype: HTMLSvgIconElement;
+    new (): HTMLSvgIconElement;
+  };
+  interface HTMLElementTagNameMap {
+    "svg-icon": HTMLSvgIconElement;
+  }
+  interface ElementTagNameMap {
+    "svg-icon": HTMLSvgIconElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "svg-icon": JSXElements.SvgIconAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SvgIconAttributes extends HTMLAttributes {
+      name?: string;
+      onClick?: (evt: UIEvent) => void;
+    }
+  }
+}
+
+
+import {
+  SvgIcons as SvgIcons
+} from './components/svg-icons/svg-icons';
+
+declare global {
+  interface HTMLSvgIconsElement extends SvgIcons, HTMLElement {
+  }
+  var HTMLSvgIconsElement: {
+    prototype: HTMLSvgIconsElement;
+    new (): HTMLSvgIconsElement;
+  };
+  interface HTMLElementTagNameMap {
+    "svg-icons": HTMLSvgIconsElement;
+  }
+  interface ElementTagNameMap {
+    "svg-icons": HTMLSvgIconsElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "svg-icons": JSXElements.SvgIconsAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SvgIconsAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+

@@ -9,11 +9,7 @@ import {
 export class AppHeader {
   public render(): JSX.Element {
     return (
-      <header>
-        <h1>
-          <translate-string entry='header.index' />
-        </h1>
-      </header>
+      <svg-icon name='menu' class='menuButton' />
     );
   }
 }

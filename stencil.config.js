@@ -1,12 +1,21 @@
 exports.config = {
   bundles: [
     {
+      /** Icons Components */
+      components: [
+        'svg-icons',
+        'svg-icon'
+      ]
+    },
+    {
+      /** Main Components */
       components: [
         'main-app',
         'connected-router'
       ]
     },
     {
+      /** Routing Components */
       components: [
         'enhanced-route',
         'connected-link',
@@ -14,16 +23,25 @@ exports.config = {
       ]
     },
     {
+      /** Translations Components */
+      components: [
+        'translate-string'
+      ]
+    },
+    {
+      /** Login Page */
       components: [
         'login-page'
       ]
     },
     {
+      /** Dashboard Page */
       components: [
         'dashboard-page'
       ]
     },
     {
+      /** Projects Page */
       components: [
         'projects-page',
         'list-projects',
