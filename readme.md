@@ -14,7 +14,7 @@ It features a couple of common principles and workflows that are used at the mom
    - Fully-configured for development using [JetBrains](https://www.jetbrains.com/) products, especially [WebStorm](https://www.jetbrains.com/webstorm/)
    - Custom built translations system
 
-Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **prerendering** and **server side rendering** are not enabled. 
+Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **prerendering** and **server side rendering** are not enabled.
 
 ## Known Issues
 * Automated Testing is not working 
