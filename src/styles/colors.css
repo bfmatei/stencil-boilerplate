@@ -1,0 +1,12 @@
+:root {
+  --white: rgb(255, 255, 255);
+  --dirtyWhite: rgb(239, 243, 246);
+  --brightGreen: rgb(72, 187, 152);
+  --darkerGreen: rgba(72, 187, 152, 0.4);
+  --darkGreen: rgba(72, 187, 152, 0.2);
+  --red: rgb(221, 59, 30);
+  --darkerRed: rgba(221, 59, 30, 0.4);
+  --darkRed: rgba(221, 59, 30, 0.2);
+  --shadow: rgba(0, 0, 0, 0.12);
+  --text: rgba(0, 0, 0, 0.87);
+}

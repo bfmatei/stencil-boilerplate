@@ -1,0 +1,13 @@
+{
+  "name": "Stencil Boilerplate",
+  "short_name": "Boilerplate",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/favicon/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

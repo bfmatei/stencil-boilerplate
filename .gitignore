@@ -1,0 +1,18 @@
+# App
+.sass-cache/
+dist/
+node_modules/
+www/
+.stylelint-cache
+
+# IDEs
+.idea/dictionaries/
+.idea/**/workspace.xml
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Common OS files
+$RECYCLE.BIN/
+.DS_Store
+Thumbs.db
