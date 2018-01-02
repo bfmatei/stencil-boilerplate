@@ -13,8 +13,9 @@ It features a couple of common principles and workflows that are used at the mom
    - Code quality is ensured by [TSLint](https://palantir.github.io/tslint/) and [stylelint](https://stylelint.io/) and both have manually-configured rules
    - Fully-configured for development using [JetBrains](https://www.jetbrains.com/) products, especially [WebStorm](https://www.jetbrains.com/webstorm/)
    - Custom built translations system
+   - CSS grid layout
 
-Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **prerendering** and **server side rendering** are not enabled.
+Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **prerendering** and **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.
 
 ## Known Issues
 * Automated Testing is not working 

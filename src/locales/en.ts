@@ -1,26 +1,32 @@
 export default {
   menu: {
-    index: 'This is the menu'
+    dashboard: 'Dashboard',
+    projects: 'Projects',
+    logout: 'Logout'
   },
-  dashboardPage: {
+  dashboard: {
     index: 'This is the dashboard page'
   },
-  loginPage: {
+  login: {
     username: 'Username',
     password: 'Password',
-    signIn: 'Sign In'
+    signIn: 'Sign In',
+    errors: {
+      wrongUsername: 'Wrong username',
+      wrongPassword: 'Wrong password'
+    }
   },
-  projectsPage: {
-    listProjectsPage: {
+  projects: {
+    projectsList: {
       index: 'This is the list projects page'
     },
-    newProjectPage: {
+    projectNew: {
       index: 'This is the new project page'
     },
-    viewProjectPage: {
+    projectView: {
       index: 'This is the view project page'
     },
-    editProjectPage: {
+    projectEdit: {
       index: 'This is the edit project page'
     }
   }

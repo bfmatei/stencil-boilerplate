@@ -1,0 +1,25 @@
+app-header {
+  grid-area: header;
+  background-color: var(--white);
+  box-sizing: border-box;
+  box-shadow:
+    var(--shadowColor) var(--boxShadow1Size),
+    var(--shadowColor) var(--boxShadow2Size);
+  width: 100%;
+  padding: 0 24px;
+  height: 64px;
+  z-index: var(--appHeaderIndex);
+
+  & .menu-button {
+    background: none;
+    user-select: none;
+    border: 0;
+    padding: 12px;
+    width: 24px;
+    height: 24px;
+    margin: 8px 0 0 -16px;
+    color: var(--midnight);
+    cursor: pointer;
+    outline: none;
+  }
+}

@@ -1,14 +1,14 @@
-import locales from '../../locales';
+import locales from '../../locales/locales';
+import {
+  LocalesMap
+} from '../../locales/locales.interface';
 
 import {
   I18nActions,
   I18nActionTypes
 } from './i18n.actions';
-import {
-  I18nObject
-} from './i18n.interface';
 
-export type I18nState = I18nObject;
+export type I18nState = LocalesMap;
 
 export function getInitialState(): I18nState {
   return {

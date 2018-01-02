@@ -5,7 +5,7 @@ import {
   MiddlewareAPI
 } from 'redux';
 
-import locales from '../../locales';
+import locales from '../../locales/locales';
 import {
   GlobalStoreState
 } from '../../redux/store';

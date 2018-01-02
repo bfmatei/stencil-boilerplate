@@ -10,20 +10,20 @@ import {
   composeWithDevTools
 } from 'redux-devtools-extension';
 
-import connectedRouterMiddleware from '../components/connected-router/connected-router.middleware';
 import {
-  ConnectedRouterState,
-  getInitialState as getConnectedRouterInitialState
-} from '../components/connected-router/connected-router.reducer';
-import {
-  getInitialState as getLoginInitialState,
-  LoginPageState
-} from '../components/login-page/login-page.reducer';
+  AppMenuState,
+  getInitialState as getAppMenuInitialState
+} from '../components/app-menu/app-menu.reducer';
 import configMiddleware from '../orchestrators/config/config.middleware';
 import {
   ConfigState,
   getInitialState as getConfigInitialState
 } from '../orchestrators/config/config.reducer';
+import connectedRouterMiddleware from '../orchestrators/connected-router/connected-router.middleware';
+import {
+  ConnectedRouterState,
+  getInitialState as getConnectedRouterInitialState
+} from '../orchestrators/connected-router/connected-router.reducer';
 import {
   getInitialState as getI18nInitialState,
   I18nState
@@ -38,7 +38,7 @@ import rootReducer from './root-reducer';
 export interface GlobalStoreState {
   config: ConfigState;
   i18n: I18nState;
-  login: LoginPageState;
+  menu: AppMenuState;
   router: ConnectedRouterState;
   user: UserState;
 }
@@ -47,7 +47,7 @@ export function getInitialState(): GlobalStoreState {
   return {
     config: getConfigInitialState(),
     i18n: getI18nInitialState(),
-    login: getLoginInitialState(),
+    menu: getAppMenuInitialState(),
     router: getConnectedRouterInitialState(),
     user: getUserInitialState()
   };

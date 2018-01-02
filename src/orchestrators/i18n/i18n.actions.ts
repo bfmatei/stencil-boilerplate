@@ -3,12 +3,11 @@ import {
 } from 'redux';
 
 import {
+  LocalesMap
+} from '../../locales/locales.interface';
+import {
   GlobalStoreState
 } from '../../redux/store';
-
-import {
-  I18nObject
-} from './i18n.interface';
 
 export enum I18nActions {
   UPDATE_ENTRIES = 'UPDATE_ENTRIES'
@@ -16,10 +15,10 @@ export enum I18nActions {
 
 export interface UpdateEntriesAction {
   type: I18nActions.UPDATE_ENTRIES;
-  payload: I18nObject;
+  payload: LocalesMap;
 }
 
-export function updateEntries(entries: I18nObject): any {
+export function updateEntries(entries: LocalesMap): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<UpdateEntriesAction> => {
     return dispatch({
       type: I18nActions.UPDATE_ENTRIES as I18nActions.UPDATE_ENTRIES,

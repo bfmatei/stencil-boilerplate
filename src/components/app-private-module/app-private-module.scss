@@ -1,0 +1,10 @@
+app-private-module {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'header header'
+    'menu content';
+}

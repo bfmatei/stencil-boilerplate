@@ -1,53 +1,55 @@
 exports.config = {
   bundles: [
     {
-      /** Icons Components */
+      /** Shared Components */
       components: [
-        'svg-icons',
-        'svg-icon'
+        'app-icon',
+        'app-link',
+        'app-route',
+        'app-redirect',
+        'app-translate'
       ]
     },
     {
       /** Main Components */
       components: [
-        'main-app',
-        'connected-router'
+        'app-load',
+        'app-icons',
+        'app-main'
       ]
     },
     {
-      /** Routing Components */
+      /**
+       * Public Modules
+       *
+       * This needs to be placed separately from the main components.
+       */
       components: [
-        'enhanced-route',
-        'connected-link',
-        'render-redirect'
+        'app-login'
       ]
     },
     {
-      /** Translations Components */
+      /** Private Module */
       components: [
-        'translate-string'
+        'app-private-module',
+        'app-header',
+        'app-menu'
       ]
     },
     {
-      /** Login Page */
+      /** Common Private Modules */
       components: [
-        'login-page'
+        'app-dashboard'
       ]
     },
     {
-      /** Dashboard Page */
+      /** Projects Module */
       components: [
-        'dashboard-page'
-      ]
-    },
-    {
-      /** Projects Page */
-      components: [
-        'projects-page',
-        'list-projects',
-        'new-project',
-        'view-project',
-        'edit-project'
+        'app-projects',
+        'app-projects-list',
+        'app-project-new',
+        'app-project-view',
+        'app-project-edit'
       ]
     }
   ],
@@ -68,8 +70,11 @@ exports.config = {
     ]
   },
   globalStyle: [
+    'src/styles/animations.css',
+    'src/styles/colors.css',
     'src/styles/reset.css',
-    'src/styles/colors.css'
+    'src/styles/sizes.css',
+    'src/styles/z-index.css'
   ]
 };
 

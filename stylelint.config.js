@@ -115,7 +115,7 @@ module.exports = {
     // 'selector-max-type': 0,
     'selector-max-universal': 0,
     // 'selector-nested-pattern': '',
-    'selector-no-qualifying-type': true,
+    // 'selector-no-qualifying-type': true,
     'selector-no-vendor-prefix': true,
     // 'selector-pseudo-class-blacklist': [],
     // 'selector-pseudo-class-whitelist': [],
