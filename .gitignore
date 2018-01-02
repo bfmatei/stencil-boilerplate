@@ -2,6 +2,7 @@
 .sass-cache/
 dist/
 node_modules/
+src/components.d.ts
 www/
 .stylelint-cache
 
