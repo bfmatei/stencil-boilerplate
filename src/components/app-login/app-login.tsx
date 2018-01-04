@@ -8,7 +8,6 @@ import {
 } from '@stencil/redux';
 
 import autobind from '../../decorators/autobind';
-import debounce from '../../decorators/debounce';
 import {
   LocalesMap
 } from '../../locales/locales.interface';
@@ -66,14 +65,12 @@ export class AppLogin {
     });
   }
 
-  @debounce(50)
-  private usernameInputEvent(evt: UIEvent): void {
-    this.username = (evt.target as any).value;
+  private usernameInputEvent(value: string): void {
+    this.username = value;
   }
 
-  @debounce(50)
-  private passwordInputEvent(evt: UIEvent): void {
-    this.password = (evt.target as any).value;
+  private passwordInputEvent(value: string): void {
+    this.password = value;
   }
 
   @autobind
@@ -122,17 +119,19 @@ export class AppLogin {
     return (
       <section class='container'>
         <form>
-          <input
+          <app-text-input
+            label='login.username'
             type='text'
-            onInput={this.usernameInputEvent}
+            name='username'
             value={this.username}
-            placeholder={this.translations.login.username}
+            onValueChange={this.usernameInputEvent}
           />
-          <input
+          <app-text-input
+            label='login.password'
             type='password'
-            onInput={this.passwordInputEvent}
+            name='password'
             value={this.password}
-            placeholder={this.translations.login.password}
+            onValueChange={this.passwordInputEvent}
           />
           <input
             type='submit'

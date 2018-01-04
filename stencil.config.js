@@ -7,6 +7,7 @@ exports.config = {
         'app-link',
         'app-route',
         'app-redirect',
+        'app-text-input',
         'app-translate'
       ]
     },
@@ -22,7 +23,7 @@ exports.config = {
       /**
        * Public Modules
        *
-       * This needs to be placed separately from the main components.
+       * These should be placed separately from the main components.
        */
       components: [
         'app-login'
@@ -72,6 +73,7 @@ exports.config = {
   globalStyle: [
     'src/styles/animations.css',
     'src/styles/colors.css',
+    'src/styles/fonts.css',
     'src/styles/reset.css',
     'src/styles/sizes.css',
     'src/styles/z-index.css'

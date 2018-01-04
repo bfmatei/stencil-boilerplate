@@ -1,6 +1,7 @@
 :root {
   --white: rgb(255, 255, 255);
   --dirtyWhite: rgb(239, 243, 246);
+  --brightGray: rgb(224, 224, 224);
   --brightGreen: rgb(72, 187, 152);
   --darkerGreen: rgba(72, 187, 152, 0.4);
   --darkGreen: rgba(72, 187, 152, 0.2);
@@ -11,5 +12,5 @@
   --midnight: rgb(34, 44, 60);
   --darkerMidnight: rgb(29, 37, 49);
   --shadowColor: rgba(0, 0, 0, 0.12);
-  --text: rgba(0, 0, 0, 0.87);
+  --textColor: rgba(0, 0, 0, 0.87);
 }
