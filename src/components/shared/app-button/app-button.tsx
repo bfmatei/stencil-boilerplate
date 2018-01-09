@@ -3,7 +3,7 @@ import {
   Element,
   Listen,
   Prop,
-  PropWillChange
+  Watch
 } from '@stencil/core';
 
 @Component({
@@ -32,7 +32,7 @@ export class AppButton {
     this.onClick();
   }
 
-  @PropWillChange('disabled')
+  @Watch('disabled')
   public disablePropChange(newValue: boolean): void {
     this.$element.setAttribute('disabled', newValue.toString());
   }

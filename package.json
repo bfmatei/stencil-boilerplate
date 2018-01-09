@@ -17,7 +17,7 @@
     "homepage": "https://github.com/bfmatei"
   },
   "scripts": {
-    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
+    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server --no-open\" ",
     "dev:build": "sd concurrent \"stencil build --watch\" \"stencil-dev-server\" ",
     "build": "stencil build",
     "lint": "sd concurrent \"npm run lint:ts\" \"npm run lint:styles\"",
@@ -27,14 +27,14 @@
     "test:watch": "jest --watch --no-cache --verbose"
   },
   "dependencies": {
-    "@stencil/core": "0.1.1-0",
+    "@stencil/core": "0.1.1",
     "@stencil/redux": "0.0.3",
     "@stencil/router": "0.0.22",
     "redux": "3.7.2",
     "redux-devtools-extension": "2.13.2"
   },
   "devDependencies": {
-    "@stencil/dev-server": "0.0.18-0",
+    "@stencil/dev-server": "0.0.18-1",
     "@stencil/utils": "0.0.4",
     "@types/jest": "22.0.1",
     "jest": "22.0.4",

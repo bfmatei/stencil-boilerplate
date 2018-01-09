@@ -2,8 +2,8 @@ import {
   Component,
   Element,
   Prop,
-  PropWillChange,
-  State
+  State,
+  Watch
 } from '@stencil/core';
 
 import autobind from '../../../decorators/autobind';
@@ -57,7 +57,7 @@ export class AppTextInput {
     );
   }
 
-  @PropWillChange('value')
+  @Watch('value')
   public valueWillChange(newValue: string): void {
     this.internalValue = newValue;
     this.activeClass = this.focused || newValue.length > 0;
