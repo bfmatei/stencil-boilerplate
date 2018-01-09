@@ -1,25 +1,61 @@
+@keyframes indicatorAnim {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    display: block;
+  }
+
+  100% {
+    width: 36px;
+    height: 36px;
+    opacity: 1;
+    display: block;
+  }
+}
+
 app-header {
-  grid-area: header;
   background-color: var(--white);
   box-sizing: border-box;
   box-shadow:
     var(--shadowColor) var(--boxShadow1Size),
     var(--shadowColor) var(--boxShadow2Size);
-  width: 100%;
-  padding: 0 24px;
+  width: 100vw;
+  padding: 0 20px;
   height: 64px;
   z-index: var(--appHeaderIndex);
 
-  & .menu-button {
+  & > .button {
     background: none;
     user-select: none;
     border: 0;
-    padding: 12px;
     width: 24px;
     height: 24px;
-    margin: 8px 0 0 -16px;
+    margin: 20px 0;
     color: var(--midnight);
     cursor: pointer;
     outline: none;
+    position: relative;
+
+    &:before {
+      content: ' ';
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: var(--dirtyWhite);
+      border-radius: 50%;
+      z-index: -1;
+      display: none;
+      animation: indicatorAnim var(--animationDuration) var(--animationTiming) backwards;
+    }
+
+    &:active {
+      &:before {
+        display: block;
+      }
+    }
   }
 }

@@ -12,5 +12,6 @@
   --midnight: rgb(34, 44, 60);
   --darkerMidnight: rgb(29, 37, 49);
   --shadowColor: rgba(0, 0, 0, 0.12);
+  --overlayColor: rgba(34, 44, 60, 0.7);
   --textColor: rgba(0, 0, 0, 0.87);
 }

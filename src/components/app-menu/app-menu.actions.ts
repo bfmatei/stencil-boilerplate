@@ -40,7 +40,7 @@ export interface ToggleMenuAction {
   type: AppMenuActions.TOGGLE_MENU;
 }
 
-export function replace(): any {
+export function toggleMenu(): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<ToggleMenuAction> => {
     return dispatch({
       type: AppMenuActions.TOGGLE_MENU as AppMenuActions.TOGGLE_MENU

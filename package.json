@@ -18,6 +18,7 @@
   },
   "scripts": {
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
+    "dev:build": "sd concurrent \"stencil build --watch\" \"stencil-dev-server\" ",
     "build": "stencil build",
     "lint": "sd concurrent \"npm run lint:ts\" \"npm run lint:styles\"",
     "lint:ts": "tslint -p tsconfig.json -c tslint.json",
@@ -35,7 +36,7 @@
   "devDependencies": {
     "@stencil/dev-server": "0.0.18-0",
     "@stencil/utils": "0.0.4",
-    "@types/jest": "22.0.0",
+    "@types/jest": "22.0.1",
     "jest": "22.0.4",
     "stylelint": "^8.4.0",
     "tslint": "5.8.0"

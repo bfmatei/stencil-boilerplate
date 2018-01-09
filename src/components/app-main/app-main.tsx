@@ -55,7 +55,7 @@ export class AppMain {
     if (this.history) {
       this.locationChange(this.history.location);
 
-      this.unsubscribeFromHistory = this.history.listen(this.locationChange(location));
+      this.unsubscribeFromHistory = this.history.listen(this.locationChange);
     }
   }
 

@@ -9,13 +9,18 @@ import {
 export type UserState = UserData;
 
 export function getInitialState(): UserState {
+  const localStorageUser: string = window.localStorage ? localStorage.getItem('user') : null;
+
+  if (localStorageUser) {
+    return JSON.parse(localStorageUser);
+  }
+
   return {
     id: null,
     user: null,
     name: null,
     lastName: null,
-    email: null,
-    role: null
+    email: null
   };
 }
 

@@ -8,7 +8,7 @@ import {
 
 import autobind from '../../decorators/autobind';
 import {
-  openMenu
+  toggleMenu
 } from '../app-menu/app-menu.actions';
 
 @Component({
@@ -21,22 +21,22 @@ export class AppHeader {
   })
   private store: Store;
 
-  private openMenu: typeof openMenu;
+  private toggleMenu: typeof toggleMenu;
 
   public componentWillLoad(): void {
     this.store.mapDispatchToProps(this, {
-      openMenu
+      toggleMenu
     });
   }
 
   @autobind
   private menuClickHandler(): void {
-    this.openMenu();
+    this.toggleMenu();
   }
 
   public render(): JSX.Element {
     return (
-      <app-icon name='menu' class='menu-button' onClick={this.menuClickHandler} />
+      <app-icon name='menu' class='button' onClick={this.menuClickHandler} />
     );
   }
 }

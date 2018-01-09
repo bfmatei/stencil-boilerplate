@@ -1,3 +1,4 @@
 :root {
   --animationDuration: 450ms;
+  --animationTiming: cubic-bezier(0.23, 1, 0.32, 1);
 }

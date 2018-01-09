@@ -11,7 +11,7 @@ export function fillTranslationValues(translation: string, values: {}): string {
 }
 
 export function reduceTranslations(translations: I18nObject, path: string): I18nObject | string {
-  const splittedPath: string[] = path.split('.');
+  const splittedPath: string[] = (path || '').split('.');
 
   return Object.keys(translations).length > 0 ?
     splittedPath.reduce((accumulator: I18nObject | string, item: string): I18nObject => {

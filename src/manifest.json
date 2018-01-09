@@ -9,5 +9,7 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "background_color": "#EFF3F6",
+  "theme_color": "#48BB98"
 }

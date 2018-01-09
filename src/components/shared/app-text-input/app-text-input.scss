@@ -1,3 +1,13 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 app-text-input {
   display: block;
   position: relative;
@@ -19,14 +29,14 @@ app-text-input {
     width: 100%;
     height: 2px;
     overflow: hidden;
-    transition: max-width 450ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: max-width var(--animationDuration) var(--animationTiming);
     background-color: var(--brightGreen);
   }
 
   & .label {
     position: absolute;
     top: 0;
-    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all var(--animationDuration) var(--animationTiming);
     transform: scale(1) translate(0, 15px);
     transform-origin: left top 0;
     pointer-events: none;
@@ -51,13 +61,13 @@ app-text-input {
 
   & .error-container {
     color: var(--red);
-    opacity: 0;
-    transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: opacity var(--animationDuration) var(--animationTiming);
     font-size: 12px;
     transform: translateY(20px);
     position: absolute;
     left: 0;
     bottom: 0;
+    animation: var(--animationDuration) fadeIn var(--animationTiming);
   }
 
   &.active {

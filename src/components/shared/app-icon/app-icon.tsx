@@ -20,7 +20,7 @@ export class AppIcon {
   public render(): JSX.Element {
     return (
       <svg width={this.size} height={this.size} viewBox='0 0 24 24' fill='currentColor' onClick={this.onClick}>
-        <use xlinkHref={`#${this.name}`} />
+        <use xlinkHref={`/assets/icons.svg#${this.name}`} />
       </svg>
     );
   }

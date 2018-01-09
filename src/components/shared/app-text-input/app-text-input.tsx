@@ -2,11 +2,14 @@ import {
   Component,
   Element,
   Prop,
-  PropDidChange,
+  PropWillChange,
   State
 } from '@stencil/core';
 
 import autobind from '../../../decorators/autobind';
+import {
+  toggleClassNames
+} from '../../../helpers/className';
 
 @Component({
   tag: 'app-text-input',
@@ -26,13 +29,16 @@ export class AppTextInput {
   public error: string = '';
 
   @Prop()
-  public value: string = '';
+  public value: string;
 
   @Prop()
   public disabled: boolean = false;
 
   @Prop()
   public onValueChange: (value: string) => void;
+
+  @State()
+  private internalValue: string = '';
 
   @State()
   private focused: boolean = false;
@@ -51,8 +57,9 @@ export class AppTextInput {
     );
   }
 
-  @PropDidChange('value')
+  @PropWillChange('value')
   public valueWillChange(newValue: string): void {
+    this.internalValue = newValue;
     this.activeClass = this.focused || newValue.length > 0;
   }
 
@@ -65,27 +72,29 @@ export class AppTextInput {
   @autobind
   private inputBlurHandler(): void {
     this.focused = false;
-    this.activeClass = this.value.length > 0;
+    this.activeClass = this.internalValue.length > 0;
   }
 
   @autobind
   private inputChangeHandler(evt: UIEvent): void {
     const value: string = (evt.currentTarget as any).value;
 
+    this.internalValue = value;
     this.activeClass = this.focused || value.length > 0;
 
-    this.onValueChange(value);
+    this.onValueChange(this.internalValue);
   }
 
   private renderInput(): JSX.Element {
     return (
       <input
+        name={this.name}
         onFocus={this.inputFocusHandler}
         onBlur={this.inputBlurHandler}
-        onChange={this.inputChangeHandler}
+        onInput={this.inputChangeHandler}
         class='input'
         type={this.type}
-        value={this.value}
+        value={this.internalValue}
         disabled={this.disabled}
       />
     );
@@ -97,26 +106,15 @@ export class AppTextInput {
     }
 
     return (
-      <span class='error'>{this.error}</span>
+      <span class='error-container'>{this.error}</span>
     );
   }
 
-  private setContainerClasses(): void {
-    if (this.activeClass) {
-      this.$element.classList.add('active');
-    } else {
-      this.$element.classList.remove('active');
-    }
-
-    if (this.error.length > 0) {
-      this.$element.classList.add('error');
-    } else {
-      this.$element.classList.remove('error');
-    }
-  }
-
   public render(): JSX.Element[] {
-    this.setContainerClasses();
+    toggleClassNames(this.$element, {
+      active: this.activeClass,
+      error: this.error.length > 0
+    });
 
     return [
       this.renderLabel(),

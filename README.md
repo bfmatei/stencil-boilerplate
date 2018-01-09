@@ -2,7 +2,7 @@
 
 App boilerplate for [Stencil](https://stenciljs.com/) applications.
 
-It features a couple of common principles and workflows that are used at the moment in the UI frameworks world:
+It features a couple of common principles and workflows that are used at the moment in the Web Apps development world:
    * Routing using [Stencil Router](https://github.com/ionic-team/stencil-router)
    * Redux:
       * [Stencil Redux](https://github.com/ionic-team/stencil-redux) is used as basic router
@@ -28,6 +28,8 @@ It features a couple of common principles and workflows that are used at the mom
       * SCSS pre-processor
       * Grid layout
       * Centralized variables
+      * Material-UI-based styles
+   * nginx configuration 
 
 Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **prerendering** and **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.
 
@@ -44,3 +46,4 @@ Please note that this boilerplate is built for web apps rather than public websi
    * [Marmelab](https://marmelab.com)
    * [Flow](https://flowdash.co)
    * [Anton Kalik](https://dribbble.com/idedy)
+* nginx config rules - [H5BP](https://github.com/h5bp/server-configs-nginx)

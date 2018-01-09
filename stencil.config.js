@@ -15,7 +15,6 @@ exports.config = {
       /** Main Components */
       components: [
         'app-load',
-        'app-icons',
         'app-main'
       ]
     },
@@ -63,8 +62,10 @@ exports.config = {
     }
   ],
   serviceWorker: {
+    skipWaiting: true,
+    clientsClaim: true,
     globPatterns: [
-      '**/*.{js,css,json,html,ico,png,jpeg}'
+      '**/*.{js,css,json,html,ico,png,jpeg,svg,woff2}'
     ],
     globIgnores: [
       'build/app/svg/*.js'

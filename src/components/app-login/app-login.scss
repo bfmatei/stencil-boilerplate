@@ -4,7 +4,7 @@ app-login {
   height: 100vh;
   background-color: var(--brightGreen);
 
-  .container {
+  & > .container {
     position: fixed;
     top: 50%;
     left: 50%;

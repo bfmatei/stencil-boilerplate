@@ -1,5 +1,6 @@
 import {
   Component,
+  Element,
   Prop,
   State
 } from '@stencil/core';
@@ -8,6 +9,9 @@ import {
 } from '@stencil/redux';
 
 import autobind from '../../decorators/autobind';
+import {
+  toggleClassNames
+} from '../../helpers/className';
 import {
   push
 } from '../../orchestrators/connected-router/connected-router.actions';
@@ -33,7 +37,10 @@ export class AppMenu {
   private store: Store;
 
   @State()
-  private visible: boolean = false;
+  public visible: boolean = false;
+
+  @Element()
+  private $element: HTMLElement;
 
   private push: typeof push;
   private closeMenu: typeof closeMenu;
@@ -60,7 +67,9 @@ export class AppMenu {
   }
 
   private menuItemNavClickHandlerBinder(route: string): any {
-    return (): void => {
+    return (evt: UIEvent): void => {
+      evt.stopImmediatePropagation();
+
       this.push(route);
     };
   }
@@ -88,22 +97,13 @@ export class AppMenu {
   }
 
   public render(): JSX.Element[] {
-    const containerClassName: string[] = [
-      'container'
-    ];
-
-    const overlayClassName: string[] = [
-      'overlay'
-    ];
-
-    if (this.visible) {
-      containerClassName.push('visible');
-      overlayClassName.push('visible');
-    }
+    toggleClassNames(this.$element, {
+      visible: this.visible
+    });
 
     return [
       (
-        <nav class={containerClassName.join(' ')}>
+        <nav class='container'>
           {this.renderMenuItem('dashboard', 'dashboard', this.menuItemNavClickHandlerBinder('/dashboard'))}
           {this.renderMenuItem('projects', 'projects', this.menuItemNavClickHandlerBinder('/projects'))}
           {this.renderMenuItem('logout', 'logout', this.menuItemLogoutClickHandler)}
@@ -111,7 +111,7 @@ export class AppMenu {
       ),
       (
         <div
-          class={overlayClassName.join(' ')}
+          class='overlay'
           onClick={this.overlayClickHandler}
         />
       )
