@@ -23,7 +23,12 @@
       ```bash
       sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain app.local.crt
       ```
-5. Start:
+6. Add a new entry in hosts for current app:
+   ```bash
+   sudo echo '127.0.0.1 app.local' >> /etc/hosts
+   sudo echo '127.0.0.1 www.app.local' >> /etc/hosts
+   ```
+7. Start:
    ```bash
    sudo nginx -c /absolute/path/to/project/nginx.conf
    ```
