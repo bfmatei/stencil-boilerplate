@@ -1,6 +1,8 @@
 # App
 .sass-cache/
 dist/
+nginx/servers-enabled/
+nginx/nginx.conf
 node_modules/
 src/components.d.ts
 www/
