@@ -133,6 +133,7 @@
       true,
       "check-parameters"
     ],
+    "no-dynamic-delete": true,
     "no-empty": true,
     "no-eval": true,
     "no-floating-promises": true,
@@ -197,6 +198,7 @@
     "no-require-imports": true,
     "object-literal-sort-keys": false,
     "prefer-const": true,
+    "prefer-readonly": false,
     "trailing-comma": [
       true,
       {
@@ -236,6 +238,7 @@
     ],
     "match-default-export-name": true,
     "newline-before-return": true,
+    "newline-per-chained-call": true,
     "new-parens": true,
     "no-angle-bracket-type-assertion": true,
     "no-boolean-literal-compare": false,

@@ -23,6 +23,7 @@ export default function (target: any, propertyKey: string, descriptor: TypedProp
         set(value: Function): void {
           actualFn = value;
 
+          // tslint:disable-next-line:no-dynamic-delete
           delete this[propertyKey];
         }
       });

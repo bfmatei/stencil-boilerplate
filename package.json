@@ -27,18 +27,18 @@
     "test:watch": "jest --watch --no-cache --verbose"
   },
   "dependencies": {
-    "@stencil/core": "0.1.1",
+    "@stencil/core": "0.1.4",
     "@stencil/redux": "0.0.3",
     "@stencil/router": "0.0.22",
     "redux": "3.7.2",
     "redux-devtools-extension": "2.13.2"
   },
   "devDependencies": {
-    "@stencil/dev-server": "0.0.18-1",
+    "@stencil/dev-server": "0.0.18",
     "@stencil/utils": "0.0.4",
     "@types/jest": "22.0.1",
-    "jest": "22.0.4",
+    "jest": "22.0.6",
     "stylelint": "^8.4.0",
-    "tslint": "5.8.0"
+    "tslint": "5.9.1"
   }
 }
