@@ -25,10 +25,8 @@ app-private-module {
     height: calc(100vh - 64px);
     overflow: scroll;
     transition: width var(--animationDuration) var(--animationTiming);
-  }
 
-  &.menuVisible {
-    & .content-container {
+    &.shrinked {
       width: calc(100vw - 260px);
     }
   }
@@ -43,6 +41,12 @@ app-private-module {
 
     & .menu-container {
       grid-area: content;
+    }
+
+    & .content-container {
+      &.shrinked {
+        width: 100vw;
+      }
     }
   }
 }

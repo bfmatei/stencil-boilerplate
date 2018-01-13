@@ -59,6 +59,14 @@ export class AppPrivateModule {
       <app-menu class='menu-container' />,
       (
         <section class={containerClassNames}>
+          <app-route
+            url='/'
+            component='app-redirect'
+            componentProps={{
+              url: '/dashboard'
+            }}
+            exact={true}
+          />
           <app-route url='/dashboard' component='app-dashboard' />
           <app-route url='/projects' component='app-projects' />
         </section>
