@@ -5,7 +5,8 @@ export default {
     logout: 'Logout'
   },
   dashboard: {
-    index: 'This is the dashboard page'
+    index: 'This is the dashboard page',
+    richEditorLabel: 'Rich Editor Label'
   },
   login: {
     username: 'Username',

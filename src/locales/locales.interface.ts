@@ -10,6 +10,7 @@ export interface LocalesMap extends I18nObject {
   };
   dashboard: {
     index: string;
+    richEditorLabel: string;
   };
   login: {
     username: string;

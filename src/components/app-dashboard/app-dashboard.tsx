@@ -9,7 +9,10 @@ import {
 export class AppDashboard {
   public render(): JSX.Element {
     return (
-      <app-translate entry='dashboard.index' />
+      <app-rich-editor
+        name='test'
+        label='dashboard.richEditorLabel'
+      />
     );
   }
 }

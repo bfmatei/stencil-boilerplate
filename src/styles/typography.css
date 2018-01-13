@@ -1,0 +1,89 @@
+b {
+  font-weight: 600;
+}
+
+i {
+  font-style: italic;
+}
+
+u {
+  font-style: underline;
+}
+
+strike {
+  text-decoration: line-through;
+}
+
+ol {
+  margin: 16px 0 10px;
+  padding: 0 0 0 40px;
+  list-style-type: decimal;
+}
+
+ul {
+  margin: 16px 0 10px;
+  padding: 0 0 0 40px;
+  list-style-type: initial;
+}
+
+h1 {
+  font-weight: 600;
+  color: var(--textColor);
+  margin: 20px 0 10px;
+  font-size: 56px;
+}
+
+h2 {
+  font-weight: 600;
+  color: var(--textColor);
+  margin: 20px 0 10px;
+  font-size: 45px;
+}
+
+h3 {
+  font-weight: 600;
+  color: var(--textColor);
+  margin: 20px 0 10px;
+  font-size: 34px;
+}
+
+h4 {
+  font-weight: 600;
+  color: var(--textColor);
+  margin: 10px 0;
+  font-size: 24px;
+}
+
+h5 {
+  font-weight: 600;
+  color: var(--textColor);
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+h6 {
+  font-weight: 600;
+  color: var(--textColor);
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+p {
+  margin: 0 10px;
+}
+
+blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 17px;
+  border-left: 5px solid rgb(40, 40, 40);
+}
+
+pre {
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace;
+  padding: 2px 4px;
+  font-size: 14px;
+  color: var(--darkerRed);
+  background-color: var(--codeBlockBgColor);
+  border-radius: 4px;
+}

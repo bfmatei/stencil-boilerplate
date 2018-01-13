@@ -6,8 +6,13 @@ exports.config = {
         'app-icon',
         'app-link',
         'app-loader',
-        'app-route',
         'app-redirect',
+        'app-rich-editor-content',
+        'app-rich-editor-label',
+        'app-rich-editor-menu-bar',
+        'app-rich-editor-menu-button',
+        'app-rich-editor',
+        'app-route',
         'app-text-input',
         'app-translate'
       ]
@@ -78,6 +83,7 @@ exports.config = {
     'src/styles/fonts.css',
     'src/styles/reset.css',
     'src/styles/sizes.css',
+    'src/styles/typography.css',
     'src/styles/z-index.css'
   ]
 };

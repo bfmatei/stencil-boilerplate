@@ -1,0 +1,18 @@
+app-rich-editor-content {
+  display: block;
+  min-height: 50px;
+  transition: min-height var(--animationDuration) var(--animationTiming);
+  margin: 16px 0 0;
+  width: 100%;
+  cursor: auto;
+  outline: none;
+
+  &.active {
+    min-height: 300px;
+    max-height: 800px;
+  }
+
+  div {
+    margin: 0 10px;
+  }
+}

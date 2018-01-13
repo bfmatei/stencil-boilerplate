@@ -1,0 +1,28 @@
+app-rich-editor {
+  display: block;
+  min-height: 38px;
+  overflow: hidden;
+  transition: min-height var(--animationDuration) var(--animationTiming);
+  position: relative;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--brightGray);
+  outline: none;
+
+  &:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    max-width: 0;
+    width: 100%;
+    height: 2px;
+    overflow: hidden;
+    transition: max-width var(--animationDuration) var(--animationTiming);
+    background-color: var(--brightGreen);
+  }
+}
