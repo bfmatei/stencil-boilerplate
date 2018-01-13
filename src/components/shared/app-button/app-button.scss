@@ -20,7 +20,8 @@ app-button {
     background-color: var(--darkerGreen);
   }
 
-  &[disabled='true'] {
+  &.disabled {
     background-color: var(--lighterMidnight);
+    pointer-events: none;
   }
 }

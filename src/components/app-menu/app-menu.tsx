@@ -1,6 +1,5 @@
 import {
   Component,
-  Element,
   Prop,
   State
 } from '@stencil/core';
@@ -9,9 +8,6 @@ import {
 } from '@stencil/redux';
 
 import autobind from '../../decorators/autobind';
-import {
-  toggleClassNames
-} from '../../helpers/className';
 import {
   push
 } from '../../orchestrators/connected-router/connected-router.actions';
@@ -38,9 +34,6 @@ export class AppMenu {
 
   @State()
   public visible: boolean = false;
-
-  @Element()
-  private $element: HTMLElement;
 
   private push: typeof push;
   private closeMenu: typeof closeMenu;
@@ -96,11 +89,15 @@ export class AppMenu {
     this.closeMenu();
   }
 
-  public render(): JSX.Element[] {
-    toggleClassNames(this.$element, {
-      visible: this.visible
-    });
+  public hostData(): JSXElements.AppMenuAttributes {
+    return {
+      class: {
+        visible: this.visible
+      }
+    };
+  }
 
+  public render(): JSX.Element[] {
     return [
       (
         <nav class='container'>

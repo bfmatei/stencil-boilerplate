@@ -1,15 +1,11 @@
 import {
   Component,
-  Element,
   Prop,
   State,
   Watch
 } from '@stencil/core';
 
 import autobind from '../../../decorators/autobind';
-import {
-  toggleClassNames
-} from '../../../helpers/className';
 
 @Component({
   tag: 'app-text-input',
@@ -45,9 +41,6 @@ export class AppTextInput {
 
   @State()
   private activeClass: boolean = false;
-
-  @Element()
-  private $element: HTMLElement;
 
   private renderLabel(): JSX.Element {
     return (
@@ -110,12 +103,16 @@ export class AppTextInput {
     );
   }
 
-  public render(): JSX.Element[] {
-    toggleClassNames(this.$element, {
-      active: this.activeClass,
-      error: this.error.length > 0
-    });
+  public hostData(): JSXElements.AppTextInputAttributes {
+    return {
+      class: {
+        active: this.activeClass,
+        error: this.error.length > 0
+      }
+    };
+  }
 
+  public render(): JSX.Element[] {
     return [
       this.renderLabel(),
       this.renderInput(),

@@ -1,9 +1,7 @@
 import {
   Component,
-  Element,
   Listen,
-  Prop,
-  Watch
+  Prop
 } from '@stencil/core';
 
 @Component({
@@ -20,21 +18,17 @@ export class AppButton {
   @Prop()
   public disabled: boolean = false;
 
-  @Element()
-  private $element: HTMLElement;
-
-  public componentDidLoad(): void {
-    this.disablePropChange(this.disabled);
-  }
-
   @Listen('click')
   public clickHandler(): void {
     this.onClick();
   }
 
-  @Watch('disabled')
-  public disablePropChange(newValue: boolean): void {
-    this.$element.setAttribute('disabled', newValue.toString());
+  public hostData(): JSXElements.AppButtonAttributes {
+    return {
+      class: {
+        disabled: this.disabled
+      }
+    };
   }
 
   public render(): JSX.Element[] {
