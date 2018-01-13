@@ -5,6 +5,7 @@ exports.config = {
       components: [
         'app-icon',
         'app-link',
+        'app-loader',
         'app-route',
         'app-redirect',
         'app-text-input',
