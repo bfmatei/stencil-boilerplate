@@ -6,7 +6,7 @@ app-loader {
   max-width: 36px;
   max-height: 36px;
   overflow: hidden;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid var(--darkerGray);
   border-radius: 50%;
   transform: scale(0.7);
 
@@ -50,7 +50,7 @@ app-loader {
 
   .spinnerWrapper:after {
     content: '';
-    background: rgb(255, 255, 255);
+    background: var(--white);
     border-radius: 50%;
     width: 26px;
     height: 26px;
@@ -73,14 +73,14 @@ app-loader {
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgb(72, 187, 152);
-      border: 3px solid rgb(255, 255, 255);
+      background: var(--brightGreen);
+      border: 3px solid var(--white);
       border-radius: 100%;
     }
   }
 
   .innerSpin {
-    background: rgb(255, 255, 255);
+    background: var(--white);
     height: 36px;
     width: 18px;
     animation: rotateLeft 2500ms infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);

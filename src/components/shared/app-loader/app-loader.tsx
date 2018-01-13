@@ -17,7 +17,6 @@ export class AppLoader {
   public hostData(): JSXElements.AppLoaderAttributes {
     return {
       class: {
-        spinner: true,
         [this.size]: true,
         active: this.active
       }
