@@ -49,15 +49,12 @@ export interface LocalesMap extends I18nObject {
     horizontalRule: string;
     link: string;
     linkUrl: string;
-    image: string;
-    imageUrl: string;
     h1: string;
     h2: string;
     h3: string;
     h4: string;
     h5: string;
     h6: string;
-    paragraph: string;
     blockquote: string;
     codeBlock: string;
   };

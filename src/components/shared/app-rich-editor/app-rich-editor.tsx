@@ -24,11 +24,9 @@ import {
   heading5Button,
   heading6Button,
   horizontalLineButton,
-  imageButton,
   italicButton,
   linkButton,
   orderedListButton,
-  paragraphButton,
   separator,
   strikeThroughButton,
   underlineButton,
@@ -43,9 +41,6 @@ import {
   styleUrl: 'app-rich-editor.scss'
 })
 export class AppRichEditor {
-  @Prop()
-  public id: string;
-
   @Prop()
   public label: string = '';
 
@@ -74,8 +69,7 @@ export class AppRichEditor {
     unorderedListButton,
     separator,
     horizontalLineButton,
-    linkButton,
-    imageButton
+    linkButton
   ];
 
   @Prop()
@@ -87,7 +81,6 @@ export class AppRichEditor {
     heading5Button,
     heading6Button,
     separator,
-    paragraphButton,
     blockquoteButton,
     codeButton
   ];
@@ -127,7 +120,6 @@ export class AppRichEditor {
     return (
       <app-rich-editor-menu-bar
         buttons={items}
-        richEditorId={this.id}
         class={this.active ? 'active' : ''}
       />
     );
@@ -161,16 +153,9 @@ export class AppRichEditor {
         onFocus={this.editorFocusHandler}
         onBlur={this.editorBlurHandler}
         defaultContent={this.defaultContent}
-        richEditorId={this.id}
         class={this.active ? 'active' : ''}
       />
     );
-  }
-
-  public hostData(): JSXElements.AppRichEditorAttributes {
-    return {
-      id: this.id
-    };
   }
 
   public render(): JSX.Element[] {

@@ -13,8 +13,6 @@ import {
   styleUrl: 'app-rich-editor-menu-bar.scss'
 })
 export class AppRichEditorMenuBar {
-  @Prop()
-  public richEditorId: string;
 
   @Prop()
   public buttons: AppRichEditorMenuItemConfig[] = [];
@@ -22,14 +20,8 @@ export class AppRichEditorMenuBar {
   @autobind
   private renderButton(button: AppRichEditorMenuItemConfig): JSX.Element {
     return (
-      <app-rich-editor-menu-item richEditorId={this.richEditorId} data={button} />
+      <app-rich-editor-menu-item data={button} />
     );
-  }
-
-  public hostData(): JSXElements.AppRichEditorMenuBarAttributes {
-    return {
-      richEditorId: this.richEditorId
-    };
   }
 
   public render(): JSX.Element[] {

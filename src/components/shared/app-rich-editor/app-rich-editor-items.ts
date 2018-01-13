@@ -95,17 +95,6 @@ export const linkButton: AppRichEditorMenuButtonConfig = {
   }
 };
 
-export const imageButton: AppRichEditorMenuButtonConfig = {
-  type: 'button',
-  label: 'image',
-  icon: 'image',
-  action: {
-  name: 'insertImage',
-    prompt: true,
-    value: 'imageUrl'
-  }
-};
-
 export const heading1Button: AppRichEditorMenuButtonConfig = {
   type: 'button',
   label: 'h1',
@@ -163,16 +152,6 @@ export const heading6Button: AppRichEditorMenuButtonConfig = {
   action: {
     name: 'formatBlock',
     value: 'h6'
-  }
-};
-
-export const paragraphButton: AppRichEditorMenuButtonConfig = {
-  type: 'button',
-  label: 'paragraph',
-  icon: 'paragraph',
-  action: {
-    name: 'formatBlock',
-    value: 'p'
   }
 };
 

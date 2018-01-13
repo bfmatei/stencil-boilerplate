@@ -18,9 +18,6 @@ export class AppRichEditorMenuItem {
   @Prop()
   public data: AppRichEditorMenuItemConfig;
 
-  @Prop()
-  public richEditorId: string;
-
   @Listen('mousedown')
   public buttonClickHandler(evt: MouseEvent): void {
     evt.preventDefault();
@@ -56,7 +53,6 @@ export class AppRichEditorMenuItem {
 
   public hostData(): any {
     return {
-      richEditorId: this.richEditorId,
       class: {
         [this.data.type]: true
       }

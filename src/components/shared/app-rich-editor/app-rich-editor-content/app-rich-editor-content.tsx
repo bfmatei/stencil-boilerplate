@@ -11,9 +11,6 @@ import {
 })
 export class AppRichEditorContent {
   @Prop()
-  public richEditorId: string;
-
-  @Prop()
   public defaultContent: string;
 
   @Prop()
@@ -41,7 +38,6 @@ export class AppRichEditorContent {
   public hostData(): JSXElements.AppRichEditorContentAttributes {
     return {
       contentEditable: true,
-      richEditorId: this.richEditorId,
       innerHTML: this.content
     };
   }
