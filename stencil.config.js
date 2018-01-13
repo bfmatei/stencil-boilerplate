@@ -10,7 +10,7 @@ exports.config = {
         'app-rich-editor-content',
         'app-rich-editor-label',
         'app-rich-editor-menu-bar',
-        'app-rich-editor-menu-button',
+        'app-rich-editor-menu-item',
         'app-rich-editor',
         'app-route',
         'app-text-input',

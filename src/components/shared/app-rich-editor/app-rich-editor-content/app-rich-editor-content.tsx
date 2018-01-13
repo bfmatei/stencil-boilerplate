@@ -1,7 +1,8 @@
 import {
   Component,
   Listen,
-  Prop
+  Prop,
+  State
 } from '@stencil/core';
 
 @Component({
@@ -13,13 +14,18 @@ export class AppRichEditorContent {
   public richEditorId: string;
 
   @Prop()
-  public content: string;
+  public defaultContent: string;
 
   @Prop()
   public onChange: (newValue: any) => void;
 
+  @State()
+  private content: string = '';
+
   @Listen('input')
   public contentInputHandler(evt: UIEvent): void {
+    evt.preventDefault();
+
     this.onChange((evt.target as HTMLElement).innerHTML);
   }
 
@@ -28,14 +34,19 @@ export class AppRichEditorContent {
     evt.preventDefault();
   }
 
+  public componentDidLoad(): void {
+    this.content = this.defaultContent;
+  }
+
   public hostData(): JSXElements.AppRichEditorContentAttributes {
     return {
       contentEditable: true,
-      richEditorId: this.richEditorId
+      richEditorId: this.richEditorId,
+      innerHTML: this.content
     };
   }
 
   public render(): string {
-    return this.content;
+    return null;
   }
 }

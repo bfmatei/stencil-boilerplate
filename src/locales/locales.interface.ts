@@ -35,6 +35,32 @@ export interface LocalesMap extends I18nObject {
       index: string;
     };
   };
+  richEditor: {
+    bold: string;
+    italic: string;
+    underline: string;
+    strikeThrough: string;
+    alignJustify: string;
+    alignLeft: string;
+    alignCenter: string;
+    alignRight: string;
+    orderedList: string;
+    unorderedList: string;
+    horizontalRule: string;
+    link: string;
+    linkUrl: string;
+    image: string;
+    imageUrl: string;
+    h1: string;
+    h2: string;
+    h3: string;
+    h4: string;
+    h5: string;
+    h6: string;
+    paragraph: string;
+    blockquote: string;
+    codeBlock: string;
+  };
 }
 
 export interface LocalesCollection {

@@ -5,8 +5,8 @@ import {
 
 import autobind from '../../../../decorators/autobind';
 import {
-  AppRichEditorMenuButtonConfig
-} from '../app-rich-editor-menu-button/app-rich-editor-menu-button.interface';
+  AppRichEditorMenuItemConfig
+} from '../app-rich-editor-menu-item/app-rich-editor-menu-item.interface';
 
 @Component({
   tag: 'app-rich-editor-menu-bar',
@@ -17,18 +17,12 @@ export class AppRichEditorMenuBar {
   public richEditorId: string;
 
   @Prop()
-  public buttons: AppRichEditorMenuButtonConfig[] = [];
+  public buttons: AppRichEditorMenuItemConfig[] = [];
 
   @autobind
-  private renderButton(button: AppRichEditorMenuButtonConfig): JSX.Element {
-    const {
-      label,
-      icon,
-      action
-    } = button;
-
+  private renderButton(button: AppRichEditorMenuItemConfig): JSX.Element {
     return (
-      <app-rich-editor-menu-button richEditorId={this.richEditorId} label={label} icon={icon} action={action} />
+      <app-rich-editor-menu-item richEditorId={this.richEditorId} data={button} />
     );
   }
 

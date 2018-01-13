@@ -3,11 +3,11 @@ app-rich-editor-menu-bar {
   flex-direction: row;
   height: 0;
   overflow: hidden;
-  margin-top: -100px;
-  transition: margin-top var(--animationDuration) var(--animationTiming);
+  transform: translateY(-100px);
+  transition: transform var(--animationDuration) var(--animationTiming);
 
   &.active {
     height: 31px;
-    margin-top: 12px;
+    transform: translateY(12px);
   }
 }

@@ -10,8 +10,33 @@ import convertRichEditorToString from '../../../helpers/convertRichEditorToStrin
 import noop from '../../../helpers/noop';
 
 import {
-  AppRichEditorMenuButtonConfig
-} from './app-rich-editor-menu-button/app-rich-editor-menu-button.interface';
+  alignCenterButton,
+  alignJustifyButton,
+  alignLeftButton,
+  alignRightButton,
+  blockquoteButton,
+  boldButton,
+  codeButton,
+  heading1Button,
+  heading2Button,
+  heading3Button,
+  heading4Button,
+  heading5Button,
+  heading6Button,
+  horizontalLineButton,
+  imageButton,
+  italicButton,
+  linkButton,
+  orderedListButton,
+  paragraphButton,
+  separator,
+  strikeThroughButton,
+  underlineButton,
+  unorderedListButton
+} from './app-rich-editor-items';
+import {
+  AppRichEditorMenuItemConfig
+} from './app-rich-editor-menu-item/app-rich-editor-menu-item.interface';
 
 @Component({
   tag: 'app-rich-editor',
@@ -19,206 +44,147 @@ import {
 })
 export class AppRichEditor {
   @Prop()
-  private richEditorId: string;
-
-  @Prop()
-  public name: string = '';
+  public id: string;
 
   @Prop()
   public label: string = '';
 
   @Prop()
+  public defaultContent: string = '';
+
+  @Prop()
+  public readonly: boolean = false;
+
+  @Prop()
   public onChange: (newValue: any) => void = noop;
 
   @Prop()
-  public defaultContent: string = '';
+  private toolbar1Items: AppRichEditorMenuItemConfig[] = [
+    boldButton,
+    italicButton,
+    underlineButton,
+    strikeThroughButton,
+    separator,
+    alignJustifyButton,
+    alignLeftButton,
+    alignCenterButton,
+    alignRightButton,
+    separator,
+    orderedListButton,
+    unorderedListButton,
+    separator,
+    horizontalLineButton,
+    linkButton,
+    imageButton
+  ];
+
+  @Prop()
+  private toolbar2Items: AppRichEditorMenuItemConfig[] = [
+    heading1Button,
+    heading2Button,
+    heading3Button,
+    heading4Button,
+    heading5Button,
+    heading6Button,
+    separator,
+    paragraphButton,
+    blockquoteButton,
+    codeButton
+  ];
+
+  @State()
+  private active: boolean = false;
 
   @Element()
   private $element: HTMLElement;
 
-  @State()
-  private content: string = '';
+  public isFocused: boolean = false;
 
-  @State()
-  public focused: boolean = false;
+  public textContent: string = '';
 
-  private buttons: AppRichEditorMenuButtonConfig[] = [
-    {
-      label: 'Bold',
-      icon: 'bold',
-      action: 'bold'
-    },
-    {
-      label: 'Italic',
-      icon: 'italic',
-      action: 'italic'
-    },
-    {
-      label: 'Underline',
-      icon: 'underline',
-      action: 'underline'
-    },
-    {
-      label: 'Strike-Through',
-      icon: 'strike-through',
-      action: 'strikeThrough'
-    },
-    {
-      label: 'Heading 1',
-      icon: 'h1',
-      action: {
-        name: 'formatBlock',
-        value: 'h1'
-      }
-    },
-    {
-      label: 'Heading 2',
-      icon: 'h2',
-      action: {
-        name: 'formatBlock',
-        value: 'h2'
-      }
-    },
-    {
-      label: 'Heading 3',
-      icon: 'h3',
-      action: {
-        name: 'formatBlock',
-        value: 'h3'
-      }
-    },
-    {
-      label: 'Heading 4',
-      icon: 'h4',
-      action: {
-        name: 'formatBlock',
-        value: 'h4'
-      }
-    },
-    {
-      label: 'Heading 5',
-      icon: 'h5',
-      action: {
-        name: 'formatBlock',
-        value: 'h5'
-      }
-    },
-    {
-      label: 'Heading 6',
-      icon: 'h6',
-      action: {
-        name: 'formatBlock',
-        value: 'h6'
-      }
-    },
-    {
-      label: 'Paragraph',
-      icon: 'paragraph',
-      action: {
-        name: 'formatBlock',
-        value: 'p'
-      }
-    },
-    {
-      label: 'Quote',
-      icon: 'blockquote',
-      action: {
-        name: 'formatBlock',
-        value: 'blockquote'
-      }
-    },
-    {
-      label: 'Ordered List',
-      icon: 'ordered-list',
-      action: 'insertOrderedList'
-    },
-    {
-      label: 'Unordered List',
-      icon: 'unordered-list',
-      action: 'insertUnorderedList'
-    },
-    {
-      label: 'Code',
-      icon: 'code-block',
-      action: {
-        name: 'formatBlock',
-        value: 'pre'
-      }
-    },
-    {
-      label: 'Horizontal Line',
-      icon: 'horizontal-rule',
-      action: 'insertHorizontalRule'
-    },
-    {
-      label: 'Link',
-      icon: 'link',
-      action: {
-        name: 'createLink',
-        prompt: true,
-        value: 'Enter the link URL'
-      }
-    },
-    {
-      label: 'Image',
-      icon: 'image',
-      action: {
-        name: 'insertImage',
-        prompt: true,
-        value: 'Enter the image URL'
-      }
-    }
-  ];
-
-  @autobind
-  private handleContentChange(newContent: string): void {
-    this.content = newContent;
-  }
-
-  @autobind
-  private editorFocusHandler(): void {
-    this.focused = true;
-  }
-
-  @autobind
-  private editorBlurHandler(): void {
-    this.focused = false;
-  }
-
-  public hostData(): JSXElements.AppRichEditorAttributes {
-    return {
-      richEditorId: this.name
-    };
+  public componentDidLoad(): void {
+    this.handleContentChange(this.defaultContent);
   }
 
   @autobind
   private labelClickHandler(): void {
-    (this.$element.querySelector('app-rich-editor-content') as HTMLElement).focus();
+    const $content: HTMLElement = this.$element.querySelector('app-rich-editor-content');
+
+    $content.focus();
   }
 
-
-  public render(): JSX.Element[] {
-    const isActive: boolean = this.focused || convertRichEditorToString(this.content).length > 0;
-
-    return [
+  private renderLabel(): JSX.Element {
+    return (
       <app-rich-editor-label
         onClick={this.labelClickHandler}
         entry={this.label}
-        class={isActive ? 'active' : ''}
-      />,
+        class={this.active ? 'active' : ''}
+      />
+    );
+  }
+
+  private renderMenuBar(items: AppRichEditorMenuItemConfig[]): JSX.Element {
+    return (
       <app-rich-editor-menu-bar
-        buttons={this.buttons}
-        richEditorId={this.name}
-        class={isActive ? 'active' : ''}
-      />,
+        buttons={items}
+        richEditorId={this.id}
+        class={this.active ? 'active' : ''}
+      />
+    );
+  }
+
+  @autobind
+  private handleContentChange(newContent: string): void {
+    this.textContent = convertRichEditorToString(newContent);
+
+    if (this.textContent.length > 0 || this.isFocused) {
+      this.active = true;
+    }
+
+    this.onChange(newContent);
+  }
+
+  @autobind
+  private editorFocusHandler(): void {
+    this.active = true;
+  }
+
+  @autobind
+  private editorBlurHandler(): void {
+    this.active = this.textContent.length > 0 ? true : false;
+  }
+
+  private renderContent(): JSX.Element {
+    return (
       <app-rich-editor-content
         onChange={this.handleContentChange}
         onFocus={this.editorFocusHandler}
         onBlur={this.editorBlurHandler}
-        content={this.defaultContent}
-        richEditorId={this.name}
-        class={isActive ? 'active' : ''}
+        defaultContent={this.defaultContent}
+        richEditorId={this.id}
+        class={this.active ? 'active' : ''}
       />
+    );
+  }
+
+  public hostData(): JSXElements.AppRichEditorAttributes {
+    return {
+      id: this.id
+    };
+  }
+
+  public render(): JSX.Element[] {
+    return [
+      this.renderLabel(),
+      this.renderMenuBar(this.toolbar1Items),
+      (
+        this.toolbar2Items.length === 0 ?
+          null :
+          (
+            this.renderMenuBar(this.toolbar2Items)
+          )
+      ),
+      this.renderContent()
     ];
   }
 }

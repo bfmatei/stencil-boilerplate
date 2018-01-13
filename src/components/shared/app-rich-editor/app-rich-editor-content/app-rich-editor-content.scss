@@ -1,11 +1,12 @@
 app-rich-editor-content {
   display: block;
-  min-height: 50px;
+  min-height: 0;
   transition: min-height var(--animationDuration) var(--animationTiming);
   margin: 16px 0 0;
   width: 100%;
   cursor: auto;
   outline: none;
+  overflow: scroll;
 
   &.active {
     min-height: 300px;

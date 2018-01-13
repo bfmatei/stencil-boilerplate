@@ -1,7 +1,7 @@
 app-rich-editor {
   display: block;
   min-height: 38px;
-  overflow: hidden;
+  overflow: scroll;
   transition: min-height var(--animationDuration) var(--animationTiming);
   position: relative;
   margin-top: 35px;
