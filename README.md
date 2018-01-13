@@ -37,7 +37,8 @@ Please note that this boilerplate is built for web apps rather than public websi
 * Automated Testing is not working 
 
 ## Credits
-* Original CSS Reset - [Eric Meyer](https://meyerweb.com/eric/tools/css/reset/) 
+* Original CSS Reset
+   * [Eric Meyer](https://meyerweb.com/eric/tools/css/reset/) 
 * Icons:
    * [Material Design Icons](https://materialdesignicons.com)
    * [Material-UI](http://www.material-ui.com/)
@@ -46,4 +47,7 @@ Please note that this boilerplate is built for web apps rather than public websi
    * [Marmelab](https://marmelab.com)
    * [Flow](https://flowdash.co)
    * [Anton Kalik](https://dribbble.com/idedy)
-* nginx config rules - [H5BP](https://github.com/h5bp/server-configs-nginx)
+* Original Loader Indicator
+   * [John Louie Biñas](https://codepen.io/johnlouie04/pen/LEoOGV)
+* nginx config rules
+   * [H5BP](https://github.com/h5bp/server-configs-nginx)
