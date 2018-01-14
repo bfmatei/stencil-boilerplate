@@ -9,9 +9,6 @@ import {
 
 import autobind from '../../decorators/autobind';
 import {
-  LocalesMap
-} from '../../locales/locales.interface';
-import {
   push
 } from '../../orchestrators/connected-router/connected-router.actions';
 import {
@@ -25,8 +22,10 @@ import {
 } from '../../redux/store';
 
 import {
-  AppLoginError
-} from './app-login.interface';
+  login,
+  loginError,
+  loginSuccess
+} from './app-login.actions';
 
 @Component({
   tag: 'app-login',
@@ -38,77 +37,77 @@ export class AppLogin {
   })
   private store: Store;
 
-  @Prop({
-    context: 'isServer'
-  })
-  private isServer: boolean;
-
-  @State()
-  private username: string = '';
-
-  @State()
-  private password: string = '';
-
   @State()
   private pending: boolean = false;
 
   @State()
-  private error: AppLoginError = {
-    field: '',
-    text: ''
-  };
+  public userId: number = null;
 
-  @State()
-  private translations: LocalesMap;
-
+  private login: typeof login;
+  private loginSuccess: typeof loginSuccess;
+  private loginError: typeof loginError;
   private setUser: typeof setUser;
   private push: typeof push;
 
+  private username: string = '';
+  private password: string = '';
+  private errorField: string = '';
+  private errorMessage: string = '';
+
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
+      const {
+        login: {
+          username,
+          password,
+          pending,
+          error: {
+            field,
+            message
+          }
+        },
+        user: {
+          id
+        }
+      } = state;
+
       return {
-        translations: state.i18n
+        username,
+        password,
+        pending,
+        errorField: field,
+        errorMessage: message,
+        userId: id
       };
     });
 
     this.store.mapDispatchToProps(this, {
+      login,
+      loginSuccess,
+      loginError,
       setUser,
       push
     });
   }
 
   @autobind
-  private usernameValueChangeHandler(value: string): void {
-    this.username = value;
-  }
-
-  @autobind
-  private passwordValueChangeHandler(value: string): void {
-    this.password = value;
-  }
-
-  @autobind
   private submitClickEvent(): void {
-    this.pending = true;
+    this.login(this.username, this.password);
 
-    this.error = {
-      field: 'username',
-      text: ''
-    };
+    // TODO: Replace with actual login method
 
     if (this.username !== 'admin') {
-      this.error = {
+      this.loginError({
         field: 'username',
-        text: this.translations.login.errors.wrongUsername
-      };
+        message: 'login.errors.wrongUsername'
+      });
     } else {
       if (this.password !== 'password') {
-        this.error = {
+        this.loginError({
           field: 'password',
-          text: this.translations.login.errors.wrongPassword
-        };
+          message: 'login.errors.wrongPassword'
+        });
       } else {
-        // TODO: Replace with actual login method
         const user: UserData = {
           id: this.username === 'admin' ? 1 : 2,
           user: this.username,
@@ -117,20 +116,34 @@ export class AppLogin {
           email: `${this.username}@app.com`
         };
 
-        if (this.isServer) {
-          localStorage.setItem('user', JSON.stringify(user));
-        }
+        localStorage.setItem('user', JSON.stringify(user));
+
+        this.setUser(user);
 
         this.push('/dashboard');
 
-        this.setUser(user);
+        this.loginSuccess();
       }
     }
-
-    this.pending = false;
   }
 
-  public render(): JSX.Element[] {
+  @autobind
+  private usernameValueChangeHandler(newValue: string): void {
+    this.username = newValue;
+  }
+
+  @autobind
+  private passwordValueChangeHandler(newValue: string): void {
+    this.password = newValue;
+  }
+
+  public render(): JSX.Element | JSX.Element[] {
+    if (this.userId !== null) {
+      return (
+        <app-redirect url='/dashboard' />
+      );
+    }
+
     return [
       <section class='container'>
         <form>
@@ -138,17 +151,19 @@ export class AppLogin {
             label='login.username'
             type='text'
             name='username'
-            value={this.username}
-            error={this.error.field === 'username' ? this.error.text : ''}
+            error={this.errorField === 'username' ? this.errorMessage : ''}
             onValueChange={this.usernameValueChangeHandler}
+            defaultValue={this.username}
+            disabled={this.pending}
           />
           <app-text-input
             label='login.password'
             type='password'
             name='password'
-            value={this.password}
-            error={this.error.field === 'password' ? this.error.text : ''}
+            error={this.errorField === 'password' ? this.errorMessage : ''}
             onValueChange={this.passwordValueChangeHandler}
+            defaultValue={this.password}
+            disabled={this.pending}
           />
           <app-button
             onClick={this.submitClickEvent}

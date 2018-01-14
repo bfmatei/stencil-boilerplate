@@ -2,7 +2,6 @@ app-private-module {
   display: grid;
   width: 100vw;
   height: 100vh;
-  grid-gap: 0;
   grid-template: max-content max-content / max-content max-content;
   grid-template-areas:
     'header header'

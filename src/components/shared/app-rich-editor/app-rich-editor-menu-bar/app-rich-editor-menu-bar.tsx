@@ -13,7 +13,6 @@ import {
   styleUrl: 'app-rich-editor-menu-bar.scss'
 })
 export class AppRichEditorMenuBar {
-
   @Prop()
   public buttons: AppRichEditorMenuItemConfig[] = [];
 

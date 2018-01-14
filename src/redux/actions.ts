@@ -1,4 +1,7 @@
 import {
+  AppLoginActionTypes
+} from '../components/app-login/app-login.actions';
+import {
   AppMenuActionTypes
 } from '../components/app-menu/app-menu.actions';
 import {
@@ -12,6 +15,7 @@ import {
 } from '../orchestrators/i18n/i18n.actions';
 
 export type GlobalActionTypes =
+  AppLoginActionTypes |
   AppMenuActionTypes |
   ConfigActionTypes |
   ConnectedRouterActionTypes |

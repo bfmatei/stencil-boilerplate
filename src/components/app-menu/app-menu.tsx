@@ -69,7 +69,12 @@ export class AppMenu {
 
   @autobind
   private menuItemLogoutClickHandler(): void {
+    // TODO: Replace with actual logout method
+    localStorage.clear();
+
     this.resetUser();
+
+    this.push('/login');
   }
 
   private renderMenuItem(label: string, iconName: string, clickHandler: any): JSX.Element {

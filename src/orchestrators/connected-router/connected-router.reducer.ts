@@ -1,5 +1,6 @@
 import {
-  LocationSegments
+  LocationSegments,
+  RouterHistory
 } from '@stencil/router';
 
 import {
@@ -9,8 +10,8 @@ import {
 
 export type ConnectedRouterState = LocationSegments;
 
-export function getInitialState(): ConnectedRouterState {
-  return {
+export function getInitialState(appHistory: RouterHistory = null): ConnectedRouterState {
+  return appHistory ? appHistory.location : {
     pathname: '',
     search: '',
     state: {},

@@ -34,9 +34,9 @@ export class AppHeader {
     this.toggleMenu();
   }
 
-  public render(): JSX.Element {
-    return (
-      <app-icon name='menu' class='button' onClick={this.menuClickHandler} />
-    );
+  public render(): JSX.Element[] {
+    return [
+      <app-icon name='menu' class='button menu' onClick={this.menuClickHandler} />
+    ];
   }
 }

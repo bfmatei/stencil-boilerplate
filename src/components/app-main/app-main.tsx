@@ -37,7 +37,7 @@ export class AppMain {
   private store: Store;
 
   @Prop()
-  private history: RouterHistory;
+  private history: RouterHistory = null;
 
   private locationChange: typeof locationChange;
 
@@ -52,11 +52,9 @@ export class AppMain {
   }
 
   public componentDidLoad(): void {
-    if (this.history) {
-      this.locationChange(this.history.location);
+    this.locationChange(this.history.location);
 
-      this.unsubscribeFromHistory = this.history.listen(this.locationChange);
-    }
+    this.unsubscribeFromHistory = this.history.listen(this.locationChange);
   }
 
   public componentWillUnload(): void {

@@ -1,11 +1,11 @@
 import {
   Component,
-  Prop,
-  State,
-  Watch
+  Element,
+  Prop
 } from '@stencil/core';
 
 import autobind from '../../../decorators/autobind';
+import noop from '../../../helpers/noop';
 
 @Component({
   tag: 'app-text-input',
@@ -19,28 +19,37 @@ export class AppTextInput {
   public label: string = '';
 
   @Prop()
-  public type: 'text' | 'password';
+  public type: 'text' | 'password' = 'text';
 
   @Prop()
   public error: string = '';
 
   @Prop()
-  public value: string;
+  public defaultValue: string = '';
 
   @Prop()
   public disabled: boolean = false;
 
   @Prop()
-  public onValueChange: (value: string) => void;
+  public onValueChange: (value: string) => void = noop;
 
-  @State()
+  @Element()
+  private $element: HTMLElement;
+
+  private focused: boolean = false;
   private internalValue: string = '';
 
-  @State()
-  private focused: boolean = false;
+  public componentWillLoad(): void {
+    this.internalValue = this.defaultValue;
+  }
 
-  @State()
-  private activeClass: boolean = false;
+  private setActiveClass(cond: boolean): void {
+    if (cond) {
+      this.$element.classList.add('active');
+    } else {
+      this.$element.classList.remove('active');
+    }
+  }
 
   private renderLabel(): JSX.Element {
     return (
@@ -50,30 +59,23 @@ export class AppTextInput {
     );
   }
 
-  @Watch('value')
-  public valueWillChange(newValue: string): void {
-    this.internalValue = newValue;
-    this.activeClass = this.focused || newValue.length > 0;
-  }
-
   @autobind
   private inputFocusHandler(): void {
     this.focused = true;
-    this.activeClass = true;
+
+    this.setActiveClass(true);
   }
 
   @autobind
   private inputBlurHandler(): void {
     this.focused = false;
-    this.activeClass = this.internalValue.length > 0;
+
+    this.setActiveClass(this.internalValue.length > 0);
   }
 
   @autobind
-  private inputChangeHandler(evt: UIEvent): void {
-    const value: string = (evt.currentTarget as any).value;
-
-    this.internalValue = value;
-    this.activeClass = this.focused || value.length > 0;
+  private inputChangeHandler(evt: KeyboardEvent): void {
+    this.internalValue = (evt.currentTarget as HTMLInputElement).value;
 
     this.onValueChange(this.internalValue);
   }
@@ -87,7 +89,7 @@ export class AppTextInput {
         onInput={this.inputChangeHandler}
         class='input'
         type={this.type}
-        value={this.internalValue}
+        value={this.defaultValue}
         disabled={this.disabled}
       />
     );
@@ -99,14 +101,14 @@ export class AppTextInput {
     }
 
     return (
-      <span class='error-container'>{this.error}</span>
+      <app-translate class='error-container' entry={this.error} />
     );
   }
 
   public hostData(): JSXElements.AppTextInputAttributes {
     return {
       class: {
-        active: this.activeClass,
+        active: this.internalValue.length > 0 || this.focused,
         error: this.error.length > 0
       }
     };

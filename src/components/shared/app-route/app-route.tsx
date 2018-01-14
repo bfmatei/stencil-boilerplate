@@ -8,9 +8,6 @@ import {
 } from '@stencil/redux';
 
 import {
-  UserData
-} from '../../../orchestrators/user/user.interface';
-import {
   GlobalStoreState
 } from '../../../redux/store';
 
@@ -24,16 +21,16 @@ export class AppRoute {
   private store: Store;
 
   @Prop()
-  public url: string;
+  public url: string = '';
 
   @Prop()
-  public component: string;
+  public component: string = '';
 
   @Prop()
   public componentProps: {} = {};
 
   @Prop()
-  public checkAuthorization: boolean;
+  public checkAuthorization: boolean = false;
 
   @Prop()
   public role: string = '';
@@ -42,16 +39,23 @@ export class AppRoute {
   public exact: boolean = false;
 
   @State()
-  public user: UserData;
+  public userId: number = null;
+
+  @State()
+  public userRole: string = null;
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
       const {
-        user
+        user: {
+          id,
+          role
+        }
       } = state;
 
       return {
-        user
+        userId: id,
+        userRole: role
       };
     });
   }
@@ -61,11 +65,11 @@ export class AppRoute {
   }
 
   private isLoggedIn(): boolean {
-    return this.user.id !== null;
+    return this.userId !== null;
   }
 
   private checkRole(): boolean {
-    return this.user.role === this.role;
+    return this.userRole === this.role;
   }
 
   public render(): JSX.Element {

@@ -12,14 +12,11 @@ export class AppIcon {
   public name: string = '';
 
   @Prop()
-  public size: number | string = 24;
-
-  @Prop()
   public onClick: (evt: UIEvent) => void;
 
   public render(): JSX.Element {
     return (
-      <svg width={this.size} height={this.size} viewBox='0 0 24 24' fill='currentColor' onClick={this.onClick}>
+      <svg width={24} height={24} viewBox='0 0 24 24' fill='currentColor' onClick={this.onClick}>
         <use xlinkHref={`/assets/icons.svg#${this.name}`} />
       </svg>
     );

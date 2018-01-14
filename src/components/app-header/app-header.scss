@@ -1,20 +1,7 @@
-@keyframes indicatorAnim {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    display: block;
-  }
-
-  100% {
-    width: 36px;
-    height: 36px;
-    opacity: 1;
-    display: block;
-  }
-}
-
 app-header {
+  display: grid;
+  grid-area: header;
+  grid-template: 'left center right';
   background-color: var(--white);
   box-sizing: border-box;
   box-shadow:
@@ -37,25 +24,8 @@ app-header {
     outline: none;
     position: relative;
 
-    &:before {
-      content: ' ';
-      width: 0;
-      height: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: var(--dirtyWhite);
-      border-radius: 50%;
-      z-index: -1;
-      display: none;
-      animation: indicatorAnim var(--animationDuration) var(--animationTiming) backwards;
-    }
-
-    &:active {
-      &:before {
-        display: block;
-      }
+    &.menu {
+      grid-area: left;
     }
   }
 }

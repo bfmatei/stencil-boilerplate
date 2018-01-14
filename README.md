@@ -34,6 +34,7 @@ It features a couple of common principles and workflows that are used at the mom
 Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **prerendering** and **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.
 
 ## Known Issues
+* Due to an issue in [@stencil/redux](https://github.com/ionic-team/stencil-redux) package, there is a re-rendering happening when mapping the state to props.
 * Automated Testing is not working 
 
 ## Credits

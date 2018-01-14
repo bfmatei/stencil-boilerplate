@@ -4,6 +4,8 @@ import {
   Prop
 } from '@stencil/core';
 
+import noop from '../../../helpers/noop';
+
 @Component({
   tag: 'app-button',
   styleUrl: 'app-button.scss'
@@ -13,7 +15,7 @@ export class AppButton {
   public label: string = '';
 
   @Prop()
-  public onClick: () => void;
+  public onClick: () => void = noop;
 
   @Prop()
   public disabled: boolean = false;
