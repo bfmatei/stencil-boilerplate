@@ -52,6 +52,10 @@ The boilerplate project aims to ease the development of a project while keeping 
 * Menu Component
    * Controlled via redux
    * Auto-adjusts using media queries
+* Redirect
+   * It can redirect to a specific location
+   * It can render a specific component with specific props
+   * By default it redirects to login page
 * Rich Editor
    * Based on native implementation using contenteditable attribute
    * Has support for default values
