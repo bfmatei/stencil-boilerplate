@@ -24,7 +24,9 @@ import {
 import {
   login,
   loginError,
-  loginSuccess
+  loginSuccess,
+  setPassword,
+  setUsername
 } from './app-login.actions';
 
 @Component({
@@ -43,16 +45,30 @@ export class AppLogin {
   @State()
   public userId: number = null;
 
+  @State()
+  private username: string = '';
+
+  @State()
+  private password: string = '';
+
+  @State()
+  private errorField: string = '';
+
+  @State()
+  private errorMessage: string = '';
+
+  @State()
+  private redirectTo: string;
+
+  private setUsername: typeof setUsername;
+  private setPassword: typeof setPassword;
   private login: typeof login;
   private loginSuccess: typeof loginSuccess;
   private loginError: typeof loginError;
   private setUser: typeof setUser;
   private push: typeof push;
 
-  private username: string = '';
-  private password: string = '';
-  private errorField: string = '';
-  private errorMessage: string = '';
+  private defaultRedirectRoute: string = '/dashboard';
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
@@ -66,6 +82,11 @@ export class AppLogin {
             message
           }
         },
+        router: {
+          state: {
+            from
+          }
+        },
         user: {
           id
         }
@@ -77,11 +98,14 @@ export class AppLogin {
         pending,
         errorField: field,
         errorMessage: message,
-        userId: id
+        userId: id,
+        redirectTo: from
       };
     });
 
     this.store.mapDispatchToProps(this, {
+      setUsername,
+      setPassword,
       login,
       loginSuccess,
       loginError,
@@ -92,7 +116,7 @@ export class AppLogin {
 
   @autobind
   private submitClickEvent(): void {
-    this.login(this.username, this.password);
+    this.login();
 
     // TODO: Replace with actual login method
 
@@ -120,7 +144,7 @@ export class AppLogin {
 
         this.setUser(user);
 
-        this.push('/dashboard');
+        this.push(this.redirectTo || this.defaultRedirectRoute);
 
         this.loginSuccess();
       }
@@ -129,12 +153,12 @@ export class AppLogin {
 
   @autobind
   private usernameValueChangeHandler(newValue: string): void {
-    this.username = newValue;
+    this.setUsername(newValue);
   }
 
   @autobind
   private passwordValueChangeHandler(newValue: string): void {
-    this.password = newValue;
+    this.setPassword(newValue);
   }
 
   public render(): JSX.Element | JSX.Element[] {
@@ -151,24 +175,26 @@ export class AppLogin {
             label='login.username'
             type='text'
             name='username'
-            error={this.errorField === 'username' ? this.errorMessage : ''}
+            hasError={this.errorField === 'username'}
+            message={this.errorField === 'username' ? this.errorMessage : ''}
             onValueChange={this.usernameValueChangeHandler}
-            defaultValue={this.username}
+            value={this.username}
             disabled={this.pending}
           />
           <app-text-input
             label='login.password'
             type='password'
             name='password'
-            error={this.errorField === 'password' ? this.errorMessage : ''}
+            hasError={this.errorField === 'password'}
+            message={this.errorField === 'password' ? this.errorMessage : ''}
             onValueChange={this.passwordValueChangeHandler}
-            defaultValue={this.password}
+            value={this.password}
             disabled={this.pending}
           />
           <app-button
             onClick={this.submitClickEvent}
             label='login.signIn'
-            disabled={this.pending}
+            loading={this.pending}
           />
         </form>
       </section>

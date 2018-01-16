@@ -1,11 +1,13 @@
 import {
   Component,
+  Listen,
   Prop,
   State
 } from '@stencil/core';
 import {
   Store
 } from '@stencil/redux';
+import { push } from '../../../orchestrators/connected-router/connected-router.actions';
 
 import {
   fillTranslationValues,
@@ -16,7 +18,8 @@ import {
 } from '../../../redux/store';
 
 @Component({
-  tag: 'app-translate'
+  tag: 'app-translate',
+  styleUrl: 'app-translate.scss'
 })
 export class AppTranslate {
   @Prop({
@@ -30,8 +33,13 @@ export class AppTranslate {
   @Prop()
   private values: {} = {};
 
+  @Prop()
+  public url: string = '';
+
   @State()
   private translation: string = '';
+
+  private push: typeof push;
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
@@ -43,6 +51,25 @@ export class AppTranslate {
         translation: reduceTranslations(i18n, this.entry)
       };
     });
+
+    this.store.mapDispatchToProps(this, {
+      push
+    });
+  }
+
+  @Listen('click')
+  public elementClickHandler(): void {
+    if (this.url.length > 0) {
+      this.push(this.url);
+    }
+  }
+
+  public hostData(): JSXElements.AppTranslateAttributes {
+    return {
+      class: {
+        link: this.url.length > 0
+      }
+    };
   }
 
   public render(): string {

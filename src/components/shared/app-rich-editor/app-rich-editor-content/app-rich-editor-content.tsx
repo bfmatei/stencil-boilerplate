@@ -1,9 +1,16 @@
 import {
   Component,
+  Element,
   Listen,
-  Prop,
-  State
+  Prop
 } from '@stencil/core';
+
+import noop from '../../../../helpers/noop';
+
+/**
+ * Due to an issue with contenteditable items (the cursor repositions itself at the beginning of the element after a re-render),
+ * the content cannot be controlled from outside.
+ */
 
 @Component({
   tag: 'app-rich-editor-content',
@@ -11,38 +18,43 @@ import {
 })
 export class AppRichEditorContent {
   @Prop()
-  public defaultContent: string;
+  public defaultValue: string = '';
 
   @Prop()
-  public onChange: (newValue: any) => void;
+  public onValueChange: (newValue: any) => void;
 
-  @State()
-  private content: string = '';
+  @Prop()
+  public storeElementRef: ($element: HTMLElement) => void = noop;
 
-  @Listen('input')
-  public contentInputHandler(evt: UIEvent): void {
-    evt.preventDefault();
+  @Element()
+  private $element: HTMLElement;
 
-    this.onChange((evt.target as HTMLElement).innerHTML);
-  }
+  private value: string;
 
-  @Listen('keydown.tab')
-  public contentTabKeyDownHandler(evt: UIEvent): void {
-    evt.preventDefault();
+  public componentWillLoad(): void {
+    this.value = this.defaultValue;
   }
 
   public componentDidLoad(): void {
-    this.content = this.defaultContent;
+    this.storeElementRef(this.$element);
+  }
+
+  @Listen('input')
+  public contentInputHandler(): void {
+    this.value = this.$element.innerHTML;
+
+    this.onValueChange(this.value);
+  }
+
+  @Listen('keydown.tab')
+  public contentTabKeyDownHandler(evt: KeyboardEvent): void {
+    evt.preventDefault();
   }
 
   public hostData(): JSXElements.AppRichEditorContentAttributes {
     return {
       contentEditable: true,
-      innerHTML: this.content
+      innerHTML: this.value
     };
-  }
-
-  public render(): string {
-    return null;
   }
 }

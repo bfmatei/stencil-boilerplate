@@ -34,28 +34,40 @@ export function locationChange(location: LocationSegments): any {
 
 export interface PushAction {
   type: ConnectedRouterActions.PUSH;
-  payload: string;
+  payload: {
+    location: string;
+    state: {};
+  };
 }
 
-export function push(location: string): any {
+export function push(location: string, state: {} = {}): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<PushAction> => {
     return dispatch({
       type: ConnectedRouterActions.PUSH as ConnectedRouterActions.PUSH,
-      payload: location
+      payload: {
+        location,
+        state
+      }
     });
   };
 }
 
 export interface ReplaceAction {
   type: ConnectedRouterActions.REPLACE;
-  payload: string;
+  payload: {
+    location: string;
+    state: {};
+  };
 }
 
-export function replace(location: string): any {
+export function replace(location: string, state: {} = {}): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<ReplaceAction> => {
     return dispatch({
       type: ConnectedRouterActions.REPLACE as ConnectedRouterActions.REPLACE,
-      payload: location
+      payload: {
+        location,
+        state
+      }
     });
   };
 }

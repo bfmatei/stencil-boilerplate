@@ -12,12 +12,16 @@ export class AppLoader {
   public active: boolean = false;
 
   @Prop()
+  public backgroundColor: 'white' | 'lighterMidnight' = 'white';
+
+  @Prop()
   public size: 'small' | 'medium' | 'large' = 'small';
 
   public hostData(): JSXElements.AppLoaderAttributes {
     return {
       class: {
         [this.size]: true,
+        [this.backgroundColor]: true,
         active: this.active
       }
     };

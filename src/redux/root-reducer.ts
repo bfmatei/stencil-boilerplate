@@ -2,6 +2,7 @@ import {
   combineReducers
 } from 'redux';
 
+import dashboard from '../components/app-dashboard/app-dashboard.reducer';
 import login from '../components/app-login/app-login.reducer';
 import menu from '../components/app-menu/app-menu.reducer';
 import config from '../orchestrators/config/config.reducer';
@@ -15,6 +16,7 @@ import {
 
 export default combineReducers<GlobalStoreState>({
   config,
+  dashboard,
   i18n,
   login,
   menu,

@@ -27,11 +27,23 @@ export function getInitialState(): AppLoginState {
 
 export default function login(state: AppLoginState = getInitialState(), action: AppLoginActionTypes): AppLoginState {
   switch (action.type) {
+    case AppLoginActions.SET_USERNAME: {
+      return {
+        ...state,
+        username: action.payload
+      };
+    }
+
+    case AppLoginActions.SET_PASSWORD: {
+      return {
+        ...state,
+        password: action.payload
+      };
+    }
+
     case AppLoginActions.LOGIN: {
       return {
         ...state,
-        username: action.payload.username,
-        password: action.payload.password,
         pending: true,
         error: {
           field: '',
@@ -44,7 +56,6 @@ export default function login(state: AppLoginState = getInitialState(), action: 
       return {
         ...state,
         pending: false,
-
         password: ''
       };
     }

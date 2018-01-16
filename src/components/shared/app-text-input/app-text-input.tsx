@@ -1,7 +1,7 @@
 import {
   Component,
-  Element,
-  Prop
+  Prop,
+  State
 } from '@stencil/core';
 
 import autobind from '../../../decorators/autobind';
@@ -22,34 +22,22 @@ export class AppTextInput {
   public type: 'text' | 'password' = 'text';
 
   @Prop()
-  public error: string = '';
+  public message: string = '';
 
   @Prop()
-  public defaultValue: string = '';
+  public value: string = '';
 
   @Prop()
   public disabled: boolean = false;
 
   @Prop()
+  public hasError: boolean = false;
+
+  @Prop()
   public onValueChange: (value: string) => void = noop;
 
-  @Element()
-  private $element: HTMLElement;
-
+  @State()
   private focused: boolean = false;
-  private internalValue: string = '';
-
-  public componentWillLoad(): void {
-    this.internalValue = this.defaultValue;
-  }
-
-  private setActiveClass(cond: boolean): void {
-    if (cond) {
-      this.$element.classList.add('active');
-    } else {
-      this.$element.classList.remove('active');
-    }
-  }
 
   private renderLabel(): JSX.Element {
     return (
@@ -62,22 +50,16 @@ export class AppTextInput {
   @autobind
   private inputFocusHandler(): void {
     this.focused = true;
-
-    this.setActiveClass(true);
   }
 
   @autobind
   private inputBlurHandler(): void {
     this.focused = false;
-
-    this.setActiveClass(this.internalValue.length > 0);
   }
 
   @autobind
   private inputChangeHandler(evt: KeyboardEvent): void {
-    this.internalValue = (evt.currentTarget as HTMLInputElement).value;
-
-    this.onValueChange(this.internalValue);
+    this.onValueChange((evt.currentTarget as HTMLInputElement).value);
   }
 
   private renderInput(): JSX.Element {
@@ -89,27 +71,27 @@ export class AppTextInput {
         onInput={this.inputChangeHandler}
         class='input'
         type={this.type}
-        value={this.defaultValue}
+        value={this.value}
         disabled={this.disabled}
       />
     );
   }
 
   private renderErrorBox(): JSX.Element {
-    if (this.error.length === 0) {
+    if (this.message.length === 0) {
       return null;
     }
 
     return (
-      <app-translate class='error-container' entry={this.error} />
+      <app-translate class='message-container' entry={this.message} />
     );
   }
 
   public hostData(): JSXElements.AppTextInputAttributes {
     return {
       class: {
-        active: this.internalValue.length > 0 || this.focused,
-        error: this.error.length > 0
+        active: this.value.length > 0 || this.focused,
+        error: this.hasError
       }
     };
   }

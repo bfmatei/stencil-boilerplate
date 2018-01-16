@@ -22,9 +22,6 @@ export class AppLink {
   private store: Store;
 
   @Prop()
-  public tag: string = 'a';
-
-  @Prop()
   public url: string;
 
   private push: typeof push;

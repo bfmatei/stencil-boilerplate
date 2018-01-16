@@ -59,15 +59,15 @@ app-text-input {
     font-size: 16px;
   }
 
-  & .error-container {
-    color: var(--red);
+  & .message-container {
+    color: var(--textInputLabelText);
     transition: opacity var(--animationDuration) var(--animationTiming);
     font-size: 12px;
     transform: translateY(20px);
     position: absolute;
     left: 0;
     bottom: 0;
-    animation: var(--animationDuration) fadeIn var(--animationTiming);
+    animation: var(--animationDuration) fadeIn var(--animationTiming) forwards;
   }
 
   &.active {
@@ -77,6 +77,10 @@ app-text-input {
 
     & .label {
       transform: scale(0.75);
+      color: var(--brightGreen);
+    }
+
+    & .message-container {
       color: var(--brightGreen);
     }
   }
@@ -92,8 +96,8 @@ app-text-input {
       color: var(--red);
     }
 
-    & .errorContainer {
-      opacity: 1;
+    & .message-container {
+      color: var(--red);
     }
   }
 }

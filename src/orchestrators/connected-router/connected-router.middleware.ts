@@ -21,11 +21,11 @@ export default function connectedRouterMiddleware(appHistory: RouterHistory): Mi
       return <A extends AnyAction>(action: A): any => {
         switch (action.type) {
           case ConnectedRouterActions.PUSH:
-            appHistory.push(action.payload, {});
+            appHistory.push(action.payload.location, action.payload.state);
             break;
 
           case ConnectedRouterActions.REPLACE:
-            appHistory.replace(action.payload, {});
+            appHistory.replace(action.payload.location, action.payload.state);
             break;
 
           case ConnectedRouterActions.GO:

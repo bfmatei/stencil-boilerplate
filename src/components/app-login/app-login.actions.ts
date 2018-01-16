@@ -11,27 +11,49 @@ import {
 } from './app-login.interface';
 
 export enum AppLoginActions {
+  SET_USERNAME = 'SET_USERNAME',
+  SET_PASSWORD = 'SET_PASSWORD',
   LOGIN = 'LOGIN',
   LOGIN_SUCCESS = 'LOGIN_SUCCESS',
   LOGIN_ERROR = 'LOGIN_ERROR'
 }
 
-export interface LoginAction {
-  type: AppLoginActions.LOGIN;
-  payload: {
-    username: string;
-    password: string;
+export interface SetUsernameAction {
+  type: AppLoginActions.SET_USERNAME;
+  payload: string;
+}
+
+export function setUsername(username: string): any {
+  return async (dispatch: Dispatch<GlobalStoreState>): Promise<SetUsernameAction> => {
+    return dispatch({
+      type: AppLoginActions.SET_USERNAME as AppLoginActions.SET_USERNAME,
+      payload: username
+    });
   };
 }
 
-export function login(username: string, password: string): any {
+export interface SetPasswordAction {
+  type: AppLoginActions.SET_PASSWORD;
+  payload: string;
+}
+
+export function setPassword(password: string): any {
+  return async (dispatch: Dispatch<GlobalStoreState>): Promise<SetPasswordAction> => {
+    return dispatch({
+      type: AppLoginActions.SET_PASSWORD as AppLoginActions.SET_PASSWORD,
+      payload: password
+    });
+  };
+}
+
+export interface LoginAction {
+  type: AppLoginActions.LOGIN;
+}
+
+export function login(): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<LoginAction> => {
     return dispatch({
-      type: AppLoginActions.LOGIN as AppLoginActions.LOGIN,
-      payload: {
-        username,
-        password
-      }
+      type: AppLoginActions.LOGIN as AppLoginActions.LOGIN
     });
   };
 }
@@ -62,4 +84,4 @@ export function loginError(error: AppLoginError): any {
   };
 }
 
-export type AppLoginActionTypes = LoginAction | LoginSuccessAction | LoginErrorAction;
+export type AppLoginActionTypes = SetUsernameAction | SetPasswordAction | LoginAction | LoginSuccessAction | LoginErrorAction;

@@ -1,6 +1,5 @@
 import {
   Component,
-  Element,
   Prop,
   State
 } from '@stencil/core';
@@ -45,13 +44,13 @@ export class AppRichEditor {
   public label: string = '';
 
   @Prop()
-  public defaultContent: string = '';
+  public defaultValue: string = '';
 
   @Prop()
-  public readonly: boolean = false;
+  public disabled: boolean = false;
 
   @Prop()
-  public onChange: (newValue: any) => void = noop;
+  public onValueChange: (newValue: any) => void = noop;
 
   @Prop()
   private toolbar1Items: AppRichEditorMenuItemConfig[] = [
@@ -88,22 +87,15 @@ export class AppRichEditor {
   @State()
   private active: boolean = false;
 
-  @Element()
-  private $element: HTMLElement;
+  private $contentElement: HTMLElement = null;
 
   public isFocused: boolean = false;
 
   public textContent: string = '';
 
-  public componentDidLoad(): void {
-    this.handleContentChange(this.defaultContent);
-  }
-
   @autobind
   private labelClickHandler(): void {
-    const $content: HTMLElement = this.$element.querySelector('app-rich-editor-content');
-
-    $content.focus();
+    this.$contentElement.focus();
   }
 
   private renderLabel(): JSX.Element {
@@ -133,7 +125,7 @@ export class AppRichEditor {
       this.active = true;
     }
 
-    this.onChange(newContent);
+    this.onValueChange(newContent);
   }
 
   @autobind
@@ -146,13 +138,23 @@ export class AppRichEditor {
     this.active = this.textContent.length > 0 ? true : false;
   }
 
+  @autobind
+  private storeEditorElementRefHandler($contentElement: HTMLElement): void {
+    if (this.$contentElement === null) {
+      this.$contentElement = $contentElement;
+
+      this.$contentElement.innerHTML = this.defaultValue;
+    }
+  }
+
   private renderContent(): JSX.Element {
     return (
       <app-rich-editor-content
-        onChange={this.handleContentChange}
+        storeElementRef={this.storeEditorElementRefHandler}
+        onValueChange={this.handleContentChange}
         onFocus={this.editorFocusHandler}
         onBlur={this.editorBlurHandler}
-        defaultContent={this.defaultContent}
+        defaultValue={this.defaultValue}
         class={this.active ? 'active' : ''}
       />
     );

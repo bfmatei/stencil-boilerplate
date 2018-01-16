@@ -6,6 +6,7 @@ import {
 import {
   Store
 } from '@stencil/redux';
+import { ConnectedRouterState } from '../../../orchestrators/connected-router/connected-router.reducer';
 
 import {
   GlobalStoreState
@@ -27,7 +28,7 @@ export class AppRoute {
   public component: string = '';
 
   @Prop()
-  public componentProps: {} = {};
+  public componentProps: any = {};
 
   @Prop()
   public checkAuthorization: boolean = false;
@@ -36,17 +37,30 @@ export class AppRoute {
   public role: string = '';
 
   @Prop()
+  public redirectUrl: string = '';
+
+  @Prop()
+  public redirectComponent: string = '';
+
+  @Prop()
+  public redirectComponentProps: any = '';
+
+  @Prop()
   public exact: boolean = false;
 
   @State()
-  public userId: number = null;
+  public router: ConnectedRouterState;
 
   @State()
-  public userRole: string = null;
+  public userId: number;
+
+  @State()
+  public userRole: string;
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
       const {
+        router,
         user: {
           id,
           role
@@ -54,6 +68,7 @@ export class AppRoute {
       } = state;
 
       return {
+        router,
         userId: id,
         userRole: role
       };
@@ -74,14 +89,24 @@ export class AppRoute {
 
   public render(): JSX.Element {
     let component: string = this.component;
-    let componentProps: {} = this.componentProps;
+    let componentProps: any = this.componentProps;
 
     if (this.checkAuthorization && !this.checkAccess()) {
-      component = 'app-redirect';
+      if (this.redirectComponent.length > 0) {
+        component = this.redirectComponent;
+        componentProps = this.redirectComponentProps;
+      } else {
+        component = 'app-redirect';
 
-      componentProps = {
-        url: '/login'
-      };
+        componentProps = {
+          url: '/login',
+          from: this.router.pathname
+        };
+
+        if (this.redirectUrl.length > 0) {
+          componentProps.url = this.redirectUrl;
+        }
+      }
     }
 
     return (
