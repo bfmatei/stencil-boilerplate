@@ -37,7 +37,7 @@
     "@stencil/dev-server": "0.0.18",
     "@stencil/utils": "0.0.4",
     "@types/jest": "22.0.1",
-    "jest": "22.0.6",
+    "jest": "22.1.1",
     "stylelint": "^8.4.0",
     "tslint": "5.9.1"
   }
