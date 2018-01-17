@@ -11,10 +11,6 @@ import {
 } from 'redux-devtools-extension';
 
 import {
-  AppDashboardState,
-  getInitialState as getDashboardInitialState
-} from '../components/app-dashboard/app-dashboard.reducer';
-import {
   AppLoginState,
   getInitialState as getLoginInitialState
 } from '../components/app-login/app-login.reducer';
@@ -45,7 +41,6 @@ import rootReducer from './root-reducer';
 
 export interface GlobalStoreState {
   config: ConfigState;
-  dashboard: AppDashboardState;
   i18n: I18nState;
   login: AppLoginState;
   menu: AppMenuState;
@@ -56,7 +51,6 @@ export interface GlobalStoreState {
 export function getInitialState(appHistory: RouterHistory): GlobalStoreState {
   return {
     config: getConfigInitialState(),
-    dashboard: getDashboardInitialState(),
     i18n: getI18nInitialState(),
     login: getLoginInitialState(),
     menu: getAppMenuInitialState(),

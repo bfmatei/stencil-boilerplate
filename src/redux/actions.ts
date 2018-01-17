@@ -1,7 +1,4 @@
 import {
-  AppDashboardActionTypes
-} from '../components/app-dashboard/app-dashboard.actions';
-import {
   AppLoginActionTypes
 } from '../components/app-login/app-login.actions';
 import {
@@ -18,7 +15,6 @@ import {
 } from '../orchestrators/i18n/i18n.actions';
 
 export type GlobalActionTypes =
-  AppDashboardActionTypes |
   AppLoginActionTypes |
   AppMenuActionTypes |
   ConfigActionTypes |

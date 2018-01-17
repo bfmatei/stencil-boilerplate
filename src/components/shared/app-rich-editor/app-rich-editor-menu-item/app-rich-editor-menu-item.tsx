@@ -19,9 +19,7 @@ export class AppRichEditorMenuItem {
   public data: AppRichEditorMenuItemConfig;
 
   @Listen('mousedown')
-  public buttonClickHandler(evt: MouseEvent): void {
-    evt.preventDefault();
-
+  public buttonClickHandler(): void {
     switch (this.data.type) {
       case 'button':
         let actionName: string | AppRichEditorMenuButtonActionWithValue = this.data.action;

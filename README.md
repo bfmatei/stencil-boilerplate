@@ -39,6 +39,11 @@ The boilerplate project aims to ease the development of a project while keeping 
    * Disabled State (optional)
    * Pending State (optional)
    * Background Color Palette
+* Checkbox
+   * Label(optional)
+   * Custom Icon (optional)
+   * Disabled State (optional)
+   * Inversed Layout (optional)
 * Connected Link
    * Wrap another element in an internal link
 * Enhanced Route
