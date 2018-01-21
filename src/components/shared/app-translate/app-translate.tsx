@@ -2,7 +2,8 @@ import {
   Component,
   Listen,
   Prop,
-  State
+  State,
+  Watch
 } from '@stencil/core';
 import {
   Store
@@ -16,6 +17,9 @@ import {
   fillTranslationValues,
   reduceTranslations
 } from '../../../orchestrators/i18n/i18n.helpers';
+import {
+  I18nState
+} from '../../../orchestrators/i18n/i18n.reducer';
 import {
   GlobalStoreState
 } from '../../../redux/store';
@@ -40,6 +44,9 @@ export class AppTranslate {
   public url: string = '';
 
   @State()
+  public translations: I18nState;
+
+  @State()
   private translation: string = '';
 
   private push: typeof push;
@@ -51,6 +58,7 @@ export class AppTranslate {
       } = state;
 
       return {
+        translations: i18n,
         translation: reduceTranslations(i18n, this.entry)
       };
     });
@@ -59,6 +67,12 @@ export class AppTranslate {
       push
     });
   }
+
+  @Watch('entry')
+  public entryChangeHandler(newValue: string): void {
+    this.translation = reduceTranslations(this.translations, newValue) as string;
+  }
+
 
   @Listen('click')
   public elementClickHandler(): void {
@@ -71,8 +85,11 @@ export class AppTranslate {
     return {
       class: {
         link: this.url.length > 0
-      },
-      innerHTML: fillTranslationValues(this.translation, this.values)
+      }
     };
+  }
+
+  public render(): string {
+    return fillTranslationValues(this.translation, this.values);
   }
 }

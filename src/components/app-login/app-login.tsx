@@ -166,28 +166,32 @@ export class AppLogin {
 
     return [
       <section class='container'>
+        <app-logo class='logo' />
         <form autoComplete='off'>
           <app-text-input
             label='login.username'
             type='text'
             name='username'
             hasError={this.errorField === 'username'}
-            message={this.errorField === 'username' ? this.errorMessage : ''}
+            message={this.errorField === 'username' ? this.errorMessage : 'login.tryUsername'}
             onValueChange={this.usernameValueChangeHandler}
             value={this.username}
             disabled={this.pending}
+            class='username'
           />
           <app-text-input
             label='login.password'
             type='password'
             name='password'
             hasError={this.errorField === 'password'}
-            message={this.errorField === 'password' ? this.errorMessage : ''}
+            message={this.errorField === 'password' ? this.errorMessage : 'login.tryPassword'}
             onValueChange={this.passwordValueChangeHandler}
             value={this.password}
             disabled={this.pending}
+            class='password'
           />
           <app-button
+            class='submit'
             onClick={this.submitClickEvent}
             label='login.signIn'
             loading={this.pending}

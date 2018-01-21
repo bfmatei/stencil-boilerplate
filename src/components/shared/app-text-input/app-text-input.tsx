@@ -77,7 +77,7 @@ export class AppTextInput {
     );
   }
 
-  private renderErrorBox(): JSX.Element {
+  private renderMessageBox(): JSX.Element {
     if (this.message.length === 0) {
       return null;
     }
@@ -100,7 +100,7 @@ export class AppTextInput {
     return [
       this.renderLabel(),
       this.renderInput(),
-      this.renderErrorBox()
+      this.renderMessageBox()
     ];
   }
 }

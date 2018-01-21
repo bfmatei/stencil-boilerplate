@@ -11,6 +11,8 @@ export default {
     username: 'Username',
     password: 'Password',
     signIn: 'Sign In',
+    tryUsername: 'Hint: try admin',
+    tryPassword: 'Hint: try password',
     errors: {
       wrongUsername: 'Wrong username',
       wrongPassword: 'Wrong password'

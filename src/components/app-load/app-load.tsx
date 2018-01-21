@@ -1,6 +1,7 @@
 import {
   Component,
-  Prop
+  Prop,
+  State
 } from '@stencil/core';
 
 /**
@@ -19,17 +20,37 @@ export class AppLoad {
   })
   private window: Window;
 
-  public componentDidLoad(): void {
-    this.window.navigator.serviceWorker.ready.then(() => {
-      console.log('a');
-    });
+  @Prop({
+    context: 'isServer'
+  })
+  private isServer: boolean;
+
+  @State()
+  private isLoading: boolean = true;
+
+  public componentWillLoad(): void {
+    if (!this.isServer) {
+      this.window.navigator.serviceWorker.ready
+        .then(() => {
+          this.isLoading = false;
+        })
+        .catch(() => {
+          console.error('Could not load service worker');
+        });
+    }
   }
 
-  public render(): JSX.Element[] {
-    return [
+  public render(): JSX.Element {
+    if (this.isServer || this.isLoading) {
+      return (
+        <app-splash active={true} />
+      );
+    }
+
+    return (
       <stencil-router>
         <stencil-route url='/' component='app-main' />
       </stencil-router>
-    ];
+    );
   }
 }
