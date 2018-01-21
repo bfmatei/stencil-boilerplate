@@ -35,7 +35,7 @@ export class AppLoad {
           this.isLoading = false;
         })
         .catch(() => {
-          console.error('Could not load service worker');
+          this.isLoading = false;
         });
     }
   }
