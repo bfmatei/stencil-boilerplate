@@ -166,7 +166,7 @@ export class AppLogin {
 
     return [
       <section class='container'>
-        <form>
+        <form autoComplete='off'>
           <app-text-input
             label='login.username'
             type='text'
