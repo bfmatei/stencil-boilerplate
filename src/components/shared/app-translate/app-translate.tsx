@@ -7,7 +7,10 @@ import {
 import {
   Store
 } from '@stencil/redux';
-import { push } from '../../../orchestrators/connected-router/connected-router.actions';
+
+import {
+  push
+} from '../../../orchestrators/connected-router/connected-router.actions';
 
 import {
   fillTranslationValues,

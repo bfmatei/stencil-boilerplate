@@ -3,6 +3,8 @@ exports.config = {
     {
       /** Shared Components */
       components: [
+        'app-form-text-input',
+        'app-form',
         'app-icon',
         'app-link',
         'app-loader',

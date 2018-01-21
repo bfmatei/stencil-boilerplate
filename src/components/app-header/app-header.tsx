@@ -21,6 +21,11 @@ export class AppHeader {
   })
   private store: Store;
 
+  @Prop({
+    context: 'window'
+  })
+  private window: Window;
+
   private toggleMenu: typeof toggleMenu;
 
   public componentWillLoad(): void {
@@ -34,9 +39,15 @@ export class AppHeader {
     this.toggleMenu();
   }
 
+  @autobind
+  private githubClickHandler(): void {
+    this.window.open('https://github.com/bfmatei/stencil-boilerplate');
+  }
+
   public render(): JSX.Element[] {
     return [
-      <app-icon name='menu' class='button menu' onClick={this.menuClickHandler} />
+      <app-icon name='menu' class='button menu' onClick={this.menuClickHandler} />,
+      <app-icon name='github' class='button github' onClick={this.githubClickHandler} />
     ];
   }
 }

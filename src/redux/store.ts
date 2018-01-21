@@ -23,6 +23,10 @@ import {
   ConfigState,
   getInitialState as getConfigInitialState
 } from '../orchestrators/config/config.reducer';
+import {
+  ConnectedFormsState,
+  getInitialState as getConnectedFormsInitialState
+} from '../orchestrators/connected-forms/connected-forms.reducer';
 import connectedRouterMiddleware from '../orchestrators/connected-router/connected-router.middleware';
 import {
   ConnectedRouterState,
@@ -41,6 +45,7 @@ import rootReducer from './root-reducer';
 
 export interface GlobalStoreState {
   config: ConfigState;
+  forms: ConnectedFormsState;
   i18n: I18nState;
   login: AppLoginState;
   menu: AppMenuState;
@@ -51,6 +56,7 @@ export interface GlobalStoreState {
 export function getInitialState(appHistory: RouterHistory): GlobalStoreState {
   return {
     config: getConfigInitialState(),
+    forms: getConnectedFormsInitialState(),
     i18n: getI18nInitialState(),
     login: getLoginInitialState(),
     menu: getAppMenuInitialState(),

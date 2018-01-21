@@ -6,8 +6,10 @@ import {
 import {
   Store
 } from '@stencil/redux';
-import { ConnectedRouterState } from '../../../orchestrators/connected-router/connected-router.reducer';
 
+import {
+  ConnectedRouterState
+} from '../../../orchestrators/connected-router/connected-router.reducer';
 import {
   GlobalStoreState
 } from '../../../redux/store';

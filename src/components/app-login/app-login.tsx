@@ -82,11 +82,7 @@ export class AppLogin {
             message
           }
         },
-        router: {
-          state: {
-            from
-          }
-        },
+        router,
         user: {
           id
         }
@@ -99,7 +95,7 @@ export class AppLogin {
         errorField: field,
         errorMessage: message,
         userId: id,
-        redirectTo: from
+        redirectTo: router.state && router.state.from ? router.state.from : ''
       };
     });
 

@@ -15,6 +15,16 @@ import {
   styleUrl: 'app-rich-editor-menu-item.scss'
 })
 export class AppRichEditorMenuItem {
+  @Prop({
+    context: 'window'
+  })
+  private window: Window;
+
+  @Prop({
+    context: 'document'
+  })
+  private document: Document;
+
   @Prop()
   public data: AppRichEditorMenuItemConfig;
 
@@ -29,10 +39,10 @@ export class AppRichEditorMenuItem {
           const action: AppRichEditorMenuButtonActionWithValue = this.data.action as AppRichEditorMenuButtonActionWithValue;
 
           actionName = action.name;
-          actionValue = action.prompt ? window.prompt(action.value) : `<${action.value.toUpperCase()}>`;
+          actionValue = action.prompt ? this.window.prompt(action.value) : `<${action.value.toUpperCase()}>`;
         }
 
-        document.execCommand(actionName, true, actionValue);
+        this.document.execCommand(actionName, true, actionValue);
         break;
 
       default:

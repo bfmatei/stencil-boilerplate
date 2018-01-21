@@ -8,6 +8,9 @@ import {
   ConfigActionTypes
 } from '../orchestrators/config/config.actions';
 import {
+  ConnectedFormsActionTypes
+} from '../orchestrators/connected-forms/connected-forms.actions';
+import {
   ConnectedRouterActionTypes
 } from '../orchestrators/connected-router/connected-router.actions';
 import {
@@ -18,5 +21,6 @@ export type GlobalActionTypes =
   AppLoginActionTypes |
   AppMenuActionTypes |
   ConfigActionTypes |
+  ConnectedFormsActionTypes |
   ConnectedRouterActionTypes |
   I18nActionTypes;

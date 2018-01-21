@@ -22,7 +22,8 @@ app-private-module {
     box-sizing: border-box;
     width: 100vw;
     height: calc(100vh - 64px);
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
     transition: width var(--animationDuration) var(--animationTiming);
 
     &.shrinked {

@@ -24,10 +24,10 @@ export class AppRichEditorContent {
   public onValueChange: (newValue: any) => void;
 
   @Prop()
-  public storeElementRef: ($element: HTMLElement) => void = noop;
+  public storeElementRef: ($element: HTMLAppRichEditorContentElement) => void = noop;
 
   @Element()
-  private $element: HTMLElement;
+  private $element: HTMLAppRichEditorContentElement;
 
   private value: string;
 
