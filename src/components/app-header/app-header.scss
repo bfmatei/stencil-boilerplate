@@ -11,6 +11,7 @@ app-header {
   padding: 0 20px;
   height: 64px;
   z-index: var(--appHeaderIndex);
+  align-items: center;
 
   & > .button {
     background: none;
@@ -18,7 +19,6 @@ app-header {
     border: 0;
     width: 24px;
     height: 24px;
-    margin: 20px 0;
     color: var(--midnight);
     cursor: pointer;
     outline: none;
@@ -32,5 +32,12 @@ app-header {
       grid-area: right;
       justify-self: right;
     }
+  }
+
+  & > .logo {
+    justify-self: center;
+    width: 56px;
+    height: 56px;
+    cursor: pointer;
   }
 }

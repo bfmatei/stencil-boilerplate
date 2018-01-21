@@ -2,7 +2,7 @@ app-button {
   background-color: var(--brightGreen);
   color: var(--white);
   transition: background-color var(--animationDuration) var(--animationTiming);
-  box-shadow: var(--boxShadow);
+  box-shadow: var(--shadowColor);
   box-sizing: border-box;
   display: inline-block;
   cursor: pointer;

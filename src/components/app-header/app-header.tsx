@@ -8,6 +8,9 @@ import {
 
 import autobind from '../../decorators/autobind';
 import {
+  push
+} from '../../orchestrators/connected-router/connected-router.actions';
+import {
   toggleMenu
 } from '../app-menu/app-menu.actions';
 
@@ -27,16 +30,23 @@ export class AppHeader {
   private window: Window;
 
   private toggleMenu: typeof toggleMenu;
+  private push: typeof push;
 
   public componentWillLoad(): void {
     this.store.mapDispatchToProps(this, {
-      toggleMenu
+      toggleMenu,
+      push
     });
   }
 
   @autobind
   private menuClickHandler(): void {
     this.toggleMenu();
+  }
+
+  @autobind
+  private logoClickHandler(): void {
+    this.push('/dashboard');
   }
 
   @autobind
@@ -47,6 +57,7 @@ export class AppHeader {
   public render(): JSX.Element[] {
     return [
       <app-icon name='menu' class='button menu' onClick={this.menuClickHandler} />,
+      <app-logo class='logo' onClick={this.logoClickHandler} />,
       <app-icon name='github' class='button github' onClick={this.githubClickHandler} />
     ];
   }

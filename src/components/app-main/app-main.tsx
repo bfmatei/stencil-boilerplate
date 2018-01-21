@@ -65,8 +65,7 @@ export class AppMain {
 
   public render(): JSX.Element[] {
     return [
-      <app-route url='/login' component='app-login' />,
-      <app-route url='/' component='app-private-module' checkAuthorization={true} />
+      <app-route url='/' component='app-private-module' checkAuthorization={true} redirectComponent='app-login' />
     ];
   }
 }
