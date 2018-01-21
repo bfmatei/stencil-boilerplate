@@ -31,15 +31,17 @@ export class AppLoad {
   public componentWillLoad(): void {
     if (!this.isServer) {
       if ('serviceWorker' in this.window.navigator) {
-        this.window.navigator.serviceWorker.ready
-          .then(() => {
-            this.isLoading = false;
-          })
-          .catch(() => {
-            this.isLoading = false;
-          });
-      } else {
-        this.isLoading = false;
+        if (this.window.navigator.serviceWorker.controller !== null) {
+          this.isLoading = false;
+        } else {
+          this.window.navigator.serviceWorker.ready
+            .then(() => {
+              this.isLoading = false;
+            })
+            .catch(() => {
+              this.isLoading = false;
+            });
+        }
       }
     }
   }
