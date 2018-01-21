@@ -1,5 +1,6 @@
 import {
-  Component
+  Component,
+  Prop
 } from '@stencil/core';
 
 /**
@@ -13,6 +14,17 @@ import {
   tag: 'app-load'
 })
 export class AppLoad {
+  @Prop({
+    context: 'window'
+  })
+  private window: Window;
+
+  public componentDidLoad(): void {
+    this.window.navigator.serviceWorker.ready.then(() => {
+      console.log('a');
+    });
+  }
+
   public render(): JSX.Element[] {
     return [
       <stencil-router>

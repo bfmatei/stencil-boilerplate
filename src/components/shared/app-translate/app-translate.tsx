@@ -71,11 +71,8 @@ export class AppTranslate {
     return {
       class: {
         link: this.url.length > 0
-      }
+      },
+      innerHTML: fillTranslationValues(this.translation, this.values)
     };
-  }
-
-  public render(): string {
-    return fillTranslationValues(this.translation, this.values);
   }
 }
