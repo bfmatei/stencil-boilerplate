@@ -27,11 +27,9 @@ export class AppLoad {
     if ('serviceWorker' in this.window.navigator) {
       this.window.navigator.serviceWorker.ready
         .then(() => {
-          console.log('a');
           this.isLoading = false;
         })
         .catch(() => {
-          console.log('b');
           this.isLoading = false;
         });
     }
