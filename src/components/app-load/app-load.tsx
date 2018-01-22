@@ -37,11 +37,7 @@ export class AppLoad {
         .catch(() => {
           this.isLoading = false;
         });
-    }
-  }
-
-  public componentDidLoad(): void {
-    if (this.isServer) {
+    } else {
       this.isLoading = false;
     }
   }
