@@ -16,8 +16,9 @@ export class AppSplash {
       return null;
     }
 
-    return (
-      <app-logo class='logo' />
-    );
+    return [
+      <app-logo class='logo' />,
+      <app-loader class='loader' active={true} size='large' />
+    ];
   }
 }

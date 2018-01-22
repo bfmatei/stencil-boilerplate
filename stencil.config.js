@@ -87,10 +87,11 @@ exports.config = {
     'src/styles/sizes.css',
     'src/styles/typography.css',
     'src/styles/z-index.css'
-  ]
+  ],
+  cleanWWW: true
 };
 
 exports.devServer = {
   root: 'www',
-  watchGlob: '**/**'
+  watchGlob: 'src/**/**'
 };
