@@ -18,8 +18,8 @@
   },
   "scripts": {
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server --no-open\" ",
-    "dev:build": "sd concurrent \"stencil build --watch\" \"stencil-dev-server\" ",
-    "build": "stencil build --prerender",
+    "dev:build": "sd concurrent \"stencil build --watch\" \"stencil-dev-server --no-open\" ",
+    "build": "stencil build",
     "lint": "sd concurrent \"npm run lint:ts\" \"npm run lint:styles\"",
     "lint:ts": "tslint -p tsconfig.json -c tslint.json",
     "lint:styles": "stylelint \"src/**/*.{css,scss}\" --cache --cache-location \"./.stylelint-cache\"",

@@ -20,16 +20,11 @@ export class AppLoad {
   })
   private window: Window;
 
-  @Prop({
-    context: 'isServer'
-  })
-  private isServer: boolean;
-
   @State()
   private isLoading: boolean = true;
 
   public componentWillLoad(): void {
-    if (!this.isServer && 'serviceWorker' in this.window.navigator) {
+    if ('serviceWorker' in this.window.navigator) {
       this.window.navigator.serviceWorker.ready
         .then(() => {
           this.isLoading = false;
@@ -37,13 +32,11 @@ export class AppLoad {
         .catch(() => {
           this.isLoading = false;
         });
-    } else {
-      this.isLoading = false;
     }
   }
 
   public render(): JSX.Element {
-    if (this.isServer || this.isLoading) {
+    if (this.isLoading) {
       return (
         <app-splash active={true} />
       );
