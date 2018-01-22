@@ -35,6 +35,14 @@ export class AppLoad {
     }
   }
 
+  public componentDidLoad(): void {
+    if (!('serviceWorker' in this.window.navigator)) {
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1500);
+    }
+  }
+
   public render(): JSX.Element {
     if (this.isLoading) {
       return (
