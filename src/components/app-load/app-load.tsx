@@ -30,26 +30,19 @@ export class AppLoad {
 
   public componentWillLoad(): void {
     if (!this.isServer && 'serviceWorker' in this.window.navigator) {
-      console.log('registering service worker pending');
-
       this.window.navigator.serviceWorker.ready
         .then(() => {
-          console.log('service worker is ready!');
           this.isLoading = false;
         })
         .catch(() => {
-          console.log('service worker is not ready!');
           this.isLoading = false;
         });
     }
   }
 
   public componentDidLoad(): void {
-    if (!this.isServer && 'serviceWorker' in this.window.navigator) {
-      if (this.window.navigator.serviceWorker.controller !== null) {
-        console.log('service worker controller is not null!');
-        this.isLoading = false;
-      }
+    if (this.isServer) {
+      this.isLoading = false;
     }
   }
 
