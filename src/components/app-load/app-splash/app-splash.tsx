@@ -11,7 +11,7 @@ export class AppSplash {
   @Prop()
   public active: boolean = false;
 
-  public render(): JSX.Element {
+  public render(): null | JSX.Element {
     if (!this.active) {
       return null;
     }

@@ -1,4 +1,5 @@
 exports.config = {
+  buildEs5: false,
   bundles: [
     {
       /** Shared Components */
@@ -8,6 +9,7 @@ exports.config = {
         'app-icon',
         'app-link',
         'app-loader',
+        'app-logo',
         'app-redirect',
         'app-rich-editor-content',
         'app-rich-editor-label',
@@ -23,7 +25,8 @@ exports.config = {
       /** Main Components */
       components: [
         'app-load',
-        'app-main'
+        'app-main',
+        'app-splash'
       ]
     },
     {
@@ -69,16 +72,12 @@ exports.config = {
       name: '@stencil/redux'
     }
   ],
-  serviceWorker: {
-    skipWaiting: true,
-    clientsClaim: true,
-    globPatterns: [
-      '**/*.{js,css,json,html,ico,png,jpeg,svg,woff2}'
-    ],
-    globIgnores: [
-      'build/app/svg/*.js'
-    ]
-  },
+  emptyDist: false,
+  emptyWWW: true,
+  enableCache: true,
+  generateDistribution: false,
+  generateDocs: false,
+  generateWWW: true,
   globalStyle: [
     'src/styles/animations.css',
     'src/styles/colors.css',
@@ -88,10 +87,25 @@ exports.config = {
     'src/styles/typography.css',
     'src/styles/z-index.css'
   ],
-  cleanWWW: true
+  hydratedCssClass: 'hydrated',
+  logLevel: 'info',
+  serviceWorker: {
+    skipWaiting: true,
+    clientsClaim: true,
+    globPatterns: [
+      '**/*.{js,css,json,html,ico,png,jpeg,svg,woff2}'
+    ],
+    globIgnores: [
+      'build/app/svg/*.js'
+    ]
+  }
 };
 
 exports.devServer = {
   root: 'www',
-  watchGlob: 'src/**/**'
+  verbose: true,
+  watchGlob: 'src/**/**',
+  address: '0.0.0.0',
+  httpPort: 3333,
+  liveReloadPort: 35729
 };

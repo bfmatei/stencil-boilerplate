@@ -27,16 +27,18 @@ export class AppLoad {
     if ('serviceWorker' in this.window.navigator) {
       this.window.navigator.serviceWorker.ready
         .then(() => {
+          console.log('a');
           this.isLoading = false;
         })
         .catch(() => {
+          console.log('b');
           this.isLoading = false;
         });
     }
   }
 
   public componentDidLoad(): void {
-    if (!('serviceWorker' in this.window.navigator)) {
+    if (!('serviceWorker' in this.window.navigator) || process.env.NODE_ENV === 'development') {
       setTimeout(() => {
         this.isLoading = false;
       }, 1500);
