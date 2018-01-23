@@ -1,5 +1,6 @@
 exports.config = {
   buildEs5: false,
+  buildStats: true,
   bundles: [
     {
       /** Shared Components */

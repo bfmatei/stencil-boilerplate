@@ -27,9 +27,9 @@
     "test:watch": "jest --watch --no-cache --verbose"
   },
   "dependencies": {
-    "@stencil/core": "0.2.0-1",
+    "@stencil/core": "0.2.0",
     "@stencil/redux": "0.0.3",
-    "@stencil/router": "0.0.22",
+    "@stencil/router": "0.0.23",
     "redux": "3.7.2",
     "redux-devtools-extension": "2.13.2"
   },
