@@ -33,13 +33,14 @@ export class AppRichEditorMenuItem {
     switch (this.data.type) {
       case 'button':
         let actionName: string | AppRichEditorMenuButtonActionWithValue = this.data.action;
-        let actionValue: string = null;
+
+        let actionValue: string = '';
 
         if (typeof actionName !== 'string') {
           const action: AppRichEditorMenuButtonActionWithValue = this.data.action as AppRichEditorMenuButtonActionWithValue;
 
           actionName = action.name;
-          actionValue = action.prompt ? this.window.prompt(action.value) : `<${action.value.toUpperCase()}>`;
+          actionValue = action.prompt ? this.window.prompt(action.value) || '' : `<${action.value.toUpperCase()}>`;
         }
 
         this.document.execCommand(actionName, true, actionValue);
@@ -67,7 +68,7 @@ export class AppRichEditorMenuItem {
     };
   }
 
-  public render(): JSX.Element {
+  public render(): null | JSX.Element {
     switch (this.data.type) {
       case 'button':
         return this.renderButton();

@@ -17,7 +17,7 @@
     "homepage": "https://github.com/bfmatei"
   },
   "scripts": {
-    "dev": "NODE_ENV=dev sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server --no-open\" ",
+    "dev": "NODE_ENV=dev sd concurrent \"stencil build --dev --service-worker --watch\" \"stencil-dev-server --no-open\" ",
     "dev:build": "NODE_ENV=production sd concurrent \"stencil build --watch\" \"stencil-dev-server --no-open\" ",
     "build": "NODE_ENV=production stencil build --prerender",
     "lint": "sd concurrent \"npm run lint:ts\" \"npm run lint:styles\"",

@@ -36,7 +36,7 @@ export class AppLoad {
   }
 
   public componentDidLoad(): void {
-    if (!('serviceWorker' in this.window.navigator) || process.env.NODE_ENV === 'development') {
+    if (!('serviceWorker' in this.window.navigator)) {
       setTimeout(() => {
         this.isLoading = false;
       }, 1500);
