@@ -89,8 +89,7 @@ jobs:
             - build-cache-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Deploy
-          commands:
-            - scp -r stencil-boilerplate/www/* $DEPLOY_USER@$DEPLOY_HOSTNAME:/home/bogdan/projects/stencil-boilerplate-www/
+          commands: 'scp -r stencil-boilerplate/www/* $DEPLOY_USER@$DEPLOY_HOSTNAME:/home/bogdan/projects/stencil-boilerplate-www/'
 
 workflows:
   version: 2
