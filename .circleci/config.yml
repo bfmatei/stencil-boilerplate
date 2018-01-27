@@ -89,7 +89,7 @@ jobs:
             - build-cache-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Deploy
-          command: 'scp -o "StrictHostKeyChecking no" -r stencil-boilerplate/www/* $DEPLOY_USER@$DEPLOY_HOSTNAME:$DEPLOY_PATH'
+          command: 'scp -o StrictHostKeyChecking=no -r stencil-boilerplate/www/* $DEPLOY_USER@$DEPLOY_HOSTNAME:$DEPLOY_PATH'
 
 workflows:
   version: 2
