@@ -86,7 +86,7 @@ jobs:
             - dependency-cache-{{ checksum "package.json" }}
       - restore_cache:
           keys:
-            - build-cache-{{ .Environment.CIRCLE_SHA1 }}
+            - build-cache-{{ checksum "package.json" }}
       - run:
           name: Install rsync
           command: 'sudo apt install rsync'
