@@ -92,7 +92,7 @@ jobs:
           command: 'sudo apt install rsync'
       - run:
           name: Deploy
-          command: 'rsync -avz --remove-source-files -e ssh -o StrictHostKeyChecking=no ~/stencil-boilerplate/www $DEPLOY_USERNAME@$DEPLOY_HOSTNAME:$DEPLOY_PATH'
+          command: 'rsync -avz --remove-source-files -e ssh "-o StrictHostKeyChecking=no" ~/stencil-boilerplate/www $DEPLOY_USERNAME@$DEPLOY_HOSTNAME:$DEPLOY_PATH'
 
 workflows:
   version: 2
