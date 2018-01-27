@@ -35,3 +35,4 @@ export default function (target: any, propertyKey: string, descriptor: TypedProp
     }
   };
 }
+

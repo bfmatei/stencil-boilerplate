@@ -1,26 +1,64 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "allowUnreachableCode": false,
-    "declaration": false,
-    "experimentalDecorators": true,
-    "lib": [
-      "dom",
-      "es2015"
-    ],
-    "moduleResolution": "node",
-    "module": "es2015",
-    "target": "es2015",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "baseUrl": ".",
+    "rootDir": "src",
+    "sourceMap": true,
+    "target": "es6",
     "jsx": "react",
     "jsxFactory": "h",
-    "strict": true
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": false,
+    "outDir": "dist",
+    "lib": [
+      "es6",
+      "es7",
+      "esnext",
+      "dom"
+    ],
+    "plugins": [
+      {
+        "name": "tslint-language-service"
+      }
+    ],
+    "paths": {
+      "~assets/*": [
+        "src/assets/*"
+      ],
+      "~components/*": [
+        "src/components/*"
+      ],
+      "~decorators/*": [
+        "src/decorators/*"
+      ],
+      "~helpers/*": [
+        "src/helpers/*"
+      ],
+      "~locales": [
+        "src/locales/*"
+      ],
+      "~orchestrators/*": [
+        "src/orchestrators/*"
+      ],
+      "~redux/*": [
+        "src/redux/*"
+      ],
+      "~styles/*": [
+        "src/styles/*"
+      ]
+    }
   },
-  "include": [
-    "src"
-  ],
   "exclude": [
     "node_modules"
+  ],
+  "include": [
+    "./**/*"
   ]
 }

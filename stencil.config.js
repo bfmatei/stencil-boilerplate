@@ -90,6 +90,7 @@ exports.config = {
   ],
   hydratedCssClass: 'hydrated',
   logLevel: 'info',
+  namespace: 'app',
   serviceWorker: {
     skipWaiting: true,
     clientsClaim: true,

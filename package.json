@@ -27,7 +27,7 @@
     "test:watch": "jest --watch --no-cache --verbose"
   },
   "dependencies": {
-    "@stencil/core": "0.2.0",
+    "@stencil/core": "0.2.3",
     "@stencil/redux": "0.0.3",
     "@stencil/router": "0.0.23",
     "redux": "3.7.2",
@@ -36,9 +36,10 @@
   "devDependencies": {
     "@stencil/dev-server": "0.0.18",
     "@stencil/utils": "0.0.4",
-    "@types/jest": "22.0.1",
+    "@types/jest": "22.1.0",
     "jest": "22.1.4",
     "stylelint": "^8.4.0",
-    "tslint": "5.9.1"
+    "tslint": "5.9.1",
+    "tslint-language-service": "^0.9.8"
   }
 }
