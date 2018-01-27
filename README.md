@@ -28,7 +28,8 @@ It features a couple of common principles and workflows that are used at the mom
       * Grid layout
       * Centralized variables
       * Material-UI-based styles
-   * nginx configuration
+   * [nginx](https://nginx.org/) configuration
+   * Continous integration using [CircleCI](https://circleci.com/)
 
 ## Components
 The boilerplate project aims to ease the development of a project while keeping everything as simple as possible.
