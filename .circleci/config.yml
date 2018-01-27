@@ -43,18 +43,18 @@ jobs:
           name: Linting
           command: npm run lint
 
-  test:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          keys:
-            - repo-cache-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          keys:
-            - dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Testing
-          command: npm run test
+#  test:
+#    <<: *defaults
+#    steps:
+#      - restore_cache:
+#          keys:
+#            - repo-cache-{{ .Environment.CIRCLE_SHA1 }}
+#      - restore_cache:
+#          keys:
+#            - dependency-cache-{{ checksum "package.json" }}
+#      - run:
+#          name: Testing
+#          command: npm run test
 
   build:
     <<: *defaults
@@ -89,8 +89,8 @@ jobs:
             - build-cache-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Deploy
-          command:
-            - scp -r stencil-boilerplate/www/* user@host:/home/bogdan/projects/stencil-boilerplate-www/
+          commands:
+            - scp -r stencil-boilerplate/www/* $DEPLOY_USER@$DEPLOY_HOSTNAME:/home/bogdan/projects/stencil-boilerplate-www/
 
 workflows:
   version: 2
@@ -100,9 +100,9 @@ workflows:
       - lint:
           requires:
             - dependencies
-      - test:
-          requires:
-            - dependencies
+#      - test:
+#          requires:
+#            - dependencies
       - build:
           <<: *build_filters
           requires:
