@@ -69,9 +69,9 @@ jobs:
           name: Creating Build
           command: 'npm run build'
           environment:
-              - APP_ENV: production
+              - NODE_ENV: production
       - save_cache:
-          key: build-cache-{{ .Environment.CIRCLE_SHA1 }}
+          key: build-cache-{{ checksum "package.json" }}
           paths:
             - www
 
