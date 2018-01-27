@@ -88,6 +88,9 @@ jobs:
           keys:
             - build-cache-{{ .Environment.CIRCLE_SHA1 }}
       - run:
+          name: Install rsync
+          command: 'sudo apt install rsync'
+      - run:
           name: Deploy
           command: 'rsync -avz --remove-source-files -e ssh ~/stencil-boilerplate/www $DEPLOY_USERNAME@$DEPLOY_HOSTNAME:$DEPLOY_PATH'
 
