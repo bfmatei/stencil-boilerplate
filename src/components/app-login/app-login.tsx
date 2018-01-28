@@ -7,16 +7,16 @@ import {
   Store
 } from '@stencil/redux';
 
-import autobind from '../../decorators/autobind';
+// import autobind from '../../decorators/autobind';
 import {
   push
 } from '../../orchestrators/connected-router/connected-router.actions';
 import {
   setUser
 } from '../../orchestrators/user/user.actions';
-import {
-  UserData
-} from '../../orchestrators/user/user.interface';
+// import {
+//   UserData
+// } from '../../orchestrators/user/user.interface';
 import {
   GlobalStoreState
 } from '../../redux/store';
@@ -39,36 +39,36 @@ export class AppLogin {
   })
   private store: Store;
 
-  @State()
-  private pending: boolean = false;
+  // @State()
+  // private pending: boolean = false;
 
   @State()
   public userId: number = null;
 
-  @State()
-  private username: string = '';
-
-  @State()
-  private password: string = '';
-
-  @State()
-  private errorField: string = '';
-
-  @State()
-  private errorMessage: string = '';
-
-  @State()
-  private redirectTo: string;
-
-  private setUsername: typeof setUsername;
-  private setPassword: typeof setPassword;
-  private login: typeof login;
-  private loginSuccess: typeof loginSuccess;
-  private loginError: typeof loginError;
-  private setUser: typeof setUser;
-  private push: typeof push;
-
-  private defaultRedirectRoute: string = '/dashboard';
+  // @State()
+  // private username: string = '';
+  //
+  // @State()
+  // private password: string = '';
+  //
+  // @State()
+  // private errorField: string = '';
+  //
+  // @State()
+  // private errorMessage: string = '';
+  //
+  // @State()
+  // private redirectTo: string;
+  //
+  // private setUsername: typeof setUsername;
+  // private setPassword: typeof setPassword;
+  // private login: typeof login;
+  // private loginSuccess: typeof loginSuccess;
+  // private loginError: typeof loginError;
+  // private setUser: typeof setUser;
+  // private push: typeof push;
+  //
+  // private defaultRedirectRoute: string = '/dashboard';
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
@@ -110,52 +110,52 @@ export class AppLogin {
     });
   }
 
-  @autobind
-  private submitClickEvent(): void {
-    this.login();
+  // @autobind
+  // private submitClickEvent(): void {
+  //   this.login();
+  //
+  //   // TODO: Replace with actual login method
+  //
+  //   if (this.username !== 'admin') {
+  //     this.loginError({
+  //       field: 'username',
+  //       message: 'login.errors.wrongUsername'
+  //     });
+  //   } else {
+  //     if (this.password !== 'password') {
+  //       this.loginError({
+  //         field: 'password',
+  //         message: 'login.errors.wrongPassword'
+  //       });
+  //     } else {
+  //       const user: UserData = {
+  //         id: this.username === 'admin' ? 1 : 2,
+  //         user: this.username,
+  //         name: `${this.username}Name`,
+  //         lastName: `${this.username}LastName`,
+  //         email: `${this.username}@app.com`
+  //       };
+  //
+  //       localStorage.setItem('user', JSON.stringify(user));
+  //
+  //       this.setUser(user);
+  //
+  //       this.push(this.redirectTo || this.defaultRedirectRoute);
+  //
+  //       this.loginSuccess();
+  //     }
+  //   }
+  // }
 
-    // TODO: Replace with actual login method
+  // @autobind
+  // private usernameValueChangeHandler(newValue: string): void {
+  //   this.setUsername(newValue);
+  // }
 
-    if (this.username !== 'admin') {
-      this.loginError({
-        field: 'username',
-        message: 'login.errors.wrongUsername'
-      });
-    } else {
-      if (this.password !== 'password') {
-        this.loginError({
-          field: 'password',
-          message: 'login.errors.wrongPassword'
-        });
-      } else {
-        const user: UserData = {
-          id: this.username === 'admin' ? 1 : 2,
-          user: this.username,
-          name: `${this.username}Name`,
-          lastName: `${this.username}LastName`,
-          email: `${this.username}@app.com`
-        };
-
-        localStorage.setItem('user', JSON.stringify(user));
-
-        this.setUser(user);
-
-        this.push(this.redirectTo || this.defaultRedirectRoute);
-
-        this.loginSuccess();
-      }
-    }
-  }
-
-  @autobind
-  private usernameValueChangeHandler(newValue: string): void {
-    this.setUsername(newValue);
-  }
-
-  @autobind
-  private passwordValueChangeHandler(newValue: string): void {
-    this.setPassword(newValue);
-  }
+  // @autobind
+  // private passwordValueChangeHandler(newValue: string): void {
+  //   this.setPassword(newValue);
+  // }
 
   public render(): JSX.Element | JSX.Element[] {
     if (this.userId !== null) {
@@ -167,36 +167,51 @@ export class AppLogin {
     return [
       <section class='container'>
         <app-logo class='logo' />
-        <form autoComplete='off'>
-          <app-text-input
+        <app-form name='login'>
+          <app-form-text-input
+            name='username'
             label='login.username'
             type='text'
-            name='username'
-            hasError={this.errorField === 'username'}
-            message={this.errorField === 'username' ? this.errorMessage : 'login.tryUsername'}
-            onValueChange={this.usernameValueChangeHandler}
-            value={this.username}
-            disabled={this.pending}
-            class='username'
           />
-          <app-text-input
+          <app-form-text-input
+            name='password'
             label='login.password'
             type='password'
-            name='password'
-            hasError={this.errorField === 'password'}
-            message={this.errorField === 'password' ? this.errorMessage : 'login.tryPassword'}
-            onValueChange={this.passwordValueChangeHandler}
-            value={this.password}
-            disabled={this.pending}
-            class='password'
           />
-          <app-button
-            class='submit'
-            onClick={this.submitClickEvent}
+          <app-form-submit
             label='login.signIn'
-            loading={this.pending}
           />
-        </form>
+        </app-form>
+        {/*<form autoComplete='off'>*/}
+          {/*<app-text-input*/}
+            {/*label='login.username'*/}
+            {/*type='text'*/}
+            {/*name='username'*/}
+            {/*hasError={this.errorField === 'username'}*/}
+            {/*message={this.errorField === 'username' ? this.errorMessage : 'login.tryUsername'}*/}
+            {/*onValueChange={this.usernameValueChangeHandler}*/}
+            {/*value={this.username}*/}
+            {/*disabled={this.pending}*/}
+            {/*class='username'*/}
+          {/*/>*/}
+          {/*<app-text-input*/}
+            {/*label='login.password'*/}
+            {/*type='password'*/}
+            {/*name='password'*/}
+            {/*hasError={this.errorField === 'password'}*/}
+            {/*message={this.errorField === 'password' ? this.errorMessage : 'login.tryPassword'}*/}
+            {/*onValueChange={this.passwordValueChangeHandler}*/}
+            {/*value={this.password}*/}
+            {/*disabled={this.pending}*/}
+            {/*class='password'*/}
+          {/*/>*/}
+          {/*<app-button*/}
+            {/*class='submit'*/}
+            {/*onClick={this.submitClickEvent}*/}
+            {/*label='login.signIn'*/}
+            {/*loading={this.pending}*/}
+          {/*/>*/}
+        {/*</form>*/}
       </section>
     ];
   }

@@ -2,7 +2,7 @@ import {
   I18nObject
 } from './i18n.interface';
 
-export function fillTranslationValues(translation: string, values: {}): string {
+export function fillTranslationValues(translation: string = '', values: {}): string {
   return translation.replace(/{\w+}/g, (key: string) => {
     const parsedKey: string = key.substring(1, key.length - 1);
 

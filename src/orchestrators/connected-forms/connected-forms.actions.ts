@@ -10,8 +10,10 @@ export enum ConnectedFormsActions {
   REGISTER_FORM = 'REGISTER_FORM',
   UNREGISTER_FORM = 'UNREGISTER_FORM',
   SUBMIT_FORM = 'SUBMIT_FORM',
-  UNFREEZE_FORM = 'UNFREEZE_FORM',
-  SET_FIELD = 'SET_FIELD'
+  SUBMIT_FORM_SUCCESS = 'UNFREEZE_FORM_SUCCESS',
+  SUBMIT_FORM_ERROR = 'UNFREEZE_FORM_ERROR',
+  REGISTER_FIELD = 'REGISTER_FIELD',
+  SET_FIELD_VALUE = 'SET_FIELD_VALUE'
 }
 
 export interface RegisterFormAction {
@@ -56,32 +58,84 @@ export function submitForm(name: string): any {
   };
 }
 
-export interface UnfreezeFormAction {
-  type: ConnectedFormsActions.UNFREEZE_FORM;
+export interface SubmitFormSuccessAction {
+  type: ConnectedFormsActions.SUBMIT_FORM_SUCCESS;
   payload: string;
 }
 
-export function unfreezeForm(name: string): any {
-  return async (dispatch: Dispatch<GlobalStoreState>): Promise<UnfreezeFormAction> => {
+export function submitFormSuccess(name: string): any {
+  return async (dispatch: Dispatch<GlobalStoreState>): Promise<SubmitFormSuccessAction> => {
     return dispatch({
-      type: ConnectedFormsActions.UNFREEZE_FORM as ConnectedFormsActions.UNFREEZE_FORM,
+      type: ConnectedFormsActions.SUBMIT_FORM_SUCCESS as ConnectedFormsActions.SUBMIT_FORM_SUCCESS,
       payload: name
     });
   };
 }
 
-export interface SetFieldAction {
-  type: ConnectedFormsActions.SET_FIELD;
-  payload: {};
+export interface SubmitFormErrorAction {
+  type: ConnectedFormsActions.SUBMIT_FORM_ERROR;
+  payload: string;
 }
 
-export function setField(): any {
-  return async (dispatch: Dispatch<GlobalStoreState>): Promise<SetFieldAction> => {
+export function submitFormError(name: string): any {
+  return async (dispatch: Dispatch<GlobalStoreState>): Promise<SubmitFormErrorAction> => {
     return dispatch({
-      type: ConnectedFormsActions.SET_FIELD as ConnectedFormsActions.SET_FIELD,
-      payload: {}
+      type: ConnectedFormsActions.SUBMIT_FORM_ERROR as ConnectedFormsActions.SUBMIT_FORM_ERROR,
+      payload: name
     });
   };
 }
 
-export type ConnectedFormsActionTypes = RegisterFormAction | UnregisterFormAction | SubmitFormAction | UnfreezeFormAction | SetFieldAction;
+export interface RegisterFieldAction {
+  type: ConnectedFormsActions.REGISTER_FIELD;
+  payload: {
+    name: string;
+    formName: string;
+    options: {
+      value: string;
+      error: boolean;
+      message: string;
+    };
+  };
+}
+
+export function registerField(name: string, formName: string, options: any = ''): any {
+  return async (dispatch: Dispatch<GlobalStoreState>): Promise<RegisterFieldAction> => {
+    return dispatch({
+      type: ConnectedFormsActions.REGISTER_FIELD as ConnectedFormsActions.REGISTER_FIELD,
+      payload: {
+        name,
+        formName,
+        options: {
+          value: options.defaultValue || '',
+          error: options.error || false,
+          message: options.message || ''
+        }
+      }
+    });
+  };
+}
+
+export interface SetFieldValueAction {
+  type: ConnectedFormsActions.SET_FIELD_VALUE;
+  payload: {
+    name: string;
+    value: string;
+    formName: string;
+  };
+}
+
+export function setFieldValue(name: string, value: string, formName: string): any {
+  return async (dispatch: Dispatch<GlobalStoreState>): Promise<SetFieldValueAction> => {
+    return dispatch({
+      type: ConnectedFormsActions.SET_FIELD_VALUE as ConnectedFormsActions.SET_FIELD_VALUE,
+      payload: {
+        name,
+        value,
+        formName
+      }
+    });
+  };
+}
+
+export type ConnectedFormsActionTypes = RegisterFormAction | UnregisterFormAction | SubmitFormAction | SubmitFormSuccessAction | SubmitFormErrorAction | RegisterFieldAction | SetFieldValueAction;
