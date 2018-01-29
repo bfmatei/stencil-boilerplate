@@ -71,7 +71,7 @@ jobs:
           environment:
               - NODE_ENV: production
       - save_cache:
-          key: build-cache-{{ checksum "package.json" }}
+          key: build-cache-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - www
 
@@ -86,7 +86,7 @@ jobs:
             - dependency-cache-{{ checksum "package.json" }}
       - restore_cache:
           keys:
-            - build-cache-{{ checksum "package.json" }}
+            - build-cache-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Install rsync
           command: 'sudo apt install rsync'
