@@ -3,6 +3,8 @@
 
 App boilerplate for [Stencil](https://stenciljs.com/) applications.
 
+There is a live demo available [HERE](https://stencil-boilerplate.bmatei.com).
+
 It features a couple of common principles and workflows that are used at the moment in the Web Apps development world:
    * Routing using [Stencil Router](https://github.com/ionic-team/stencil-router)
    * Redux:
