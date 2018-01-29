@@ -1,4 +1,5 @@
 # Stencil Boilerplate
+[![CircleCI](https://circleci.com/gh/bfmatei/stencil-boilerplate/tree/master.svg?style=svg)](https://circleci.com/gh/bfmatei/stencil-boilerplate/tree/master)
 
 App boilerplate for [Stencil](https://stenciljs.com/) applications.
 
@@ -16,6 +17,8 @@ It features a couple of common principles and workflows that are used at the mom
    * Fully-configured for development using [JetBrains](https://www.jetbrains.com/) products:
       * Code Styles
       * Run Configurations
+   * Full support for [Progressive Web App](https://developers.google.com/web/progressive-web-apps/)
+   * Auto-generated [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers/) using [Workbox](https://developers.google.com/web/tools/workbox/)
    * Decorators for quicker development:
       * Debounce
       * Autobind
@@ -108,7 +111,7 @@ At the moment the following features are in work and should be finished soon:
    * Redux Forms
 
 ## Known Issues
-Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **prerendering** and **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.
+Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.
 
 * Due to an issue with contenteditable items (the cursor repositions itself at the beginning of the element after a re-render), the content cannot be controlled from outside the component. It can, however receive a default value mapped to Redux.
 * Automated Testing is not working 
