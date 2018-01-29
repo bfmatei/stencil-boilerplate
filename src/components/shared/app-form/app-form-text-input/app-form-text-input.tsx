@@ -38,7 +38,7 @@ export class AppFormTextInput {
   public label: string = '';
 
   @Prop()
-  public type: 'text' | 'password' = 'text';
+  public fieldType: 'text' | 'password' = 'text';
 
   @Prop()
   public message: string = '';
@@ -117,11 +117,11 @@ export class AppFormTextInput {
       <app-text-input
         name={this.name}
         label={this.label}
-        type={this.type}
-        message={this.message}
+        fieldType={this.fieldType}
+        message={this.reduxState.message}
         value={this.reduxState.value}
         disabled={this.reduxState.disabled || this.submitting}
-        hasError={this.hasError}
+        hasError={this.reduxState.error}
         onValueChange={this.fieldValueChangeHandler}
       />
     );

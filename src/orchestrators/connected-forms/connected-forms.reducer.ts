@@ -46,31 +46,57 @@ export default function forms(state: ConnectedFormsState = getInitialState(), ac
           ...currentForm,
           success: false,
           error: false,
-          submitting: true
+          submitting: true,
+          fields: {
+            ...Object.keys(currentForm.fields)
+              .reduce((acc: any, field: string) => {
+                return {
+                  ...acc,
+                  [field]: {
+                    ...currentForm.fields[field],
+                    error: false,
+                    message: ''
+                  }
+                };
+              }, {})
+          }
         }
       };
 
     case ConnectedFormsActions.SUBMIT_FORM_SUCCESS:
-      currentForm = state[action.payload];
+      currentForm = state[action.payload.name];
 
       return {
         ...state,
-        [action.payload]: {
+        [action.payload.name]: {
           ...currentForm,
           success: true,
-          submitting: true
+          submitting: false
         }
       };
 
     case ConnectedFormsActions.SUBMIT_FORM_ERROR:
-      currentForm = state[action.payload];
+      currentForm = state[action.payload.name];
 
       return {
         ...state,
-        [action.payload]: {
+        [action.payload.name]: {
           ...currentForm,
           error: true,
-          submitting: true
+          submitting: false,
+          fields: {
+            ...currentForm.fields,
+            ...action.payload.errors.reduce((acc: any, currentError: any) => {
+              return {
+                ...acc,
+                [currentError.field]: {
+                  ...currentForm.fields[currentError.field],
+                  error: true,
+                  message: currentError.message
+                }
+              };
+            }, {})
+          }
         }
       };
 

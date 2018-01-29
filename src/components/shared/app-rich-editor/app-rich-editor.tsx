@@ -50,7 +50,7 @@ export class AppRichEditor {
   public disabled: boolean = false;
 
   @Prop()
-  public onValueChange: (newValue: any) => void = noop;
+  public onValueChange: (newValue: string) => void = noop;
 
   @Prop()
   private toolbar1Items: AppRichEditorMenuItemConfig[] = [

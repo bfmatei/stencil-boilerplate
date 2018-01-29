@@ -19,7 +19,7 @@ export class AppTextInput {
   public label: string = '';
 
   @Prop()
-  public type: 'text' | 'password' = 'text';
+  public fieldType: 'text' | 'password' = 'text';
 
   @Prop()
   public message: string = '';
@@ -70,7 +70,7 @@ export class AppTextInput {
         onBlur={this.inputBlurHandler}
         onInput={this.inputChangeHandler}
         class='input'
-        type={this.type}
+        type={this.fieldType}
         value={this.value}
         disabled={this.disabled}
       />

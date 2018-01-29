@@ -89,6 +89,13 @@ The orchestrators are singleton store instances which coordinate a specific piec
 
 * App Config
    * Global object for storing values like current language etc.
+* Connected Forms
+   * Inspired by [redux-form](https://redux-form.com/)
+   * Automatically manage the states of a form
+   * Supported Controls:
+      * Text Input
+      * Password Input
+      * Submit
 * Connected Router
    * Inspired by [react-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux)
    * Control the browser navigation through redux
@@ -99,8 +106,6 @@ The orchestrators are singleton store instances which coordinate a specific piec
 ## Current Work In Progress
 At the moment the following features are in work and should be finished soon:
    * Redux Forms
-      * Inspired by [redux-form](https://redux-form.com/)
-      * Automatically manage the state of a form
 
 ## Known Issues
 Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **prerendering** and **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.

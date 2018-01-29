@@ -21,7 +21,7 @@ export class AppRichEditorContent {
   public defaultValue: string = '';
 
   @Prop()
-  public onValueChange: (newValue: any) => void;
+  public onValueChange: (newValue: string) => void;
 
   @Prop()
   public storeElementRef: ($element: HTMLAppRichEditorContentElement) => void = noop;

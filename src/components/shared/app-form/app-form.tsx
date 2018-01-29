@@ -20,6 +20,11 @@ import {
   GlobalStoreState
 } from '../../../redux/store';
 
+import {
+  HTMLAppFormFieldsElements,
+  HTMLAppFormSubmitElements
+} from './app-form.interface';
+
 @Component({
   tag: 'app-form'
 })
@@ -46,9 +51,9 @@ export class AppForm {
 
   private registerForm: typeof registerForm;
 
-  private internalFields: any[] = [];
+  private internalFields: HTMLAppFormFieldsElements[] = [];
 
-  private submits: any[] = [];
+  private submits: HTMLAppFormSubmitElements[] = [];
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
@@ -76,8 +81,12 @@ export class AppForm {
   public componentDidLoad(): void {
     this.registerForm(this.name);
 
-    this.internalFields.forEach((field: any) => {
+    this.internalFields.forEach((field: HTMLAppFormFieldsElements) => {
       field.register(this.name);
+    });
+
+    this.submits.forEach((submits: HTMLAppFormSubmitElements) => {
+      submits.register(this.name);
     });
   }
 
@@ -87,6 +96,10 @@ export class AppForm {
       if (oldValue.submitting !== newValue.submitting) {
         if (newValue.submitting === true) {
           this.onSubmit();
+        } else if (newValue.error === true) {
+          this.onSubmitError();
+        } else {
+          this.onSubmitSuccess();
         }
       } else {
         if (oldValue.success !== newValue.success) {
@@ -105,7 +118,7 @@ export class AppForm {
   }
 
   @Method()
-  public registerField(field: any): void {
+  public registerField(field: HTMLAppFormFieldsElements): void {
     this.internalFields = [
       ...this.internalFields,
       field
@@ -113,7 +126,7 @@ export class AppForm {
   }
 
   @Method()
-  public registerSubmit(submit: any): void {
+  public registerSubmit(submit: HTMLAppFormSubmitElements): void {
     this.submits = [
       ...this.submits,
       submit

@@ -30,7 +30,7 @@ app-login {
       justify-self: center;
     }
 
-    & > form {
+    & > app-form {
       display: grid;
       grid-area: login-form;
       grid-gap: 10px;

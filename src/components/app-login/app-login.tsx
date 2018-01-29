@@ -7,27 +7,26 @@ import {
   Store
 } from '@stencil/redux';
 
-// import autobind from '../../decorators/autobind';
+import autobind from '../../decorators/autobind';
+import {
+  submitFormError,
+  submitFormSuccess
+} from '../../orchestrators/connected-forms/connected-forms.actions';
+import {
+  ConnectedForm
+} from '../../orchestrators/connected-forms/connected-forms.interface';
 import {
   push
 } from '../../orchestrators/connected-router/connected-router.actions';
 import {
   setUser
 } from '../../orchestrators/user/user.actions';
-// import {
-//   UserData
-// } from '../../orchestrators/user/user.interface';
+import {
+  UserData
+} from '../../orchestrators/user/user.interface';
 import {
   GlobalStoreState
 } from '../../redux/store';
-
-import {
-  login,
-  loginError,
-  loginSuccess,
-  setPassword,
-  setUsername
-} from './app-login.actions';
 
 @Component({
   tag: 'app-login',
@@ -39,123 +38,99 @@ export class AppLogin {
   })
   private store: Store;
 
-  // @State()
-  // private pending: boolean = false;
-
   @State()
   public userId: number = null;
 
-  // @State()
-  // private username: string = '';
-  //
-  // @State()
-  // private password: string = '';
-  //
-  // @State()
-  // private errorField: string = '';
-  //
-  // @State()
-  // private errorMessage: string = '';
-  //
-  // @State()
-  // private redirectTo: string;
-  //
-  // private setUsername: typeof setUsername;
-  // private setPassword: typeof setPassword;
-  // private login: typeof login;
-  // private loginSuccess: typeof loginSuccess;
-  // private loginError: typeof loginError;
-  // private setUser: typeof setUser;
-  // private push: typeof push;
-  //
-  // private defaultRedirectRoute: string = '/dashboard';
+  @State()
+  private redirectTo: string;
+
+  private setUser: typeof setUser;
+  private push: typeof push;
+  private submitFormSuccess: typeof submitFormSuccess;
+  private submitFormError: typeof submitFormError;
+
+  private defaultRedirectRoute: string = '/dashboard';
+
+  private username: string = '';
+  private password: string = '';
+  private user: UserData;
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
       const {
-        login: {
-          username,
-          password,
-          pending,
-          error: {
-            field,
-            message
-          }
-        },
+        forms,
         router,
         user: {
           id
         }
       } = state;
 
+      const loginForm: ConnectedForm = forms.login || {
+        name: 'login',
+        success: false,
+        submitting: false,
+        error: false,
+        dirty: false,
+        fields: {}
+      };
+
       return {
-        username,
-        password,
-        pending,
-        errorField: field,
-        errorMessage: message,
+        username: loginForm.fields.username ? loginForm.fields.username.value : '',
+        password: loginForm.fields.password ? loginForm.fields.password.value : '',
         userId: id,
         redirectTo: router.state && router.state.from ? router.state.from : ''
       };
     });
 
     this.store.mapDispatchToProps(this, {
-      setUsername,
-      setPassword,
-      login,
-      loginSuccess,
-      loginError,
       setUser,
-      push
+      push,
+      submitFormSuccess,
+      submitFormError
     });
   }
 
-  // @autobind
-  // private submitClickEvent(): void {
-  //   this.login();
-  //
-  //   // TODO: Replace with actual login method
-  //
-  //   if (this.username !== 'admin') {
-  //     this.loginError({
-  //       field: 'username',
-  //       message: 'login.errors.wrongUsername'
-  //     });
-  //   } else {
-  //     if (this.password !== 'password') {
-  //       this.loginError({
-  //         field: 'password',
-  //         message: 'login.errors.wrongPassword'
-  //       });
-  //     } else {
-  //       const user: UserData = {
-  //         id: this.username === 'admin' ? 1 : 2,
-  //         user: this.username,
-  //         name: `${this.username}Name`,
-  //         lastName: `${this.username}LastName`,
-  //         email: `${this.username}@app.com`
-  //       };
-  //
-  //       localStorage.setItem('user', JSON.stringify(user));
-  //
-  //       this.setUser(user);
-  //
-  //       this.push(this.redirectTo || this.defaultRedirectRoute);
-  //
-  //       this.loginSuccess();
-  //     }
-  //   }
-  // }
+  @autobind
+  private formSubmitHandler(): void {
+    // TODO: Replace with actual login method
 
-  // @autobind
-  // private usernameValueChangeHandler(newValue: string): void {
-  //   this.setUsername(newValue);
-  // }
+    if (this.username !== 'admin') {
+      this.submitFormError('login', [
+        {
+          field: 'username',
+          message: 'login.errors.wrongUsername'
+        }
+      ]);
+    } else {
+      if (this.password !== 'password') {
+        this.submitFormError('login', [
+          {
+            field: 'password',
+            message: 'login.errors.wrongPassword'
+          }
+        ]);
+      } else {
+        this.user = {
+          id: this.username === 'admin' ? 1 : 2,
+          user: this.username,
+          name: `${this.username}Name`,
+          lastName: `${this.username}LastName`,
+          email: `${this.username}@app.com`
+        };
 
-  // @autobind
-  // private passwordValueChangeHandler(newValue: string): void {
-  //   this.setPassword(newValue);
-  // }
+        this.submitFormSuccess('login');
+      }
+    }
+  }
+
+  @autobind
+  private formSubmitSuccessHandler(): void {
+    localStorage.setItem('user', JSON.stringify(this.user));
+
+    this.setUser(this.user);
+
+    this.push(this.redirectTo || this.defaultRedirectRoute);
+  }
 
   public render(): JSX.Element | JSX.Element[] {
     if (this.userId !== null) {
@@ -167,51 +142,24 @@ export class AppLogin {
     return [
       <section class='container'>
         <app-logo class='logo' />
-        <app-form name='login'>
+        <app-form name='login' onSubmit={this.formSubmitHandler} onSubmitSuccess={this.formSubmitSuccessHandler}>
           <app-form-text-input
             name='username'
             label='login.username'
-            type='text'
+            fieldType='text'
+            defaultValue='admin'
+            message='login.tryUsername'
+            class='username'
           />
           <app-form-text-input
             name='password'
             label='login.password'
-            type='password'
+            fieldType='password'
+            message='login.tryPassword'
+            class='password'
           />
-          <app-form-submit
-            label='login.signIn'
-          />
+          <app-form-submit label='login.signIn' />
         </app-form>
-        {/*<form autoComplete='off'>*/}
-          {/*<app-text-input*/}
-            {/*label='login.username'*/}
-            {/*type='text'*/}
-            {/*name='username'*/}
-            {/*hasError={this.errorField === 'username'}*/}
-            {/*message={this.errorField === 'username' ? this.errorMessage : 'login.tryUsername'}*/}
-            {/*onValueChange={this.usernameValueChangeHandler}*/}
-            {/*value={this.username}*/}
-            {/*disabled={this.pending}*/}
-            {/*class='username'*/}
-          {/*/>*/}
-          {/*<app-text-input*/}
-            {/*label='login.password'*/}
-            {/*type='password'*/}
-            {/*name='password'*/}
-            {/*hasError={this.errorField === 'password'}*/}
-            {/*message={this.errorField === 'password' ? this.errorMessage : 'login.tryPassword'}*/}
-            {/*onValueChange={this.passwordValueChangeHandler}*/}
-            {/*value={this.password}*/}
-            {/*disabled={this.pending}*/}
-            {/*class='password'*/}
-          {/*/>*/}
-          {/*<app-button*/}
-            {/*class='submit'*/}
-            {/*onClick={this.submitClickEvent}*/}
-            {/*label='login.signIn'*/}
-            {/*loading={this.pending}*/}
-          {/*/>*/}
-        {/*</form>*/}
       </section>
     ];
   }

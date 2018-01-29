@@ -60,7 +60,7 @@ export class AppRichEditorMenuItem {
     return null;
   }
 
-  public hostData(): any {
+  public hostData(): JSXElements.AppRichEditorMenuItemAttributes {
     return {
       class: {
         [this.data.type]: true

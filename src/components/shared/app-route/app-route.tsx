@@ -45,7 +45,7 @@ export class AppRoute {
   public redirectComponent: string = '';
 
   @Prop()
-  public redirectComponentProps: any = '';
+  public redirectComponentProps: any = {};
 
   @Prop()
   public exact: boolean = false;

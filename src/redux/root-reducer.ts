@@ -2,7 +2,6 @@ import {
   combineReducers
 } from 'redux';
 
-import login from '../components/app-login/app-login.reducer';
 import menu from '../components/app-menu/app-menu.reducer';
 import config from '../orchestrators/config/config.reducer';
 import forms from '../orchestrators/connected-forms/connected-forms.reducer';
@@ -18,7 +17,6 @@ export default combineReducers<GlobalStoreState>({
   config,
   forms,
   i18n,
-  login,
   menu,
   router,
   user

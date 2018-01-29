@@ -10,8 +10,8 @@ export enum ConnectedFormsActions {
   REGISTER_FORM = 'REGISTER_FORM',
   UNREGISTER_FORM = 'UNREGISTER_FORM',
   SUBMIT_FORM = 'SUBMIT_FORM',
-  SUBMIT_FORM_SUCCESS = 'UNFREEZE_FORM_SUCCESS',
-  SUBMIT_FORM_ERROR = 'UNFREEZE_FORM_ERROR',
+  SUBMIT_FORM_SUCCESS = 'SUBMIT_FORM_SUCCESS',
+  SUBMIT_FORM_ERROR = 'SUBMIT_FORM_ERROR',
   REGISTER_FIELD = 'REGISTER_FIELD',
   SET_FIELD_VALUE = 'SET_FIELD_VALUE'
 }
@@ -60,28 +60,40 @@ export function submitForm(name: string): any {
 
 export interface SubmitFormSuccessAction {
   type: ConnectedFormsActions.SUBMIT_FORM_SUCCESS;
-  payload: string;
+  payload: {
+    name: string;
+    data?: any;
+  };
 }
 
-export function submitFormSuccess(name: string): any {
+export function submitFormSuccess(name: string, data?: any): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<SubmitFormSuccessAction> => {
     return dispatch({
       type: ConnectedFormsActions.SUBMIT_FORM_SUCCESS as ConnectedFormsActions.SUBMIT_FORM_SUCCESS,
-      payload: name
+      payload: {
+        name,
+        data
+      }
     });
   };
 }
 
 export interface SubmitFormErrorAction {
   type: ConnectedFormsActions.SUBMIT_FORM_ERROR;
-  payload: string;
+  payload: {
+    name: string;
+    errors: any[];
+  };
 }
 
-export function submitFormError(name: string): any {
+export function submitFormError(name: string, errors: any[]): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<SubmitFormErrorAction> => {
     return dispatch({
       type: ConnectedFormsActions.SUBMIT_FORM_ERROR as ConnectedFormsActions.SUBMIT_FORM_ERROR,
-      payload: name
+      payload: {
+        name,
+        errors
+      }
     });
   };
 }
