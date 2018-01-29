@@ -49,7 +49,7 @@ export class AppFormSubmit {
   public reduxState: ConnectedForm;
 
   @Element()
-  private $element: HTMLAppFormTextInputElement;
+  private $element: HTMLAppFormSubmitElement;
 
   private submitForm: typeof submitForm;
 
