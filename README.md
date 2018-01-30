@@ -20,6 +20,8 @@ It features a couple of common principles and workflows that are used at the mom
       * Code Styles
       * Run Configurations
    * Full support for [Progressive Web App](https://developers.google.com/web/progressive-web-apps/)
+      * Stats offered by [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
+      ![Alt text](docs/assets/stats.jpg?raw=true "Lighthouse Report")
    * Auto-generated [Service Worker](https://developers.google.com/web/fundamentals/primers/service-workers/) using [Workbox](https://developers.google.com/web/tools/workbox/)
    * Decorators for quicker development:
       * Debounce
