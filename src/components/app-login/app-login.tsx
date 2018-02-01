@@ -132,35 +132,33 @@ export class AppLogin {
     this.push(this.redirectTo || this.defaultRedirectRoute);
   }
 
-  public render(): JSX.Element | JSX.Element[] {
+  public render(): JSX.Element {
     if (this.userId !== null) {
       return (
         <app-redirect url='/dashboard' />
       );
     }
 
-    return [
-      <section class='container'>
+    return (
+      <app-form name='login' onSubmit={this.formSubmitHandler} onSubmitSuccess={this.formSubmitSuccessHandler} class='container'>
         <app-logo class='logo' />
-        <app-form name='login' onSubmit={this.formSubmitHandler} onSubmitSuccess={this.formSubmitSuccessHandler}>
-          <app-form-text-input
-            name='username'
-            label='login.username'
-            fieldType='text'
-            defaultValue='admin'
-            message='login.tryUsername'
-            class='username'
-          />
-          <app-form-text-input
-            name='password'
-            label='login.password'
-            fieldType='password'
-            message='login.tryPassword'
-            class='password'
-          />
-          <app-form-submit label='login.signIn' />
-        </app-form>
-      </section>
-    ];
+        <app-form-text-input
+          name='username'
+          label='login.username'
+          fieldType='text'
+          defaultValue='admin'
+          message='login.tryUsername'
+          class='username'
+        />
+        <app-form-text-input
+          name='password'
+          label='login.password'
+          fieldType='password'
+          message='login.tryPassword'
+          class='password'
+        />
+        <app-form-submit label='login.signIn' />
+      </app-form>
+    );
   }
 }

@@ -7,10 +7,12 @@ app-login {
 
   & > .container {
     display: grid;
-    grid-area: login-container;
+    grid-gap: 10px;
     grid-template-areas:
       'login-logo'
-      'login-form';
+      'login-username'
+      'login-password'
+      'login-submit';
     align-self: center;
     justify-self: center;
     border-radius: 6px;
@@ -20,7 +22,6 @@ app-login {
     width: 100%;
     max-width: 350px;
     margin: 10px;
-    grid-gap: 15px;
 
     & .logo {
       grid-area: login-logo;
@@ -30,26 +31,16 @@ app-login {
       justify-self: center;
     }
 
-    & > app-form {
-      display: grid;
-      grid-area: login-form;
-      grid-gap: 10px;
-      grid-template-areas:
-        'login-username'
-        'login-password'
-        'login-submit';
+    & .username {
+      grid-area: login-username;
+    }
 
-      & .username {
-        grid-area: login-username;
-      }
+    & .password {
+      grid-area: login-password;
+    }
 
-      & .password {
-        grid-area: login-password;
-      }
-
-      & .submit {
-        grid-area: login-submit;
-      }
+    & .submit {
+      grid-area: login-submit;
     }
   }
 }
