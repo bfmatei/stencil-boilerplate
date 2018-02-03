@@ -121,6 +121,8 @@ Please note that this boilerplate is built for web apps rather than public websi
 * Automated Testing is not working 
 
 ## Credits
+* Logo
+   * [Vexels](https://www.vexels.com/vectors/preview/127766/fox-cartoon-circle-icon)
 * Original CSS Reset
    * [Eric Meyer](https://meyerweb.com/eric/tools/css/reset/) 
 * Icons:
