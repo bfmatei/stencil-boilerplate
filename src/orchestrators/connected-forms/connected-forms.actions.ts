@@ -67,20 +67,14 @@ export function submitForm(name: string): any {
 
 export interface SubmitFormSuccessAction {
   type: ConnectedFormsActions.SUBMIT_FORM_SUCCESS;
-  payload: {
-    name: string;
-    data?: any;
-  };
+  payload: string;
 }
 
-export function submitFormSuccess(name: string, data?: any): any {
+export function submitFormSuccess(name: string): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<SubmitFormSuccessAction> => {
     return dispatch({
       type: ConnectedFormsActions.SUBMIT_FORM_SUCCESS as ConnectedFormsActions.SUBMIT_FORM_SUCCESS,
-      payload: {
-        name,
-        data
-      }
+      payload: name
     });
   };
 }

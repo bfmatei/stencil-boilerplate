@@ -9,10 +9,6 @@ import {
 
 import autobind from '../../decorators/autobind';
 import {
-  submitFormError,
-  submitFormSuccess
-} from '../../orchestrators/connected-forms/connected-forms.actions';
-import {
   ConnectedForm
 } from '../../orchestrators/connected-forms/connected-forms.interface';
 import {
@@ -46,8 +42,6 @@ export class AppLogin {
 
   private setUser: typeof setUser;
   private push: typeof push;
-  private submitFormSuccess: typeof submitFormSuccess;
-  private submitFormError: typeof submitFormError;
 
   private defaultRedirectRoute: string = '/dashboard';
 
@@ -70,53 +64,53 @@ export class AppLogin {
 
     this.store.mapDispatchToProps(this, {
       setUser,
-      push,
-      submitFormSuccess,
-      submitFormError
+      push
     });
   }
 
   @autobind
-  private formSubmitHandler(form: ConnectedForm): Promise<void> {
+  private formSubmitHandler(form: ConnectedForm): Promise<any> {
     // TODO: Replace with actual login method
 
-    const {
-      username,
-      password
-    } = form.fields;
+    const promise: Promise<any> = new Promise((resolve: any, reject: any): void => {
+      setTimeout(() => {
+        const {
+          username,
+          password
+        } = form.fields;
 
-    const usernameValue: string = username.value;
-    const passwordValue: string = password.value;
+        const usernameValue: string = username.value;
+        const passwordValue: string = password.value;
 
-    if (usernameValue !== 'admin') {
-      this.submitFormError('login', [
-        {
-          field: 'username',
-          message: 'login.errors.wrongUsername'
-        }
-      ]);
-    } else {
-      if (passwordValue !== 'password') {
-        this.submitFormError('login', [
-          {
-            field: 'password',
-            message: 'login.errors.wrongPassword'
+        if (usernameValue !== 'admin') {
+          reject([
+            {
+              field: 'username',
+              message: 'login.errors.wrongUsername'
+            }
+          ]);
+        } else {
+          if (passwordValue !== 'password') {
+            reject([
+              {
+                field: 'password',
+                message: 'login.errors.wrongPassword'
+              }
+            ]);
+          } else {
+            resolve({
+              id: usernameValue === 'admin' ? 1 : 2,
+              user: usernameValue,
+              name: `${usernameValue}Name`,
+              lastName: `${usernameValue}LastName`,
+              email: `${usernameValue}@app.com`
+            });
           }
-        ]);
-      } else {
-        this.user = {
-          id: usernameValue === 'admin' ? 1 : 2,
-          user: usernameValue,
-          name: `${usernameValue}Name`,
-          lastName: `${usernameValue}LastName`,
-          email: `${usernameValue}@app.com`
-        };
+        }
+      }, 1500);
+    });
 
-        this.submitFormSuccess('login');
-      }
-
-      return Promise.resolve();
-    }
+    return promise;
   }
 
   @autobind

@@ -2,8 +2,7 @@ import {
   Component,
   Method,
   Prop,
-  State,
-  Watch
+  State
 } from '@stencil/core';
 import {
   Store
@@ -17,7 +16,9 @@ import {
   registerForm,
   setFieldProp,
   setFieldValue,
-  submitForm
+  submitForm,
+  submitFormError,
+  submitFormSuccess
 } from '../../../orchestrators/connected-forms/connected-forms.actions';
 import {
   ConnectedForm
@@ -59,39 +60,12 @@ export class AppForm {
   private setFieldValue: typeof setFieldValue;
   private setFieldProp: typeof setFieldProp;
   private submitForm: typeof submitForm;
+  private submitFormSuccess: typeof submitFormSuccess;
+  private submitFormError: typeof submitFormError;
 
   private internalFields: HTMLAppFormFieldsElements[] = [];
 
   private submits: HTMLAppFormSubmitElements[] = [];
-
-  @Watch('reduxState')
-  public pendingChangeHandler(newValue: ConnectedForm, oldValue: ConnectedForm): void {
-    if (newValue && oldValue) {
-      if (oldValue.submitting !== newValue.submitting) {
-        if (newValue.submitting === true) {
-          this.submit(this.reduxState)
-            .then(this.submitError)
-            .catch(this.submitError);
-        } else if (newValue.error === true) {
-          this.submitError(this.reduxState);
-        } else {
-          this.submitSuccess(this.reduxState);
-        }
-      } else {
-        if (oldValue.success !== newValue.success) {
-          if (newValue.success === true) {
-            this.submitSuccess(this.reduxState);
-          }
-        }
-
-        if (oldValue.error !== newValue.error) {
-          if (newValue.error === true) {
-            this.submitError(this.reduxState);
-          }
-        }
-      }
-    }
-  }
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
@@ -116,7 +90,9 @@ export class AppForm {
       registerField,
       setFieldValue,
       setFieldProp,
-      submitForm
+      submitForm,
+      submitFormSuccess,
+      submitFormError
     });
   }
 
@@ -150,6 +126,8 @@ export class AppForm {
 
   @autobind
   public fieldValueChangeHandler(field: string, value: string): void {
+    // TODO: add validation
+
     this.setFieldValue(field, value, this.name);
   }
 
@@ -171,6 +149,18 @@ export class AppForm {
   @autobind
   public submitClickHandler(): void {
     this.submitForm(this.name);
+
+    // TODO: add validation
+
+    this.submit(this.reduxState)
+      .then((data: any) => {
+        this.submitFormSuccess(this.name);
+        this.submitSuccess(data);
+      })
+      .catch((err: any) => {
+        this.submitFormError(this.name, err);
+        this.submitError(err);
+      });
   }
 
   public render(): JSX.Element {

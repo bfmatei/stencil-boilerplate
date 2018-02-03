@@ -75,11 +75,11 @@ export default function forms(state: ConnectedFormsState = getInitialState(), ac
       };
 
     case ConnectedFormsActions.SUBMIT_FORM_SUCCESS:
-      currentForm = state[action.payload.name];
+      currentForm = state[action.payload];
 
       return {
         ...state,
-        [action.payload.name]: {
+        [action.payload]: {
           ...currentForm,
           success: true,
           submitting: false
