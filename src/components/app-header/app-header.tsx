@@ -6,13 +6,13 @@ import {
   Store
 } from '@stencil/redux';
 
-import autobind from '../../decorators/autobind';
-import {
-  push
-} from '../../orchestrators/connected-router/connected-router.actions';
 import {
   toggleMenu
-} from '../app-menu/app-menu.actions';
+} from '~components/app-menu/app-menu.actions';
+import autobind from '~decorators/autobind';
+import {
+  push
+} from '~orchestrators/connected-router/connected-router.actions';
 
 @Component({
   tag: 'app-header',

@@ -5,7 +5,7 @@ import {
   Prop
 } from '@stencil/core';
 
-import noop from '../../../../helpers/noop';
+import noop from '~helpers/noop';
 
 /**
  * Due to an issue with contenteditable items (the cursor repositions itself at the beginning of the element after a re-render),

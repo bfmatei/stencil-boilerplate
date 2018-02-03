@@ -11,18 +11,17 @@ import {
 
 import {
   push
-} from '../../../orchestrators/connected-router/connected-router.actions';
-
+} from '~orchestrators/connected-router/connected-router.actions';
 import {
   fillTranslationValues,
   reduceTranslations
-} from '../../../orchestrators/i18n/i18n.helpers';
+} from '~orchestrators/i18n/i18n.helpers';
 import {
   I18nState
-} from '../../../orchestrators/i18n/i18n.reducer';
+} from '~orchestrators/i18n/i18n.reducer';
 import {
   GlobalStoreState
-} from '../../../redux/store';
+} from '~redux/store';
 
 @Component({
   tag: 'app-translate',

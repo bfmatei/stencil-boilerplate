@@ -4,8 +4,8 @@ import {
   State
 } from '@stencil/core';
 
-import autobind from '../../../decorators/autobind';
-import noop from '../../../helpers/noop';
+import autobind from '~decorators/autobind';
+import noop from '~helpers/noop';
 
 @Component({
   tag: 'app-text-input',

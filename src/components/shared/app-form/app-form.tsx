@@ -9,9 +9,9 @@ import {
   Store
 } from '@stencil/redux';
 
-import autobind from '../../../decorators/autobind';
-import noop from '../../../helpers/noop';
-import promisedNoop from '../../../helpers/promisedNoop';
+import autobind from '~decorators/autobind';
+import noop from '~helpers/noop';
+import promisedNoop from '~helpers/promisedNoop';
 import {
   registerField,
   registerForm,
@@ -21,14 +21,14 @@ import {
   SubmitFormError,
   submitFormError,
   submitFormSuccess
-} from '../../../orchestrators/connected-forms/connected-forms.actions';
+} from '~orchestrators/connected-forms/connected-forms.actions';
 import {
   ConnectedForm,
   ConnectedFormField
-} from '../../../orchestrators/connected-forms/connected-forms.interface';
+} from '~orchestrators/connected-forms/connected-forms.interface';
 import {
   GlobalStoreState
-} from '../../../redux/store';
+} from '~redux/store';
 
 import {
   AppFormError,

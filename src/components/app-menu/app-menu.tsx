@@ -7,16 +7,16 @@ import {
   Store
 } from '@stencil/redux';
 
-import autobind from '../../decorators/autobind';
+import autobind from '~decorators/autobind';
 import {
   push
-} from '../../orchestrators/connected-router/connected-router.actions';
+} from '~orchestrators/connected-router/connected-router.actions';
 import {
   resetUser
-} from '../../orchestrators/user/user.actions';
+} from '~orchestrators/user/user.actions';
 import {
   GlobalStoreState
-} from '../../redux/store';
+} from '~redux/store';
 
 import {
   closeMenu

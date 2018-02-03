@@ -14,29 +14,29 @@ import thunk from 'redux-thunk';
 import {
   AppMenuState,
   getInitialState as getAppMenuInitialState
-} from '../components/app-menu/app-menu.reducer';
-import configMiddleware from '../orchestrators/config/config.middleware';
+} from '~components/app-menu/app-menu.reducer';
+import configMiddleware from '~orchestrators/config/config.middleware';
 import {
   ConfigState,
   getInitialState as getConfigInitialState
-} from '../orchestrators/config/config.reducer';
+} from '~orchestrators/config/config.reducer';
 import {
   ConnectedFormsState,
   getInitialState as getConnectedFormsInitialState
-} from '../orchestrators/connected-forms/connected-forms.reducer';
-import connectedRouterMiddleware from '../orchestrators/connected-router/connected-router.middleware';
+} from '~orchestrators/connected-forms/connected-forms.reducer';
+import connectedRouterMiddleware from '~orchestrators/connected-router/connected-router.middleware';
 import {
   ConnectedRouterState,
   getInitialState as getConnectedRouterInitialState
-} from '../orchestrators/connected-router/connected-router.reducer';
+} from '~orchestrators/connected-router/connected-router.reducer';
 import {
   getInitialState as getI18nInitialState,
   I18nState
-} from '../orchestrators/i18n/i18n.reducer';
+} from '~orchestrators/i18n/i18n.reducer';
 import {
   getInitialState as getUserInitialState,
   UserState
-} from '../orchestrators/user/user.reducer';
+} from '~orchestrators/user/user.reducer';
 
 import rootReducer from './root-reducer';
 

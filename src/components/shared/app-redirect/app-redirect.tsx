@@ -9,10 +9,10 @@ import {
 
 import {
   replace
-} from '../../../orchestrators/connected-router/connected-router.actions';
+} from '~orchestrators/connected-router/connected-router.actions';
 import {
   GlobalStoreState
-} from '../../../redux/store';
+} from '~redux/store';
 
 @Component({
   tag: 'app-redirect'

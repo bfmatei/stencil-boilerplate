@@ -3,10 +3,10 @@ import {
   Prop
 } from '@stencil/core';
 
-import autobind from '../../../../decorators/autobind';
 import {
   AppRichEditorMenuItemConfig
-} from '../app-rich-editor-menu-item/app-rich-editor-menu-item.interface';
+} from '~components/shared/app-rich-editor/app-rich-editor-menu-item/app-rich-editor-menu-item.interface';
+import autobind from '~decorators/autobind';
 
 @Component({
   tag: 'app-rich-editor-menu-bar',

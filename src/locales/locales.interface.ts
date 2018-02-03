@@ -1,6 +1,6 @@
 import {
   I18nObject
-} from '../orchestrators/i18n/i18n.interface';
+} from '~orchestrators/i18n/i18n.interface';
 
 export interface LocalesMap extends I18nObject {
   menu: {

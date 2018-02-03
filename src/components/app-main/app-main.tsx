@@ -10,12 +10,11 @@ import {
 } from '@stencil/router';
 
 import {
-  configureStore
-} from '../../redux/store';
-
-import {
   locationChange
-} from '../../orchestrators/connected-router/connected-router.actions';
+} from '~orchestrators/connected-router/connected-router.actions';
+import {
+  configureStore
+} from '~redux/store';
 
 /**
  * AppMain is the true initializer of the app.
