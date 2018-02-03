@@ -23,6 +23,7 @@ import {
 import {
   GlobalStoreState
 } from '../../redux/store';
+import isRequired from '../shared/app-form/validators/is-required';
 
 @Component({
   tag: 'app-login',
@@ -44,8 +45,6 @@ export class AppLogin {
   private push: typeof push;
 
   private defaultRedirectRoute: string = '/dashboard';
-
-  private user: UserData;
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
@@ -69,10 +68,10 @@ export class AppLogin {
   }
 
   @autobind
-  private formSubmitHandler(form: ConnectedForm): Promise<any> {
+  private formSubmitHandler(form: ConnectedForm): Promise<UserData> {
     // TODO: Replace with actual login method
 
-    const promise: Promise<any> = new Promise((resolve: any, reject: any): void => {
+    const promise: Promise<UserData> = new Promise((resolve: any, reject: any): void => {
       setTimeout(() => {
         const {
           username,
@@ -114,10 +113,10 @@ export class AppLogin {
   }
 
   @autobind
-  private formSubmitSuccessHandler(): void {
-    localStorage.setItem('user', JSON.stringify(this.user));
+  private formSubmitSuccessHandler(data: UserData): void {
+    localStorage.setItem('user', JSON.stringify(data));
 
-    this.setUser(this.user);
+    this.setUser(data);
 
     this.push(this.redirectTo || this.defaultRedirectRoute);
   }
@@ -139,6 +138,9 @@ export class AppLogin {
           defaultValue='admin'
           message='login.tryUsername'
           class='username'
+          validators={[
+            isRequired
+          ]}
         />
         <app-form-text-input
           name='password'
@@ -146,6 +148,7 @@ export class AppLogin {
           fieldType='password'
           message='login.tryPassword'
           class='password'
+          validators={[]}
         />
         <app-form-submit label='login.signIn' />
       </app-form>

@@ -138,10 +138,13 @@ export default function forms(state: ConnectedFormsState = getInitialState(), ac
         [action.payload.formName]: {
           ...currentForm,
           dirty: true,
+          error: currentForm.error || !!action.payload.err,
           fields: {
             ...currentForm.fields,
             [action.payload.name]: {
               ...currentForm.fields[action.payload.name],
+              error: !!action.payload.err,
+              message: action.payload.err || currentForm.fields[action.payload.name].message,
               value: action.payload.value
             }
           }

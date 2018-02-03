@@ -5,28 +5,17 @@ import {
   Prop,
   State
 } from '@stencil/core';
-import {
-  Store
-} from '@stencil/redux';
 
 import autobind from '../../../../decorators/autobind';
 import noop from '../../../../helpers/noop';
 import {
   ConnectedForm
 } from '../../../../orchestrators/connected-forms/connected-forms.interface';
-import {
-  GlobalStoreState
-} from '../../../../redux/store';
 
 @Component({
   tag: 'app-form-submit'
 })
 export class AppFormSubmit {
-  @Prop({
-    context: 'store'
-  })
-  private store: Store;
-
   @Prop()
   public label: string = '';
 
@@ -43,31 +32,21 @@ export class AppFormSubmit {
   public loading: boolean = false;
 
   @State()
-  public reduxState: ConnectedForm;
+  public reduxState: ConnectedForm = null;
 
   @Element()
   private $element: HTMLAppFormSubmitElement;
 
-  private formName: string;
   private formSubmitClickHandler: any;
 
   public componentWillLoad(): void {
-    this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
-      const {
-        forms
-      } = state;
-
-      return {
-        reduxState: forms[this.formName]
-      };
-    });
 
     (this.$element.closest('app-form') as HTMLAppFormElement).registerSubmit(this.$element);
   }
 
   @Method()
-  public register(formName: string, formSubmitClickHandler: any): void {
-    this.formName = formName;
+  public register(reduxState: ConnectedForm, formSubmitClickHandler: any): void {
+    this.reduxState = reduxState;
     this.formSubmitClickHandler = formSubmitClickHandler;
   }
 
@@ -79,6 +58,10 @@ export class AppFormSubmit {
   }
 
   public render(): JSX.Element {
+    if (this.reduxState === null) {
+      return null;
+    }
+
     const submitting: boolean = this.reduxState ? this.reduxState.submitting : false;
 
     return (

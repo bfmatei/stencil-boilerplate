@@ -2,7 +2,8 @@ import {
   Component,
   Method,
   Prop,
-  State
+  State,
+  Watch
 } from '@stencil/core';
 import {
   Store
@@ -17,6 +18,7 @@ import {
   setFieldProp,
   setFieldValue,
   submitForm,
+  SubmitFormError,
   submitFormError,
   submitFormSuccess
 } from '../../../orchestrators/connected-forms/connected-forms.actions';
@@ -48,10 +50,10 @@ export class AppForm {
   public submit: (form: ConnectedForm) => Promise<any> = promisedNoop;
 
   @Prop()
-  public submitSuccess: (form: ConnectedForm) => void = noop;
+  public submitSuccess: (data?: any) => void = noop;
 
   @Prop()
-  public submitError: (form: ConnectedForm) => void = noop;
+  public submitError: (err?: SubmitFormError[]) => void = noop;
 
   @State()
   public reduxState: ConnectedForm;
@@ -98,7 +100,7 @@ export class AppForm {
 
   public componentDidLoad(): void {
     const fields: any = this.internalFields.map((field: HTMLAppFormFieldsElements) => {
-      field.register(this.name, this.fieldValueChangeHandler, this.fieldPropChangeHandler);
+      field.register(this.reduxState, this.fieldValueChangeHandler, this.fieldPropChangeHandler);
 
       return {
         name: field.name,
@@ -112,7 +114,18 @@ export class AppForm {
     this.registerForm(this.name, fields);
 
     this.submits.forEach((submits: HTMLAppFormSubmitElements) => {
-      submits.register(this.name, this.submitClickHandler);
+      submits.register(this.reduxState, this.submitClickHandler);
+    });
+  }
+
+  @Watch('reduxState')
+  public reduxStateChangeHandler(newValue: ConnectedForm): void {
+    this.internalFields.forEach((field: HTMLAppFormFieldsElements) => {
+      field.register(newValue, this.fieldValueChangeHandler, this.fieldPropChangeHandler);
+    });
+
+    this.submits.forEach((submits: HTMLAppFormSubmitElements) => {
+      submits.register(this.reduxState, this.submitClickHandler);
     });
   }
 
@@ -125,10 +138,9 @@ export class AppForm {
   }
 
   @autobind
-  public fieldValueChangeHandler(field: string, value: string): void {
+  public fieldValueChangeHandler(field: string, value: string, err: string = ''): void {
     // TODO: add validation
-
-    this.setFieldValue(field, value, this.name);
+    this.setFieldValue(field, value, err, this.name);
   }
 
   @autobind
@@ -148,19 +160,30 @@ export class AppForm {
 
   @autobind
   public submitClickHandler(): void {
-    this.submitForm(this.name);
+    const errors: any[] = this.internalFields.reduce((errorsCollection: any[], field: HTMLAppFormFieldsElements) => {
+      return [
+        ...errorsCollection,
+        field.validate()
+      ];
+    }, []);
 
-    // TODO: add validation
+    if (errors.length > 0) {
+      this.submitFormError(this.name, errors);
 
-    this.submit(this.reduxState)
-      .then((data: any) => {
-        this.submitFormSuccess(this.name);
-        this.submitSuccess(data);
-      })
-      .catch((err: any) => {
-        this.submitFormError(this.name, err);
-        this.submitError(err);
-      });
+      this.submitError(errors);
+    } else {
+      this.submitForm(this.name);
+
+      this.submit(this.reduxState)
+        .then((data: any) => {
+          this.submitFormSuccess(this.name);
+          this.submitSuccess(data);
+        })
+        .catch((err: any) => {
+          this.submitFormError(this.name, err);
+          this.submitError(err);
+        });
+    }
   }
 
   public render(): JSX.Element {

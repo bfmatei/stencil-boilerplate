@@ -6,28 +6,17 @@ import {
   State,
   Watch
 } from '@stencil/core';
-import {
-  Store
-} from '@stencil/redux';
 
 import autobind from '../../../../decorators/autobind';
 import {
   ConnectedForm,
   ConnectedFormField
 } from '../../../../orchestrators/connected-forms/connected-forms.interface';
-import {
-  GlobalStoreState
-} from '../../../../redux/store';
 
 @Component({
   tag: 'app-form-text-input'
 })
 export class AppFormTextInput {
-  @Prop({
-    context: 'store'
-  })
-  private store: Store;
-
   @Prop()
   public name: string = '';
 
@@ -49,16 +38,18 @@ export class AppFormTextInput {
   @Prop()
   public hasError: boolean = false;
 
-  @State()
-  public reduxState: ConnectedFormField;
+  @Prop()
+  public validators: any[] = [];
 
   @State()
-  public submitting: boolean;
+  public reduxState: ConnectedFormField = null;
+
+  @State()
+  public submitting: boolean = false;
 
   @Element()
   private $element: HTMLAppFormTextInputElement;
 
-  private formName: string;
   private formValueChangeHandler: any;
   private formPropChangeHandler: any;
 
@@ -91,33 +82,46 @@ export class AppFormTextInput {
   }
 
   public componentWillLoad(): void {
-    this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
-      const {
-        forms
-      } = state;
-
-      return {
-        reduxState: this.fieldSelector(forms[this.formName], this.name),
-        submitting: forms[this.formName] ? forms[this.formName].submitting : false
-      };
-    });
-
     (this.$element.closest('app-form') as HTMLAppFormElement).readField(this.$element);
   }
 
   @Method()
-  public register(formName: string, formValueChangeHandler: any, formPropChangeHandler: any): void {
-    this.formName = formName;
+  public register(reduxState: ConnectedForm, formValueChangeHandler: any, formPropChangeHandler: any): void {
+    this.reduxState = this.fieldSelector(reduxState, this.name);
+    this.submitting = reduxState.submitting;
+
     this.formValueChangeHandler = formValueChangeHandler;
     this.formPropChangeHandler = formPropChangeHandler;
   }
 
   @autobind
   private fieldValueChangeHandler(value: string): void {
-    this.formValueChangeHandler(this.name, value);
+    const validation: any = this.validate(value);
+
+    this.formValueChangeHandler(this.name, value, validation ? validation.message : '');
+  }
+
+  @Method()
+  public validate(value: string = this.reduxState.value): any {
+    return this.validators.reduce((err: any, validator: any) => {
+      if (err) {
+        return err;
+      }
+
+      const message: string = validator(value);
+
+      return message.length > 0 ? {
+        field: this.name,
+        message
+      } : undefined;
+    }, undefined);
   }
 
   public render(): JSX.Element {
+    if (this.reduxState === null) {
+      return null;
+    }
+
     return (
       <app-text-input
         name={this.name}

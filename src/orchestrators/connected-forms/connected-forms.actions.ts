@@ -79,15 +79,20 @@ export function submitFormSuccess(name: string): any {
   };
 }
 
+export interface SubmitFormError {
+  field: string;
+  message: string;
+}
+
 export interface SubmitFormErrorAction {
   type: ConnectedFormsActions.SUBMIT_FORM_ERROR;
   payload: {
     name: string;
-    errors: any[];
+    errors: SubmitFormError[];
   };
 }
 
-export function submitFormError(name: string, errors: any[]): any {
+export function submitFormError(name: string, errors: SubmitFormError[]): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<SubmitFormErrorAction> => {
     return dispatch({
       type: ConnectedFormsActions.SUBMIT_FORM_ERROR as ConnectedFormsActions.SUBMIT_FORM_ERROR,
@@ -142,17 +147,19 @@ export interface SetFieldValueAction {
   payload: {
     name: string;
     value: string;
+    err: string;
     formName: string;
   };
 }
 
-export function setFieldValue(name: string, value: string, formName: string): any {
+export function setFieldValue(name: string, value: string, err: string, formName: string): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<SetFieldValueAction> => {
     return dispatch({
       type: ConnectedFormsActions.SET_FIELD_VALUE as ConnectedFormsActions.SET_FIELD_VALUE,
       payload: {
         name,
         value,
+        err,
         formName
       }
     });
