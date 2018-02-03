@@ -1,5 +1,6 @@
 export interface ConnectedFormField {
   name: string;
+  dirty: boolean;
   disabled: boolean;
   userDisabled: boolean;
   value: string;
@@ -9,13 +10,15 @@ export interface ConnectedFormField {
   userMessage: string;
 }
 
+export interface ConnectedFormFields {
+  [name: string]: ConnectedFormField;
+}
+
 export interface ConnectedForm {
   name: string;
   success: boolean;
   submitting: boolean;
   error: boolean;
   dirty: boolean;
-  fields: {
-    [name: string]: ConnectedFormField;
-  };
+  fields: ConnectedFormFields;
 }

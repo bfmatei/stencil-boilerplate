@@ -59,6 +59,13 @@ export interface LocalesMap extends I18nObject {
     blockquote: string;
     codeBlock: string;
   };
+  forms: {
+    errors: {
+      validators: {
+        isRequired: string;
+      };
+    };
+  };
 }
 
 export interface LocalesCollection {

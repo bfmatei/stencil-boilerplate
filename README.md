@@ -9,7 +9,8 @@ It features a couple of common principles and workflows that are used at the mom
    * Routing using [Stencil Router](https://github.com/ionic-team/stencil-router)
    * Redux:
       * [Stencil Redux](https://github.com/ionic-team/stencil-redux) is used as basic router
-      * Typed actions (as described in [this article](https://medium.com/@martin_hotell/redux-typescript-typed-actions-with-less-keystrokes-d984063901d)) pattern for a better typed-coding experience 
+      * Typed actions (as described in [this article](https://medium.com/@martin_hotell/redux-typescript-typed-actions-with-less-keystrokes-d984063901d)) pattern for a better typed-coding experience
+      * [Redux Thunk](https://github.com/gaearon/redux-thunk) support 
       * Browser extension (using [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)) included for easier development
    * Automated testing using [Jest](https://facebook.github.io/jest/)
    * Linting:
@@ -99,6 +100,7 @@ The orchestrators are singleton store instances which coordinate a specific piec
 * Connected Forms
    * Inspired by [redux-form](https://redux-form.com/)
    * Automatically manage the states of a form
+   * Validation
    * Supported Controls:
       * Text Input
       * Password Input
@@ -112,7 +114,12 @@ The orchestrators are singleton store instances which coordinate a specific piec
 
 ## Current Work In Progress
 At the moment the following features are in work and should be finished soon:
-   * Redux Forms
+   * Connected Forms: 
+      * Rich Editor support
+      * Checkbox support
+      * List Support
+   * Components:
+      * Dropdown Menu
 
 ## Known Issues
 Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.

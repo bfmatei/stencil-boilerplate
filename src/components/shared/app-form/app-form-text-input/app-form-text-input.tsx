@@ -8,10 +8,15 @@ import {
 } from '@stencil/core';
 
 import autobind from '../../../../decorators/autobind';
+import noop from '../../../../helpers/noop';
 import {
   ConnectedForm,
   ConnectedFormField
 } from '../../../../orchestrators/connected-forms/connected-forms.interface';
+import {
+  AppFormError,
+  AppFormValidator
+} from '../app-form.interface';
 
 @Component({
   tag: 'app-form-text-input'
@@ -39,7 +44,10 @@ export class AppFormTextInput {
   public hasError: boolean = false;
 
   @Prop()
-  public validators: any[] = [];
+  public validators: AppFormValidator[] = [];
+
+  @Prop()
+  public onValueChange: (value: string) => void = noop;
 
   @State()
   public reduxState: ConnectedFormField = null;
@@ -50,8 +58,8 @@ export class AppFormTextInput {
   @Element()
   private $element: HTMLAppFormTextInputElement;
 
-  private formValueChangeHandler: any;
-  private formPropChangeHandler: any;
+  private formValueChangeHandler: (field: string, value: string, err: string) => void;
+  private formPropChangeHandler: (field: string, prop: string, value: string | boolean, oldValue: string | boolean) => void;
 
   @Watch('disabled')
   public disabledChangeHandler(newValue: boolean, oldValue: boolean): void {
@@ -69,8 +77,9 @@ export class AppFormTextInput {
   }
 
   public fieldSelector(form: ConnectedForm, fieldName: string): ConnectedFormField {
-    return form && form.fields[fieldName] ? form.fields[fieldName] : {
+    const field: ConnectedFormField = form && form.fields[fieldName] ? form.fields[fieldName] : {
       name: fieldName,
+      dirty: false,
       disabled: false,
       userDisabled: this.disabled,
       error: false,
@@ -79,14 +88,22 @@ export class AppFormTextInput {
       message: '',
       userMessage: this.message
     };
+
+    const validation: AppFormError = this.validate(field.value);
+
+    field.error = validation.message.length > 0;
+    field.message = validation.message;
+
+    return field;
   }
 
   public componentWillLoad(): void {
+    // tslint:disable-next-line:no-unnecessary-type-assertion
     (this.$element.closest('app-form') as HTMLAppFormElement).readField(this.$element);
   }
 
   @Method()
-  public register(reduxState: ConnectedForm, formValueChangeHandler: any, formPropChangeHandler: any): void {
+  public register(reduxState: ConnectedForm, formValueChangeHandler: (field: string, value: string, err: string) => void, formPropChangeHandler: (field: string, prop: string, value: string | boolean, oldValue: string | boolean) => void): void {
     this.reduxState = this.fieldSelector(reduxState, this.name);
     this.submitting = reduxState.submitting;
 
@@ -96,25 +113,25 @@ export class AppFormTextInput {
 
   @autobind
   private fieldValueChangeHandler(value: string): void {
-    const validation: any = this.validate(value);
+    const validation: AppFormError = this.validate(value);
 
     this.formValueChangeHandler(this.name, value, validation ? validation.message : '');
+
+    this.onValueChange(value);
   }
 
   @Method()
-  public validate(value: string = this.reduxState.value): any {
-    return this.validators.reduce((err: any, validator: any) => {
-      if (err) {
-        return err;
-      }
+  public validate(value: string = this.reduxState.value): AppFormError {
+    return {
+      field: this.name,
+      message: this.validators.reduce((err: string, validator: AppFormValidator) => {
+        if (err.length > 0) {
+          return err;
+        }
 
-      const message: string = validator(value);
-
-      return message.length > 0 ? {
-        field: this.name,
-        message
-      } : undefined;
-    }, undefined);
+        return validator(value);
+      }, '')
+    };
   }
 
   public render(): JSX.Element {
@@ -127,7 +144,7 @@ export class AppFormTextInput {
         name={this.name}
         label={this.label}
         fieldType={this.fieldType}
-        message={this.reduxState.userMessage || this.reduxState.message}
+        message={!this.reduxState.dirty || (this.reduxState.value.length === 0 && !this.reduxState.error) ? this.reduxState.userMessage : this.reduxState.message}
         value={this.reduxState.value}
         disabled={this.reduxState.userDisabled || this.reduxState.disabled || this.submitting}
         hasError={this.reduxState.userError || this.reduxState.error}

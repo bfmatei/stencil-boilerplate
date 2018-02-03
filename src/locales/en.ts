@@ -54,5 +54,12 @@ export default {
     h6: 'Heading 6',
     blockquote: 'Quote',
     codeBlock: 'Code'
+  },
+  forms: {
+    errors: {
+      validators: {
+        isRequired: 'This field is required'
+      }
+    }
   }
 };

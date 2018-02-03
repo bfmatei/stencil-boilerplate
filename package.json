@@ -31,7 +31,8 @@
     "@stencil/redux": "0.0.3",
     "@stencil/router": "0.0.23",
     "redux": "3.7.2",
-    "redux-devtools-extension": "2.13.2"
+    "redux-devtools-extension": "2.13.2",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "@stencil/dev-server": "0.0.18",

@@ -59,8 +59,7 @@ export class AppMenu {
     });
   }
 
-  // TODO: set correct return type
-  private menuItemNavClickHandlerBinder(route: string): any {
+  private menuItemNavClickHandlerBinder(route: string): (evt: UIEvent) => void {
     return (evt: UIEvent): void => {
       evt.stopImmediatePropagation();
 
@@ -78,8 +77,7 @@ export class AppMenu {
     this.push('/login');
   }
 
-  // TODO: set correct clickHandler type
-  private renderMenuItem(label: string, iconName: string, clickHandler: any): JSX.Element {
+  private renderMenuItem(label: string, iconName: string, clickHandler: (evt: UIEvent) => void): JSX.Element {
     return (
       <button
         class='item'

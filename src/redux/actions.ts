@@ -1,4 +1,8 @@
 import {
+  ThunkAction
+} from 'redux-thunk';
+
+import {
   AppMenuActionTypes
 } from '../components/app-menu/app-menu.actions';
 import {
@@ -13,6 +17,12 @@ import {
 import {
   I18nActionTypes
 } from '../orchestrators/i18n/i18n.actions';
+
+import {
+  GlobalStoreState
+} from './store';
+
+export type ReduxAction<T> = ThunkAction<Promise<T>, GlobalStoreState, void>;
 
 export type GlobalActionTypes =
   AppMenuActionTypes |

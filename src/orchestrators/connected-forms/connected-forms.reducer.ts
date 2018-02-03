@@ -1,10 +1,15 @@
 import {
+  AppFormError
+} from '../../components/shared/app-form/app-form.interface';
+
+import {
   ConnectedFormsActions,
   ConnectedFormsActionTypes
 } from './connected-forms.actions';
 import {
   ConnectedForm,
-  ConnectedFormField
+  ConnectedFormField,
+  ConnectedFormFields
 } from './connected-forms.interface';
 
 export interface ConnectedFormsState {
@@ -25,17 +30,17 @@ export default function forms(state: ConnectedFormsState = getInitialState(), ac
         [action.payload.name]: {
           name: action.payload.name,
           success: false,
-          error: false,
+          error: !action.payload.fields.every((field: ConnectedFormField): boolean => {
+            return field.error === false;
+          }),
           submitting: false,
           dirty: false,
-          fields: action.payload.fields.reduce((acc: any, item: any): ConnectedFormField => {
+          fields: action.payload.fields.reduce((acc: ConnectedFormFields, item: ConnectedFormField): ConnectedFormFields => {
             return {
               ...acc,
               [item.name]: {
                 ...item,
-                disabled: false,
-                error: false,
-                message: ''
+                disabled: false
               }
             };
           }, {})
@@ -60,7 +65,7 @@ export default function forms(state: ConnectedFormsState = getInitialState(), ac
           submitting: true,
           fields: {
             ...Object.keys(currentForm.fields)
-              .reduce((acc: any, field: string) => {
+              .reduce((acc: ConnectedFormFields, field: string) => {
                 return {
                   ...acc,
                   [field]: {
@@ -97,7 +102,7 @@ export default function forms(state: ConnectedFormsState = getInitialState(), ac
           submitting: false,
           fields: {
             ...currentForm.fields,
-            ...action.payload.errors.reduce((acc: any, currentError: any) => {
+            ...action.payload.errors.reduce((acc: ConnectedFormFields, currentError: AppFormError) => {
               return {
                 ...acc,
                 [currentError.field]: {
@@ -114,17 +119,14 @@ export default function forms(state: ConnectedFormsState = getInitialState(), ac
     case ConnectedFormsActions.REGISTER_FIELD:
       currentForm = state[action.payload.formName];
 
-      const options: any = action.payload.options;
-
       return {
         ...state,
         [action.payload.formName]: {
           ...currentForm,
           fields: {
             ...currentForm.fields,
-            [action.payload.name]: {
-              name: action.payload.name,
-              ...options
+            [action.payload.field.name]: {
+              ...action.payload.field
             }
           }
         }

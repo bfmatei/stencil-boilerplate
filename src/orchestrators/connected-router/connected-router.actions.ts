@@ -6,6 +6,9 @@ import {
 } from 'redux';
 
 import {
+  ReduxAction
+} from '../../redux/actions';
+import {
   GlobalStoreState
 } from '../../redux/store';
 
@@ -23,7 +26,7 @@ export interface LocationChangeAction {
   payload: LocationSegments;
 }
 
-export function locationChange(location: LocationSegments): any {
+export function locationChange(location: LocationSegments): ReduxAction<LocationChangeAction> {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<LocationChangeAction> => {
     return dispatch({
       type: ConnectedRouterActions.LOCATION_CHANGE as ConnectedRouterActions.LOCATION_CHANGE,
@@ -40,7 +43,7 @@ export interface PushAction {
   };
 }
 
-export function push(location: string, state: {} = {}): any {
+export function push(location: string, state: {} = {}): ReduxAction<PushAction> {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<PushAction> => {
     return dispatch({
       type: ConnectedRouterActions.PUSH as ConnectedRouterActions.PUSH,
@@ -60,7 +63,7 @@ export interface ReplaceAction {
   };
 }
 
-export function replace(location: string, state: {} = {}): any {
+export function replace(location: string, state: {} = {}): ReduxAction<ReplaceAction> {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<ReplaceAction> => {
     return dispatch({
       type: ConnectedRouterActions.REPLACE as ConnectedRouterActions.REPLACE,
@@ -77,7 +80,7 @@ export interface GoAction {
   payload: number;
 }
 
-export function go(step: number): any {
+export function go(step: number): ReduxAction<GoAction> {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<GoAction> => {
     return dispatch({
       type: ConnectedRouterActions.GO as ConnectedRouterActions.GO,
@@ -90,7 +93,7 @@ export interface GoBackAction {
   type: ConnectedRouterActions.GO_BACK;
 }
 
-export function goBack(): any {
+export function goBack(): ReduxAction<GoBackAction> {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<GoBackAction> => {
     return dispatch({
       type: ConnectedRouterActions.GO_BACK as ConnectedRouterActions.GO_BACK
@@ -102,7 +105,7 @@ export interface GoForwadAction {
   type: ConnectedRouterActions.GO_FORWARD;
 }
 
-export function goForward(): any {
+export function goForward(): ReduxAction<GoForwadAction> {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<GoForwadAction> => {
     return dispatch({
       type: ConnectedRouterActions.GO_FORWARD as ConnectedRouterActions.GO_FORWARD

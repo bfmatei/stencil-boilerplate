@@ -37,15 +37,15 @@ export class AppFormSubmit {
   @Element()
   private $element: HTMLAppFormSubmitElement;
 
-  private formSubmitClickHandler: any;
+  private formSubmitClickHandler: () => void;
 
   public componentWillLoad(): void {
-
+    // tslint:disable-next-line:no-unnecessary-type-assertion
     (this.$element.closest('app-form') as HTMLAppFormElement).registerSubmit(this.$element);
   }
 
   @Method()
-  public register(reduxState: ConnectedForm, formSubmitClickHandler: any): void {
+  public register(reduxState: ConnectedForm, formSubmitClickHandler: () => void): void {
     this.reduxState = reduxState;
     this.formSubmitClickHandler = formSubmitClickHandler;
   }
@@ -62,15 +62,13 @@ export class AppFormSubmit {
       return null;
     }
 
-    const submitting: boolean = this.reduxState ? this.reduxState.submitting : false;
-
     return (
       <app-button
         label={this.label}
         icon={this.icon}
         onClick={this.submitClickHandler}
-        disabled={this.disabled || submitting}
-        loading={this.loading || submitting}
+        disabled={this.disabled || this.reduxState.error}
+        loading={this.disabled || this.reduxState.submitting}
       />
     );
   }

@@ -3,6 +3,9 @@ import {
 } from 'redux';
 
 import {
+  ReduxAction
+} from '../../redux/actions';
+import {
   GlobalStoreState
 } from '../../redux/store';
 
@@ -20,7 +23,7 @@ export interface SetUserAction {
   payload: UserData;
 }
 
-export function setUser(user: UserData): any {
+export function setUser(user: UserData): ReduxAction<SetUserAction> {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<SetUserAction> => {
     return dispatch({
       type: UserActions.SET_USER as UserActions.SET_USER,
@@ -33,7 +36,7 @@ export interface ResetUserAction {
   type: UserActions.RESET_USER;
 }
 
-export function resetUser(): any {
+export function resetUser(): ReduxAction<ResetUserAction> {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<ResetUserAction> => {
     return dispatch({
       type: UserActions.RESET_USER as UserActions.RESET_USER

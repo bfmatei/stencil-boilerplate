@@ -23,6 +23,9 @@ import {
 import {
   GlobalStoreState
 } from '../../redux/store';
+import {
+  AppFormError
+} from '../shared/app-form/app-form.interface';
 import isRequired from '../shared/app-form/validators/is-required';
 
 @Component({
@@ -71,7 +74,7 @@ export class AppLogin {
   private formSubmitHandler(form: ConnectedForm): Promise<UserData> {
     // TODO: Replace with actual login method
 
-    const promise: Promise<UserData> = new Promise((resolve: any, reject: any): void => {
+    const promise: Promise<UserData> = new Promise((resolve: (value: UserData) => void, reject: (reason: AppFormError[]) => void): void => {
       setTimeout(() => {
         const {
           username,
@@ -148,7 +151,9 @@ export class AppLogin {
           fieldType='password'
           message='login.tryPassword'
           class='password'
-          validators={[]}
+          validators={[
+            isRequired
+          ]}
         />
         <app-form-submit label='login.signIn' />
       </app-form>

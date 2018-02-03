@@ -1,8 +1,6 @@
 import {
-  AnyAction,
   Dispatch,
-  Middleware,
-  MiddlewareAPI
+  Middleware
 } from 'redux';
 
 import locales from '../../locales/locales';
@@ -18,9 +16,9 @@ import {
 } from './config.actions';
 
 export default function configMiddleware(): Middleware {
-  return <S = GlobalStoreState>(store: MiddlewareAPI<S>): any => {
-    return (next: Dispatch<S>): any => {
-      return <A extends AnyAction>(action: A): any => {
+  return (store: any): any => {
+    return (next: Dispatch<GlobalStoreState>): any => {
+      return (action: any): any => {
         switch (action.type) {
           case ConfigActions.CHANGE_LANGUAGE:
             store.dispatch(updateEntries(locales[action.payload]));

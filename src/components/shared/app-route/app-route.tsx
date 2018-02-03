@@ -13,6 +13,7 @@ import {
 import {
   GlobalStoreState
 } from '../../../redux/store';
+import { ComponentProps } from '../../../types/componentProps';
 
 @Component({
   tag: 'app-route'
@@ -30,7 +31,7 @@ export class AppRoute {
   public component: string = '';
 
   @Prop()
-  public componentProps: any = {};
+  public componentProps: ComponentProps = {};
 
   @Prop()
   public checkAuthorization: boolean = false;
@@ -45,7 +46,7 @@ export class AppRoute {
   public redirectComponent: string = '';
 
   @Prop()
-  public redirectComponentProps: any = {};
+  public redirectComponentProps: ComponentProps = {};
 
   @Prop()
   public exact: boolean = false;
@@ -91,7 +92,7 @@ export class AppRoute {
 
   public render(): JSX.Element {
     let component: string = this.component;
-    let componentProps: any = this.componentProps;
+    let componentProps: ComponentProps = this.componentProps;
 
     if (this.checkAuthorization && !this.checkAccess()) {
       if (this.redirectComponent.length > 0) {

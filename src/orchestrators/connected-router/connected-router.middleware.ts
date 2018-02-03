@@ -2,7 +2,6 @@ import {
   RouterHistory
 } from '@stencil/router';
 import {
-  AnyAction,
   Dispatch,
   Middleware
 } from 'redux';
@@ -16,9 +15,9 @@ import {
 } from './connected-router.actions';
 
 export default function connectedRouterMiddleware(appHistory: RouterHistory): Middleware {
-  return <S = GlobalStoreState>(): any => {
-    return (next: Dispatch<S>): any => {
-      return <A extends AnyAction>(action: A): any => {
+  return (): any => {
+    return (next: Dispatch<GlobalStoreState>): any => {
+      return (action: any): any => {
         switch (action.type) {
           case ConnectedRouterActions.PUSH:
             appHistory.push(action.payload.location, action.payload.state);

@@ -23,13 +23,15 @@ import {
   submitFormSuccess
 } from '../../../orchestrators/connected-forms/connected-forms.actions';
 import {
-  ConnectedForm
+  ConnectedForm,
+  ConnectedFormField
 } from '../../../orchestrators/connected-forms/connected-forms.interface';
 import {
   GlobalStoreState
 } from '../../../redux/store';
 
 import {
+  AppFormError,
   HTMLAppFormFieldsElements,
   HTMLAppFormSubmitElements
 } from './app-form.interface';
@@ -99,12 +101,18 @@ export class AppForm {
   }
 
   public componentDidLoad(): void {
-    const fields: any = this.internalFields.map((field: HTMLAppFormFieldsElements) => {
+    const fields: ConnectedFormField[] = this.internalFields.map((field: HTMLAppFormFieldsElements): ConnectedFormField => {
       field.register(this.reduxState, this.fieldValueChangeHandler, this.fieldPropChangeHandler);
+
+      const validation: AppFormError = field.validate();
 
       return {
         name: field.name,
+        dirty: false,
+        disabled: false,
         value: field.defaultValue,
+        error: validation.message.length > 0,
+        message: validation.message,
         userDisabled: field.disabled,
         userMessage: field.message,
         userError: field.hasError
@@ -139,12 +147,11 @@ export class AppForm {
 
   @autobind
   public fieldValueChangeHandler(field: string, value: string, err: string = ''): void {
-    // TODO: add validation
     this.setFieldValue(field, value, err, this.name);
   }
 
   @autobind
-  public fieldPropChangeHandler(field: string, prop: string, value: any, oldValue: any): void {
+  public fieldPropChangeHandler(field: string, prop: string, value: string | boolean, oldValue: string | boolean): void {
     if (value !== oldValue) {
       this.setFieldProp(field, prop, value, this.name);
     }
@@ -160,10 +167,12 @@ export class AppForm {
 
   @autobind
   public submitClickHandler(): void {
-    const errors: any[] = this.internalFields.reduce((errorsCollection: any[], field: HTMLAppFormFieldsElements) => {
+    const errors: AppFormError[] = this.internalFields.reduce((errorsCollection: AppFormError[], field: HTMLAppFormFieldsElements) => {
+      const validation: AppFormError = field.validate();
+
       return [
         ...errorsCollection,
-        field.validate()
+        validation.message ? validation : undefined
       ];
     }, []);
 
@@ -179,7 +188,7 @@ export class AppForm {
           this.submitFormSuccess(this.name);
           this.submitSuccess(data);
         })
-        .catch((err: any) => {
+        .catch((err: AppFormError[]) => {
           this.submitFormError(this.name, err);
           this.submitError(err);
         });
