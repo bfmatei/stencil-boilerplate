@@ -3,7 +3,8 @@ import {
   Element,
   Method,
   Prop,
-  State
+  State,
+  Watch
 } from '@stencil/core';
 import {
   Store
@@ -12,6 +13,7 @@ import {
 import autobind from '../../../../decorators/autobind';
 import {
   registerField,
+  setFieldProp,
   setFieldValue
 } from '../../../../orchestrators/connected-forms/connected-forms.actions';
 import {
@@ -63,16 +65,41 @@ export class AppFormTextInput {
 
   private registerField: typeof registerField;
   private setFieldValue: typeof setFieldValue;
+  private setFieldProp: typeof setFieldProp;
 
   private formName: string;
+
+  @Watch('disabled')
+  public disabledChangeHandler(newValue: boolean, oldValue: boolean): void {
+    if (newValue !== oldValue) {
+      this.setFieldProp(this.name, 'userDisabled', newValue, this.formName);
+    }
+  }
+
+  @Watch('message')
+  public messageChangeHandler(newValue: boolean, oldValue: boolean): void {
+    if (newValue !== oldValue) {
+      this.setFieldProp(this.name, 'userMessage', newValue, this.formName);
+    }
+  }
+
+  @Watch('hasError')
+  public hasErrorChangeHandler(newValue: boolean, oldValue: boolean): void {
+    if (newValue !== oldValue) {
+      this.setFieldProp(this.name, 'userError', newValue, this.formName);
+    }
+  }
 
   public fieldSelector(form: ConnectedForm, fieldName: string): ConnectedFormField {
     return form && form.fields[fieldName] ? form.fields[fieldName] : {
       name: fieldName,
-      disabled: this.disabled,
-      error: this.hasError,
+      disabled: false,
+      userDisabled: this.disabled,
+      error: false,
+      userError: this.hasError,
       value: this.defaultValue,
-      message: this.message
+      message: '',
+      userMessage: this.message
     };
   }
 
@@ -90,7 +117,8 @@ export class AppFormTextInput {
 
     this.store.mapDispatchToProps(this, {
       registerField,
-      setFieldValue
+      setFieldValue,
+      setFieldProp
     });
 
     (this.$element.closest('app-form') as HTMLAppFormElement).registerField(this.$element);
@@ -102,8 +130,9 @@ export class AppFormTextInput {
 
     this.registerField(this.name, this.formName, {
       defaultValue: this.defaultValue,
-      message: this.message,
-      error: this.hasError
+      userDisabled: this.disabled,
+      userMessage: this.message,
+      userError: this.hasError
     });
   }
 
@@ -118,10 +147,10 @@ export class AppFormTextInput {
         name={this.name}
         label={this.label}
         fieldType={this.fieldType}
-        message={this.reduxState.message}
+        message={this.reduxState.userMessage || this.reduxState.message}
         value={this.reduxState.value}
-        disabled={this.reduxState.disabled || this.submitting}
-        hasError={this.reduxState.error}
+        disabled={this.reduxState.userDisabled || this.reduxState.disabled || this.submitting}
+        hasError={this.reduxState.userError || this.reduxState.error}
         onValueChange={this.fieldValueChangeHandler}
       />
     );

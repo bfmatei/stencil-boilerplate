@@ -13,7 +13,8 @@ export enum ConnectedFormsActions {
   SUBMIT_FORM_SUCCESS = 'SUBMIT_FORM_SUCCESS',
   SUBMIT_FORM_ERROR = 'SUBMIT_FORM_ERROR',
   REGISTER_FIELD = 'REGISTER_FIELD',
-  SET_FIELD_VALUE = 'SET_FIELD_VALUE'
+  SET_FIELD_VALUE = 'SET_FIELD_VALUE',
+  SET_FIELD_PROP = 'SET_FIELD_PROP'
 }
 
 export interface RegisterFormAction {
@@ -105,13 +106,17 @@ export interface RegisterFieldAction {
     formName: string;
     options: {
       value: string;
+      disabled: boolean;
+      userDisabled: boolean;
       error: boolean;
+      userError: boolean;
       message: string;
+      userMessage: string;
     };
   };
 }
 
-export function registerField(name: string, formName: string, options: any = ''): any {
+export function registerField(name: string, formName: string, options: any = {}): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<RegisterFieldAction> => {
     return dispatch({
       type: ConnectedFormsActions.REGISTER_FIELD as ConnectedFormsActions.REGISTER_FIELD,
@@ -120,8 +125,12 @@ export function registerField(name: string, formName: string, options: any = '')
         formName,
         options: {
           value: options.defaultValue || '',
-          error: options.error || false,
-          message: options.message || ''
+          disabled: false,
+          userDisabled: options.userDisabled || false,
+          error: false,
+          userError: options.userError || false,
+          message: '',
+          userMessage: options.userMessage || ''
         }
       }
     });
@@ -150,4 +159,28 @@ export function setFieldValue(name: string, value: string, formName: string): an
   };
 }
 
-export type ConnectedFormsActionTypes = RegisterFormAction | UnregisterFormAction | SubmitFormAction | SubmitFormSuccessAction | SubmitFormErrorAction | RegisterFieldAction | SetFieldValueAction;
+export interface SetFieldPropAction {
+  type: ConnectedFormsActions.SET_FIELD_PROP;
+  payload: {
+    name: string;
+    prop: string;
+    value: any;
+    formName: string;
+  };
+}
+
+export function setFieldProp(name: string, prop: string, value: any, formName: string): any {
+  return async (dispatch: Dispatch<GlobalStoreState>): Promise<SetFieldPropAction> => {
+    return dispatch({
+      type: ConnectedFormsActions.SET_FIELD_PROP as ConnectedFormsActions.SET_FIELD_PROP,
+      payload: {
+        name,
+        prop,
+        value,
+        formName
+      }
+    });
+  };
+}
+
+export type ConnectedFormsActionTypes = RegisterFormAction | UnregisterFormAction | SubmitFormAction | SubmitFormSuccessAction | SubmitFormErrorAction | RegisterFieldAction | SetFieldValueAction | SetFieldPropAction;

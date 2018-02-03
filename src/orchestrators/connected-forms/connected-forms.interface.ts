@@ -1,9 +1,12 @@
 export interface ConnectedFormField {
   name: string;
   disabled: boolean;
+  userDisabled: boolean;
   value: string;
   error: boolean;
+  userError: boolean;
   message: string;
+  userMessage: string;
 }
 
 export interface ConnectedForm {

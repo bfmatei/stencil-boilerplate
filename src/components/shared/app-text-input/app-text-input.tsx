@@ -91,6 +91,7 @@ export class AppTextInput {
     return {
       class: {
         active: this.value.length > 0 || this.focused,
+        disabled: this.disabled,
         error: this.hasError
       }
     };

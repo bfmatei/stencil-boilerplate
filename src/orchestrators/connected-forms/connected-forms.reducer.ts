@@ -137,6 +137,23 @@ export default function forms(state: ConnectedFormsState = getInitialState(), ac
         }
       };
 
+    case ConnectedFormsActions.SET_FIELD_PROP:
+      currentForm = state[action.payload.formName];
+
+      return {
+        ...state,
+        [action.payload.formName]: {
+          ...currentForm,
+          fields: {
+            ...currentForm.fields,
+            [action.payload.name]: {
+              ...currentForm.fields[action.payload.name],
+              [action.payload.prop]: action.payload.value
+            }
+          }
+        }
+      };
+
     default:
       return state;
   }
