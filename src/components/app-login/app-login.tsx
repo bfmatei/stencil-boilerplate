@@ -51,32 +51,18 @@ export class AppLogin {
 
   private defaultRedirectRoute: string = '/dashboard';
 
-  private username: string = '';
-  private password: string = '';
   private user: UserData;
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
       const {
-        forms,
         router,
         user: {
           id
         }
       } = state;
 
-      const loginForm: ConnectedForm = forms.login || {
-        name: 'login',
-        success: false,
-        submitting: false,
-        error: false,
-        dirty: false,
-        fields: {}
-      };
-
       return {
-        username: loginForm.fields.username ? loginForm.fields.username.value : '',
-        password: loginForm.fields.password ? loginForm.fields.password.value : '',
         userId: id,
         redirectTo: router.state && router.state.from ? router.state.from : ''
       };
@@ -91,10 +77,18 @@ export class AppLogin {
   }
 
   @autobind
-  private formSubmitHandler(): void {
+  private formSubmitHandler(form: ConnectedForm): Promise<void> {
     // TODO: Replace with actual login method
 
-    if (this.username !== 'admin') {
+    const {
+      username,
+      password
+    } = form.fields;
+
+    const usernameValue: string = username.value;
+    const passwordValue: string = password.value;
+
+    if (usernameValue !== 'admin') {
       this.submitFormError('login', [
         {
           field: 'username',
@@ -102,7 +96,7 @@ export class AppLogin {
         }
       ]);
     } else {
-      if (this.password !== 'password') {
+      if (passwordValue !== 'password') {
         this.submitFormError('login', [
           {
             field: 'password',
@@ -111,15 +105,17 @@ export class AppLogin {
         ]);
       } else {
         this.user = {
-          id: this.username === 'admin' ? 1 : 2,
-          user: this.username,
-          name: `${this.username}Name`,
-          lastName: `${this.username}LastName`,
-          email: `${this.username}@app.com`
+          id: usernameValue === 'admin' ? 1 : 2,
+          user: usernameValue,
+          name: `${usernameValue}Name`,
+          lastName: `${usernameValue}LastName`,
+          email: `${usernameValue}@app.com`
         };
 
         this.submitFormSuccess('login');
       }
+
+      return Promise.resolve();
     }
   }
 
@@ -140,7 +136,7 @@ export class AppLogin {
     }
 
     return (
-      <app-form name='login' onSubmit={this.formSubmitHandler} onSubmitSuccess={this.formSubmitSuccessHandler} class='container'>
+      <app-form name='login' submit={this.formSubmitHandler} submitSuccess={this.formSubmitSuccessHandler} class='container'>
         <app-logo class='logo' />
         <app-form-text-input
           name='username'

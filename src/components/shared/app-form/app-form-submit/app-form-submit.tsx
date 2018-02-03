@@ -12,9 +12,6 @@ import {
 import autobind from '../../../../decorators/autobind';
 import noop from '../../../../helpers/noop';
 import {
-  submitForm
-} from '../../../../orchestrators/connected-forms/connected-forms.actions';
-import {
   ConnectedForm
 } from '../../../../orchestrators/connected-forms/connected-forms.interface';
 import {
@@ -51,9 +48,8 @@ export class AppFormSubmit {
   @Element()
   private $element: HTMLAppFormSubmitElement;
 
-  private submitForm: typeof submitForm;
-
   private formName: string;
+  private formSubmitClickHandler: any;
 
   public componentWillLoad(): void {
     this.store.mapStateToProps(this, (state: GlobalStoreState): {} => {
@@ -66,21 +62,18 @@ export class AppFormSubmit {
       };
     });
 
-    this.store.mapDispatchToProps(this, {
-      submitForm
-    });
-
     (this.$element.closest('app-form') as HTMLAppFormElement).registerSubmit(this.$element);
   }
 
   @Method()
-  public register(formName: string): void {
+  public register(formName: string, formSubmitClickHandler: any): void {
     this.formName = formName;
+    this.formSubmitClickHandler = formSubmitClickHandler;
   }
 
   @autobind
   private submitClickHandler(evt: UIEvent): void {
-    this.submitForm(this.formName);
+    this.formSubmitClickHandler();
 
     this.onClick(evt);
   }

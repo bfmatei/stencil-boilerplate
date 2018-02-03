@@ -19,14 +19,20 @@ export enum ConnectedFormsActions {
 
 export interface RegisterFormAction {
   type: ConnectedFormsActions.REGISTER_FORM;
-  payload: string;
+  payload: {
+    name: string;
+    fields: any[];
+  };
 }
 
-export function registerForm(name: string): any {
+export function registerForm(name: string, fields: any[] = []): any {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<RegisterFormAction> => {
     return dispatch({
       type: ConnectedFormsActions.REGISTER_FORM as ConnectedFormsActions.REGISTER_FORM,
-      payload: name
+      payload: {
+        name,
+        fields
+      }
     });
   };
 }

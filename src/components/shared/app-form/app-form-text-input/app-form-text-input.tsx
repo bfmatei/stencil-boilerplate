@@ -12,11 +12,6 @@ import {
 
 import autobind from '../../../../decorators/autobind';
 import {
-  registerField,
-  setFieldProp,
-  setFieldValue
-} from '../../../../orchestrators/connected-forms/connected-forms.actions';
-import {
   ConnectedForm,
   ConnectedFormField
 } from '../../../../orchestrators/connected-forms/connected-forms.interface';
@@ -63,31 +58,23 @@ export class AppFormTextInput {
   @Element()
   private $element: HTMLAppFormTextInputElement;
 
-  private registerField: typeof registerField;
-  private setFieldValue: typeof setFieldValue;
-  private setFieldProp: typeof setFieldProp;
-
   private formName: string;
+  private formValueChangeHandler: any;
+  private formPropChangeHandler: any;
 
   @Watch('disabled')
   public disabledChangeHandler(newValue: boolean, oldValue: boolean): void {
-    if (newValue !== oldValue) {
-      this.setFieldProp(this.name, 'userDisabled', newValue, this.formName);
-    }
+    this.formPropChangeHandler(this.name, 'userDisabled', newValue, oldValue);
   }
 
   @Watch('message')
   public messageChangeHandler(newValue: boolean, oldValue: boolean): void {
-    if (newValue !== oldValue) {
-      this.setFieldProp(this.name, 'userMessage', newValue, this.formName);
-    }
+    this.formPropChangeHandler(this.name, 'userMessage', newValue, oldValue);
   }
 
   @Watch('hasError')
   public hasErrorChangeHandler(newValue: boolean, oldValue: boolean): void {
-    if (newValue !== oldValue) {
-      this.setFieldProp(this.name, 'userError', newValue, this.formName);
-    }
+    this.formPropChangeHandler(this.name, 'userError', newValue, oldValue);
   }
 
   public fieldSelector(form: ConnectedForm, fieldName: string): ConnectedFormField {
@@ -115,30 +102,19 @@ export class AppFormTextInput {
       };
     });
 
-    this.store.mapDispatchToProps(this, {
-      registerField,
-      setFieldValue,
-      setFieldProp
-    });
-
-    (this.$element.closest('app-form') as HTMLAppFormElement).registerField(this.$element);
+    (this.$element.closest('app-form') as HTMLAppFormElement).readField(this.$element);
   }
 
   @Method()
-  public register(formName: string): void {
+  public register(formName: string, formValueChangeHandler: any, formPropChangeHandler: any): void {
     this.formName = formName;
-
-    this.registerField(this.name, this.formName, {
-      defaultValue: this.defaultValue,
-      userDisabled: this.disabled,
-      userMessage: this.message,
-      userError: this.hasError
-    });
+    this.formValueChangeHandler = formValueChangeHandler;
+    this.formPropChangeHandler = formPropChangeHandler;
   }
 
   @autobind
   private fieldValueChangeHandler(value: string): void {
-    this.setFieldValue(this.name, value, this.formName);
+    this.formValueChangeHandler(this.name, value);
   }
 
   public render(): JSX.Element {

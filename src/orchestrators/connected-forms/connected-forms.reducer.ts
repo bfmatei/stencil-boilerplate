@@ -3,7 +3,8 @@ import {
   ConnectedFormsActionTypes
 } from './connected-forms.actions';
 import {
-  ConnectedForm
+  ConnectedForm,
+  ConnectedFormField
 } from './connected-forms.interface';
 
 export interface ConnectedFormsState {
@@ -21,13 +22,23 @@ export default function forms(state: ConnectedFormsState = getInitialState(), ac
     case ConnectedFormsActions.REGISTER_FORM:
       return {
         ...state,
-        [action.payload]: {
-          name: action.payload,
+        [action.payload.name]: {
+          name: action.payload.name,
           success: false,
           error: false,
           submitting: false,
           dirty: false,
-          fields: {}
+          fields: action.payload.fields.reduce((acc: any, item: any): ConnectedFormField => {
+            return {
+              ...acc,
+              [item.name]: {
+                ...item,
+                disabled: false,
+                error: false,
+                message: ''
+              }
+            };
+          }, {})
         }
       };
 
