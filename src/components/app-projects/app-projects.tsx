@@ -17,10 +17,10 @@ export class AppProjects {
           url: '/projects/list'
         }}
       />,
-      <app-route url='/projects/list' component='list-projects' />,
-      <app-route url='/projects/new' component='new-project' />,
-      <app-route url='/projects/view/:id' component='view-project' />,
-      <app-route url='/projects/edit/:id' component='edit-project' />
+      <app-route url='/projects/list' component='app-projects-list' />,
+      <app-route url='/projects/new' component='app-project-new' />,
+      <app-route url='/projects/view/:id' component='app-project-view' />,
+      <app-route url='/projects/edit/:id' component='app-project-edit' />
     ];
   }
 }
