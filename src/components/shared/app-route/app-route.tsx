@@ -13,7 +13,9 @@ import {
 import {
   GlobalStoreState
 } from '../../../redux/store';
-import { ComponentProps } from '../../../types/componentProps';
+import {
+  ComponentProps
+} from '../../../types/componentProps';
 
 @Component({
   tag: 'app-route'
