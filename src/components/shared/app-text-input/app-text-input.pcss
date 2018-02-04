@@ -1,3 +1,7 @@
+@import 'animations.css';
+@import 'colors.css';
+@import 'sizes.css';
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -41,7 +45,7 @@ app-text-input {
     pointer-events: none;
     user-select: none;
     font-size: 16px;
-    color: var(--textInputLabelText);
+    color: var(--textColor);
   }
 
   & .input {
@@ -59,7 +63,7 @@ app-text-input {
   }
 
   & .message-container {
-    color: var(--textInputLabelText);
+    color: var(--textColor);
     transition: opacity var(--animationDuration) var(--animationTiming);
     font-size: 12px;
     transform: translateY(20px);

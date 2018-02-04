@@ -40,7 +40,11 @@
     "@types/jest": "22.1.1",
     "jest": "22.1.4",
     "postcss": "^6.0.17",
+    "postcss-calc": "^6.0.1",
     "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^11.0.0",
+    "postcss-reporter": "^5.0.0",
+    "postcss-url": "^7.3.0",
     "stylelint": "^8.4.0",
     "tslint": "5.9.1",
     "tslint-language-service": "0.9.8"

@@ -3,25 +3,25 @@ import {
   Element,
   Method,
   Prop,
-  State,
-  Watch
+  State
 } from '@stencil/core';
 
-import autobind from '../../../../decorators/autobind';
-import noop from '../../../../helpers/noop';
+import autobind from '../../../decorators/autobind';
+import noop from '../../../helpers/noop';
 import {
   ConnectedForm,
   ConnectedFormField
-} from '../../../../orchestrators/connected-forms/connected-forms.interface';
+} from '../../../orchestrators/connected-forms/connected-forms.interface';
+
 import {
   AppFormError,
   AppFormValidator
-} from '../app-form.interface';
+} from './app-form.interface';
 
 @Component({
-  tag: 'app-form-text-input'
+  tag: 'app-form-checkbox'
 })
-export class AppFormTextInput {
+export class AppFormCheckbox {
   @Prop()
   public name: string = '';
 
@@ -29,13 +29,16 @@ export class AppFormTextInput {
   public label: string = '';
 
   @Prop()
-  public fieldType: 'text' | 'password' = 'text';
+  public icon: string = 'checkbox';
 
   @Prop()
   public message: string = '';
 
   @Prop()
-  public defaultValue: string = '';
+  public defaultValue: boolean = false;
+
+  @Prop()
+  public swap: boolean = false;
 
   @Prop()
   public disabled: boolean = false;
@@ -47,7 +50,7 @@ export class AppFormTextInput {
   public validators: AppFormValidator[] = [];
 
   @Prop()
-  public onValueChange: (value: string) => void = noop;
+  public onValueChange: (value: boolean) => void = noop;
 
   @State()
   public reduxState: ConnectedFormField = null;
@@ -58,23 +61,7 @@ export class AppFormTextInput {
   @Element()
   private $element: HTMLAppFormTextInputElement;
 
-  private formValueChangeHandler: (field: string, value: string, err: string) => void;
-  private formPropChangeHandler: (field: string, prop: string, value: string | boolean, oldValue: string | boolean) => void;
-
-  @Watch('disabled')
-  public disabledChangeHandler(newValue: boolean, oldValue: boolean): void {
-    this.formPropChangeHandler(this.name, 'userDisabled', newValue, oldValue);
-  }
-
-  @Watch('message')
-  public messageChangeHandler(newValue: boolean, oldValue: boolean): void {
-    this.formPropChangeHandler(this.name, 'userMessage', newValue, oldValue);
-  }
-
-  @Watch('hasError')
-  public hasErrorChangeHandler(newValue: boolean, oldValue: boolean): void {
-    this.formPropChangeHandler(this.name, 'userError', newValue, oldValue);
-  }
+  private formValueChangeHandler: (field: string, value: boolean, err: string) => void;
 
   public fieldSelector(form: ConnectedForm, fieldName: string): ConnectedFormField {
     const field: ConnectedFormField = form && form.fields[fieldName] ? form.fields[fieldName] : {
@@ -83,10 +70,10 @@ export class AppFormTextInput {
       disabled: false,
       userDisabled: this.disabled,
       error: false,
-      userError: this.hasError,
+      userError: false,
       value: this.defaultValue,
       message: '',
-      userMessage: this.message
+      userMessage: ''
     };
 
     const validation: AppFormError = this.validate(field.value);
@@ -103,16 +90,15 @@ export class AppFormTextInput {
   }
 
   @Method()
-  public register(reduxState: ConnectedForm, formValueChangeHandler: (field: string, value: string, err: string) => void, formPropChangeHandler: (field: string, prop: string, value: string | boolean, oldValue: string | boolean) => void): void {
+  public register(reduxState: ConnectedForm, formValueChangeHandler: (field: string, value: string | boolean, err: string) => void): void {
     this.reduxState = this.fieldSelector(reduxState, this.name);
     this.submitting = reduxState.submitting;
 
     this.formValueChangeHandler = formValueChangeHandler;
-    this.formPropChangeHandler = formPropChangeHandler;
   }
 
   @autobind
-  private fieldValueChangeHandler(value: string): void {
+  private fieldValueChangeHandler(value: boolean): void {
     const validation: AppFormError = this.validate(value);
 
     this.formValueChangeHandler(this.name, value, validation ? validation.message : '');
@@ -121,7 +107,7 @@ export class AppFormTextInput {
   }
 
   @Method()
-  public validate(value: string = this.reduxState.value): AppFormError {
+  public validate(value: string | boolean = this.reduxState.value): AppFormError {
     return {
       field: this.name,
       message: this.validators.reduce((err: string, validator: AppFormValidator) => {
@@ -139,16 +125,18 @@ export class AppFormTextInput {
       return null;
     }
 
+    const value: boolean = this.reduxState.value as boolean;
+
     return (
-      <app-text-input
-        name={this.name}
+      <app-checkbox
         label={this.label}
-        fieldType={this.fieldType}
-        message={!this.reduxState.dirty || (this.reduxState.value.length === 0 && !this.reduxState.error) ? this.reduxState.userMessage : this.reduxState.message}
-        value={this.reduxState.value}
-        disabled={this.reduxState.userDisabled || this.reduxState.disabled || this.submitting}
-        hasError={this.reduxState.userError || this.reduxState.error}
+        icon={this.icon}
+        checked={value}
         onValueChange={this.fieldValueChangeHandler}
+        swap={this.swap}
+        disabled={this.reduxState.userDisabled || this.reduxState.disabled || this.submitting}
+        hasError={this.reduxState.userError || (this.reduxState.dirty && this.reduxState.error)}
+        message={!this.reduxState.dirty ? this.reduxState.userMessage : this.reduxState.message}
       />
     );
   }

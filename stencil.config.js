@@ -8,6 +8,8 @@ exports.config = {
       /** Shared Components */
       components: [
         'app-form-text-input',
+        'app-form-checkbox',
+        'app-form-submit',
         'app-form',
         'app-icon',
         'app-link',
@@ -104,30 +106,38 @@ exports.config = {
     ]
   },
   plugins: [
-{
-  name: 'postcss-loader',
-  transform(sourceText, importee) {
-    if (importee.indexOf('.pcss') !== -1) {
-      const promise = new Promise((resolve) => {
-        require('postcss')([
-          require('postcss-cssnext')()
-        ])
-          .process(sourceText, {
-            from: importee
-          })
-          .then((data) => {
-            resolve(data.css);
-          })
-      });
+    {
+      name: 'postcss-loader',
+      transform(sourceText, importee) {
+        if (importee.indexOf('.pcss') !== -1) {
+          const promise = new Promise((resolve) => {
+            require('postcss')([
+              require('postcss-import')({
+                skipDuplicates: true,
+                path: [
+                  'src/styles/'
+                ]
+              }),
+              require('postcss-url')(),
+              require('postcss-cssnext')(),
+              require('postcss-reporter')()
+            ])
+              .process(sourceText, {
+                from: importee
+              })
+              .then((data) => {
+                resolve(data.css);
+              })
+          });
 
-      return promise;
-    } else {
-      return Promise.resolve({
-        code: sourceText
-      });
+          return promise;
+        } else {
+          return Promise.resolve({
+            code: sourceText
+          });
+        }
+      }
     }
-  }
-}
   ]
 };
 

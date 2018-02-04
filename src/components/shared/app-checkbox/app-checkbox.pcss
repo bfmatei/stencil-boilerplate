@@ -5,7 +5,7 @@ app-checkbox {
   width: max-content;
   cursor: pointer;
 
-  .icon-checked {
+  & .icon-checked {
     grid-area: icon;
     color: rgb(0, 188, 212);
     height: 24px;
@@ -18,7 +18,7 @@ app-checkbox {
     transform: scale(0);
   }
 
-  .icon-unchecked {
+  & .icon-unchecked {
     grid-area: icon;
     color: rgba(0, 0, 0, 0.87);
     height: 24px;
@@ -28,13 +28,13 @@ app-checkbox {
     opacity: 1;
   }
 
-  .label {
+  & .label {
     grid-area: label;
     line-height: 24px;
   }
 
   &.checked {
-    .icon-checked {
+    & .icon-checked {
       display: inline-block;
       height: 24px;
       width: 24px;
@@ -46,7 +46,7 @@ app-checkbox {
       transform: scale(1);
     }
 
-    .icon-unchecked {
+    & .icon-unchecked {
       display: inline-block;
       height: 24px;
       width: 24px;
@@ -59,9 +59,9 @@ app-checkbox {
   &.disabled {
     cursor: not-allowed;
 
-    .icon-checked,
-    .icon-unchecked,
-    .label {
+    & .icon-checked,
+    & .icon-unchecked,
+    & .label {
       color: rgba(0, 0, 0, 0.3);
     }
   }

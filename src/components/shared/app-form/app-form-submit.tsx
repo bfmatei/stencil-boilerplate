@@ -6,11 +6,11 @@ import {
   State
 } from '@stencil/core';
 
-import autobind from '../../../../decorators/autobind';
-import noop from '../../../../helpers/noop';
+import autobind from '../../../decorators/autobind';
+import noop from '../../../helpers/noop';
 import {
   ConnectedForm
-} from '../../../../orchestrators/connected-forms/connected-forms.interface';
+} from '../../../orchestrators/connected-forms/connected-forms.interface';
 
 @Component({
   tag: 'app-form-submit'

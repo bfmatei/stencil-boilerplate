@@ -135,13 +135,13 @@ export interface SetFieldValueAction {
   type: ConnectedFormsActions.SET_FIELD_VALUE;
   payload: {
     name: string;
-    value: string;
+    value: string | boolean;
     err: string;
     formName: string;
   };
 }
 
-export function setFieldValue(name: string, value: string, err: string, formName: string): ReduxAction<SetFieldValueAction> {
+export function setFieldValue(name: string, value: string | boolean, err: string, formName: string): ReduxAction<SetFieldValueAction> {
   return async (dispatch: Dispatch<GlobalStoreState>): Promise<SetFieldValueAction> => {
     return dispatch({
       type: ConnectedFormsActions.SET_FIELD_VALUE as ConnectedFormsActions.SET_FIELD_VALUE,
