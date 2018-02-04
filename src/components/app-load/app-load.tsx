@@ -12,7 +12,8 @@ import {
  *   - Load the Connected (Redux) Router (there should be only in the app)
  */
 @Component({
-  tag: 'app-load'
+  tag: 'app-load',
+  styleUrl: 'app-load.pcss'
 })
 export class AppLoad {
   @Prop({

@@ -126,7 +126,8 @@ At the moment the following features are in work and should be finished soon:
 Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.
 
 * Due to an issue with contenteditable items (the cursor repositions itself at the beginning of the element after a re-render), the content cannot be controlled from outside the component. It can, however receive a default value mapped to Redux.
-* Automated Testing is not working 
+* Automated Testing is not working
+* Editing a PostCSS file is not triggering the rebuild process (PR in pending)
 
 ## Credits
 * Logo

@@ -81,15 +81,6 @@ exports.config = {
   generateDistribution: false,
   generateDocs: false,
   generateWWW: true,
-  globalStyle: [
-    'src/styles/animations.css',
-    'src/styles/colors.css',
-    'src/styles/fonts.css',
-    'src/styles/reset.css',
-    'src/styles/sizes.css',
-    'src/styles/typography.css',
-    'src/styles/z-index.css'
-  ],
   hydratedCssClass: 'hydrated',
   logLevel: 'info',
   namespace: 'app',
@@ -104,14 +95,24 @@ exports.config = {
     ]
   },
   plugins: [
-    require('./plugins/postcss')()
+    require('./plugins/postcss')({
+      plugins: [
+        require('postcss-import')({
+          skipDuplicates: true,
+          path: [
+            'src/styles/'
+          ]
+        }),
+        require('postcss-url')(),
+        require('postcss-cssnext')(),
+        require('postcss-reporter')()
+      ]
+    })
   ]
 };
 
 exports.devServer = {
   root: 'www',
-  verbose: true,
-  watchGlob: 'src/**/**',
   address: '0.0.0.0',
   httpPort: 3333,
   liveReloadPort: 35729
