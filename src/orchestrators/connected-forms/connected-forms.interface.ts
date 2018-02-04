@@ -8,7 +8,7 @@ export interface ConnectedFormField {
   userError: boolean;
   message: string;
   userMessage: string;
-};
+}
 
 export interface ConnectedFormFields {
   [name: string]: ConnectedFormField;
