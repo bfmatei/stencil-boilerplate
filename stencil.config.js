@@ -5,9 +5,10 @@ exports.config = {
     {
       /** Shared Components */
       components: [
-        'app-form-text-input',
         'app-form-checkbox',
         'app-form-submit',
+        'app-form-rich-input',
+        'app-form-text-input',
         'app-form',
         'app-icon',
         'app-link',

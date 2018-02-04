@@ -19,9 +19,9 @@ import {
 } from './app-form.interface';
 
 @Component({
-  tag: 'app-form-text-input'
+  tag: 'app-form-rich-input'
 })
-export class AppFormTextInput {
+export class AppFormRichInput {
   @Prop()
   public name: string = '';
 
@@ -122,12 +122,10 @@ export class AppFormTextInput {
     const value: string = this.reduxState.value as string;
 
     return (
-      <app-text-input
-        name={this.name}
+      <app-rich-editor
         label={this.label}
-        fieldType={this.fieldType}
         message={!this.reduxState.dirty || (value.length === 0 && !this.reduxState.error) ? this.message : this.reduxState.message}
-        value={value}
+        defaultValue={this.defaultValue}
         disabled={this.disabled || this.reduxState.disabled || this.submitting}
         hasError={this.hasError || (this.reduxState.dirty && this.reduxState.error)}
         onValueChange={this.fieldValueChangeHandler}

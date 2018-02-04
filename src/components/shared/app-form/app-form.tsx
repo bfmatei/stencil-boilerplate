@@ -109,10 +109,7 @@ export class AppForm {
         disabled: false,
         value: field.defaultValue,
         error: validation.message.length > 0,
-        message: validation.message,
-        userDisabled: field.disabled,
-        userMessage: field.message,
-        userError: field.hasError
+        message: validation.message
       };
     });
 

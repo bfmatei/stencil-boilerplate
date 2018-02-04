@@ -44,10 +44,16 @@ export class AppRichEditor {
   public label: string = '';
 
   @Prop()
+  public message: string = '';
+
+  @Prop()
   public defaultValue: string = '';
 
   @Prop()
   public disabled: boolean = false;
+
+  @Prop()
+  public hasError: boolean = false;
 
   @Prop()
   public onValueChange: (newValue: string) => void = noop;

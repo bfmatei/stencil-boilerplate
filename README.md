@@ -104,6 +104,7 @@ The orchestrators are singleton store instances which coordinate a specific piec
    * Supported Controls:
       * Text Input
       * Password Input
+      * Rich Input
       * Checkbox
       * Submit
 * Connected Router
@@ -116,11 +117,14 @@ The orchestrators are singleton store instances which coordinate a specific piec
 ## Current Work In Progress
 At the moment the following features are in work and should be finished soon:
    * Connected Forms: 
-      * Rich Editor support
       * List Support
    * Components:
       * Dropdown Menu
    * Style Guide
+   
+## TODO
+1. Add message support and error state to Rich Input
+2. Add message support and error state to Checkbox
 
 ## Known Issues
 Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.
@@ -150,3 +154,4 @@ Please note that this boilerplate is built for web apps rather than public websi
    * [Code of Conduct](https://github.com/ionic-team/stencil/master/CODE_OF_CONDUCT.md)
    * [Contributing](https://github.com/ionic-team/stencil/blob/master/.github/CONTRIBUTING.md)
    * [Issue Template](https://raw.githubusercontent.com/ionic-team/stencil/master/.github/ISSUE_TEMPLATE.md)
+   * [Style Guide](https://github.com/ionic-team/stencil/blob/master/.github/STYLE_GUIDE.md)

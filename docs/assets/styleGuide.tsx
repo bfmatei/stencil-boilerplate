@@ -1,15 +1,3 @@
-# Style Guide
-
-## Motivation
-My way of writing TypeScript might be a little bit too much, but there are a couple of reasons I am proceeding like this.
-
-1. Faster accomodation for everybody: 
-   * people that are coming from true OOP languages are having some hard times understanding the OOP available in scripting languages
-   * tracking the code in both IDEs and code editors is much easier (you can find usages, one-time rename event etc.) 
-2. Given the fact that this aims to be a boilerplate, the code must follow some strict rules in terms of coding standards. From my past experience: if you don't impose a style from scratch, you will have a lot of bad time in the future when multiple people will develop on that project.
-
-## TypeScript
-```ts
 /**
  * Imports
  *    - Always destructure the imports.
@@ -275,4 +263,3 @@ export default class AppSomething {
     );
   }
 }
-```

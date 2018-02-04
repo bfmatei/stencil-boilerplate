@@ -172,6 +172,7 @@ export default function forms(state: ConnectedFormsState = getInitialState(), ac
           ...currentField,
           error: !!action.payload.err,
           message: action.payload.err || currentField.message,
+          dirty: true,
           value: action.payload.value
         }
       };

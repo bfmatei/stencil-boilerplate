@@ -68,12 +68,9 @@ export class AppFormCheckbox {
       name: fieldName,
       dirty: false,
       disabled: false,
-      userDisabled: this.disabled,
       error: false,
-      userError: false,
       value: this.defaultValue,
-      message: '',
-      userMessage: ''
+      message: ''
     };
 
     const validation: AppFormError = this.validate(field.value);
@@ -134,9 +131,9 @@ export class AppFormCheckbox {
         checked={value}
         onValueChange={this.fieldValueChangeHandler}
         swap={this.swap}
-        disabled={this.reduxState.userDisabled || this.reduxState.disabled || this.submitting}
-        hasError={this.reduxState.userError || (this.reduxState.dirty && this.reduxState.error)}
-        message={!this.reduxState.dirty ? this.reduxState.userMessage : this.reduxState.message}
+        disabled={this.disabled || this.reduxState.disabled || this.submitting}
+        hasError={this.hasError || (this.reduxState.dirty && this.reduxState.error)}
+        message={!this.reduxState.dirty ? this.message : this.reduxState.message}
       />
     );
   }
