@@ -28,7 +28,7 @@ import {
  */
 @Component({
   tag: 'app-main',
-  styleUrl: 'app-main.scss'
+  styleUrl: 'app-main.pcss'
 })
 export class AppMain {
   @Prop({

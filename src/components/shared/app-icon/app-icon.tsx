@@ -5,7 +5,7 @@ import {
 
 @Component({
   tag: 'app-icon',
-  styleUrl: 'app-icon.scss'
+  styleUrl: 'app-icon.pcss'
 })
 export class AppIcon {
   @Prop()

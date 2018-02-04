@@ -10,7 +10,7 @@ import {
 
 @Component({
   tag: 'app-rich-editor-menu-bar',
-  styleUrl: 'app-rich-editor-menu-bar.scss'
+  styleUrl: 'app-rich-editor-menu-bar.pcss'
 })
 export class AppRichEditorMenuBar {
   @Prop()

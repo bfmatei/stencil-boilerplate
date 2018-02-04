@@ -9,7 +9,7 @@ import noop from '../../../helpers/noop';
 
 @Component({
   tag: 'app-text-input',
-  styleUrl: 'app-text-input.scss'
+  styleUrl: 'app-text-input.pcss'
 })
 export class AppTextInput {
   @Prop()

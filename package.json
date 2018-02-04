@@ -39,6 +39,8 @@
     "@stencil/utils": "0.0.4",
     "@types/jest": "22.1.1",
     "jest": "22.1.4",
+    "postcss": "^6.0.17",
+    "postcss-cssnext": "^3.1.0",
     "stylelint": "^8.4.0",
     "tslint": "5.9.1",
     "tslint-language-service": "0.9.8"

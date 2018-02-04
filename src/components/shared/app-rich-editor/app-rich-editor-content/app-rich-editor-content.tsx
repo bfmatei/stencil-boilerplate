@@ -14,7 +14,7 @@ import noop from '../../../../helpers/noop';
 
 @Component({
   tag: 'app-rich-editor-content',
-  styleUrl: 'app-rich-editor-content.scss'
+  styleUrl: 'app-rich-editor-content.pcss'
 })
 export class AppRichEditorContent {
   @Prop()

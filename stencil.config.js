@@ -1,3 +1,5 @@
+const postcss = require('postcss');
+
 exports.config = {
   buildEs5: false,
   buildStats: true,
@@ -100,7 +102,33 @@ exports.config = {
     globIgnores: [
       'build/app/svg/*.js'
     ]
+  },
+  plugins: [
+{
+  name: 'postcss-loader',
+  transform(sourceText, importee) {
+    if (importee.indexOf('.pcss') !== -1) {
+      const promise = new Promise((resolve) => {
+        require('postcss')([
+          require('postcss-cssnext')()
+        ])
+          .process(sourceText, {
+            from: importee
+          })
+          .then((data) => {
+            resolve(data.css);
+          })
+      });
+
+      return promise;
+    } else {
+      return Promise.resolve({
+        code: sourceText
+      });
+    }
   }
+}
+  ]
 };
 
 exports.devServer = {

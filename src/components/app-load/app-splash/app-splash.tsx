@@ -5,7 +5,7 @@ import {
 
 @Component({
   tag: 'app-splash',
-  styleUrl: 'app-splash.scss'
+  styleUrl: 'app-splash.pcss'
 })
 export class AppSplash {
   @Prop()

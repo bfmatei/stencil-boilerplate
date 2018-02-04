@@ -16,7 +16,7 @@ import {
 
 @Component({
   tag: 'app-header',
-  styleUrl: 'app-header.scss'
+  styleUrl: 'app-header.pcss'
 })
 export class AppHeader {
   @Prop({

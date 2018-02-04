@@ -13,7 +13,7 @@ import {
 
 @Component({
   tag: 'app-link',
-  styleUrl: 'app-link.scss'
+  styleUrl: 'app-link.pcss'
 })
 export class AppLink {
   @Prop({

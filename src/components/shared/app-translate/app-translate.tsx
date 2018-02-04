@@ -26,7 +26,7 @@ import {
 
 @Component({
   tag: 'app-translate',
-  styleUrl: 'app-translate.scss'
+  styleUrl: 'app-translate.pcss'
 })
 export class AppTranslate {
   @Prop({

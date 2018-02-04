@@ -8,7 +8,7 @@ import noop from '../../../helpers/noop';
 
 @Component({
   tag: 'app-checkbox',
-  styleUrl: 'app-checkbox.scss'
+  styleUrl: 'app-checkbox.pcss'
 })
 export class AppCheckbox {
   @Prop()

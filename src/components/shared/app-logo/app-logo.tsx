@@ -4,7 +4,7 @@ import {
 
 @Component({
   tag: 'app-logo',
-  styleUrl: 'app-logo.scss'
+  styleUrl: 'app-logo.pcss'
 })
 export class AppLogo {
   public render(): JSX.Element {

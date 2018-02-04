@@ -5,7 +5,7 @@ import {
 
 @Component({
   tag: 'app-loader',
-  styleUrl: 'app-loader.scss'
+  styleUrl: 'app-loader.pcss'
 })
 export class AppLoader {
   @Prop()

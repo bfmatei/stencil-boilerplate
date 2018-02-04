@@ -30,7 +30,7 @@ import isRequired from '../shared/app-form/validators/is-required';
 
 @Component({
   tag: 'app-login',
-  styleUrl: 'app-login.scss'
+  styleUrl: 'app-login.pcss'
 })
 export class AppLogin {
   @Prop({
