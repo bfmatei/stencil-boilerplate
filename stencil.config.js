@@ -5,6 +5,7 @@ exports.config = {
     {
       /** Shared Components */
       components: [
+        'app-dynamic-table',
         'app-form-checkbox',
         'app-form-submit',
         'app-form-rich-input',

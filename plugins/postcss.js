@@ -28,25 +28,27 @@ module.exports = function (config) {
         return results;
       }
 
-      const cacheKey = context.cache.createKey(this.name, renderOpts);
-      const cachedContent = await context.cache.get(cacheKey);
+      if (config.enableCache) {
+        const cacheKey = context.cache.createKey(this.name, renderOpts);
+        const cachedContent = await context.cache.get(cacheKey);
 
-      if (cachedContent != null) {
-        results.code = cachedContent;
+        if (cachedContent != null) {
+          results.code = cachedContent;
 
-        return results;
+          return results;
+        }
       }
 
       results.code = await new Promise((resolve) => {
         postcss
           .process(sourceText, {
             from: id,
-            to: results.id
+            to: results.to
           })
           .then(async (data) => {
             const css = data.css;
 
-            await context.fs.writeFile(results.id, css, { inMemoryOnly: true });
+            await context.fs.writeFile(results.to, css, { inMemoryOnly: true });
 
             resolve(css);
           })
@@ -55,7 +57,9 @@ module.exports = function (config) {
           });
       });
 
-      await context.cache.put(cacheKey, results.code);
+      if (config.enableCache) {
+        await context.cache.put(cacheKey, results.code);
+      }
 
       return results;
     }

@@ -26,6 +26,16 @@ export interface LocalesMap extends I18nObject {
   projects: {
     projectsList: {
       index: string;
+      headerButtons: {
+        refresh: string;
+        add: string;
+      };
+      columns: {
+        index: string;
+        id: string;
+        name: string;
+        description: string;
+      };
     };
     projectNew: {
       index: string;

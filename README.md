@@ -55,6 +55,20 @@ The boilerplate project aims to ease the development of a project while keeping 
    * Inversed Layout (optional)
 * Connected Link
    * Wrap another element in an internal link
+* Dynamic Table
+   * Create dynamic tables
+   * Column Types
+      * Index
+      * Text
+      * Icon
+      * Button
+      * Rich Text
+   * Column Features
+      * Label
+      * Width
+      * Align
+      * Class Name
+      * Item Class Name
 * Enhanced Route
    * Can check for authorization
    * Can check the user role
@@ -116,11 +130,13 @@ The orchestrators are singleton store instances which coordinate a specific piec
 
 ## Current Work In Progress
 At the moment the following features are in work and should be finished soon:
-   * Connected Forms: 
+   * Connected Forms:
       * List Support
    * Components:
+      * Dynamic Table
       * Dropdown Menu
-   * Style Guide
+   * Pages:
+      * Projects List
    
 ## TODO
 1. Add message support and error state to Rich Input

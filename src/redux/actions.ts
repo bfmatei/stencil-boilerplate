@@ -6,6 +6,9 @@ import {
   AppMenuActionTypes
 } from '../components/app-menu/app-menu.actions';
 import {
+  AppProjectsActionTypes
+} from '../components/app-projects/app-projects.actions';
+import {
   ConfigActionTypes
 } from '../orchestrators/config/config.actions';
 import {
@@ -26,6 +29,7 @@ export type ReduxAction<T> = ThunkAction<Promise<T>, GlobalStoreState, void>;
 
 export type GlobalActionTypes =
   AppMenuActionTypes |
+  AppProjectsActionTypes |
   ConfigActionTypes |
   ConnectedFormsActionTypes |
   ConnectedRouterActionTypes |

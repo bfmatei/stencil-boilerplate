@@ -1,0 +1,101 @@
+@import 'animations.pcss';
+@import 'colors.pcss';
+
+app-dynamic-table {
+  display: block;
+
+  & .table {
+    background-color: transparent;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-sizing: border-box;
+    table-layout: fixed;
+  }
+
+  & .table-header {
+    border-bottom: 1px solid var(--brightGray);
+    font-size: 14px;
+    text-transform: uppercase;
+    box-sizing: border-box;
+  }
+
+  & .table-header-row {
+    color: var(--textColor);
+    height: 48px;
+    box-sizing: border-box;
+  }
+
+  & .table-header-cell {
+    font-size: 14px;
+    padding: 0 16px;
+    text-align: left;
+    color: var(--textColor);
+    box-sizing: border-box;
+    vertical-align: middle;
+    font-weight: 500;
+  }
+
+  & .table-body {
+    font-size: 13px;
+  }
+
+  & .table-body-row {
+    border-bottom: 1px solid var(--brightGray);
+    color: var(--textColor);
+    height: 48px;
+    box-sizing: border-box;
+
+    &:nth-of-type(odd) {
+      background-color: rgb(244, 247, 249);
+    }
+
+    &:nth-of-type(even) {
+      background-color: var(--white);
+    }
+
+    &:hover {
+      color: var(--textColor);
+
+      &:nth-of-type(odd) {
+        background-color: var(--darkGreen);
+      }
+
+      &:nth-of-type(even) {
+        background-color: var(--darkGreen);
+      }
+    }
+  }
+
+  & .table-body-cell {
+    padding: 15px 12px 15px 16px;
+    height: 48px;
+    text-align: left;
+    font-size: 13px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    line-height: 16px;
+  }
+
+  & .entry-button {
+    box-shadow: none;
+    width: auto;
+    display: inline-block;
+    height: auto;
+    margin: 0 10px;
+    line-height: normal;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    vertical-align: middle;
+    background-color: transparent;
+    color: var(--brightGreen);
+    transition: color var(--animationDuration) var(--animationTiming);
+
+    &:hover,
+    &:active {
+      background-color: transparent;
+      color: var(--brightGreen);
+    }
+  }
+}

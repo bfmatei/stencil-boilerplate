@@ -6,6 +6,7 @@
   },
   "linterOptions": {
     "exclude": [
+      "./docs/assets/styleGuide.tsx",
       "./src/components.d.ts"
     ]
   },

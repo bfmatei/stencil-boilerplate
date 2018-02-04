@@ -15,6 +15,10 @@ import {
   AppMenuState,
   getInitialState as getAppMenuInitialState
 } from '../components/app-menu/app-menu.reducer';
+import {
+  AppProjectsState,
+  getInitialState as getAppProjectsInitialState
+} from '../components/app-projects/app-projects.reducer';
 import configMiddleware from '../orchestrators/config/config.middleware';
 import {
   ConfigState,
@@ -45,6 +49,7 @@ export interface GlobalStoreState {
   forms: ConnectedFormsState;
   i18n: I18nState;
   menu: AppMenuState;
+  projects: AppProjectsState;
   router: ConnectedRouterState;
   user: UserState;
 }
@@ -55,6 +60,7 @@ export function getInitialState(appHistory: RouterHistory): GlobalStoreState {
     forms: getConnectedFormsInitialState(),
     i18n: getI18nInitialState(),
     menu: getAppMenuInitialState(),
+    projects: getAppProjectsInitialState(),
     router: getConnectedRouterInitialState(appHistory),
     user: getUserInitialState()
   };

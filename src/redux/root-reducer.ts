@@ -3,6 +3,7 @@ import {
 } from 'redux';
 
 import menu from '../components/app-menu/app-menu.reducer';
+import projects from '../components/app-projects/app-projects.reducer';
 import config from '../orchestrators/config/config.reducer';
 import forms from '../orchestrators/connected-forms/connected-forms.reducer';
 import router from '../orchestrators/connected-router/connected-router.reducer';
@@ -18,6 +19,7 @@ export default combineReducers<GlobalStoreState>({
   forms,
   i18n,
   menu,
+  projects,
   router,
   user
 });

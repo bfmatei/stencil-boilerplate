@@ -21,7 +21,17 @@ export default {
   },
   projects: {
     projectsList: {
-      index: 'This is the list projects page'
+      index: 'This is the list projects page',
+      headerButtons: {
+        refresh: 'Refresh Projects',
+        add: 'Add Project'
+      },
+      columns: {
+        index: '#',
+        id: 'ID',
+        name: 'Project Name',
+        description: 'Project Description'
+      }
     },
     projectNew: {
       index: 'This is the new project page'

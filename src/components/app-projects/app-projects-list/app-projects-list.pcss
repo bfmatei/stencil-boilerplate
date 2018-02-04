@@ -1,3 +1,67 @@
+@import 'colors.pcss';
+
 app-projects-list {
-  display: block;
+  background-color: var(--white);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  box-shadow: var(--shadowColor);
+  border-radius: 2px;
+  color: var(--textColor);
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+
+  & .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+
+    & .title {
+      font-size: 24px;
+      color: var(--textColor);
+      display: block;
+      line-height: 36px;
+      flex: 1;
+    }
+
+    & .buttons-container {
+      flex: 1;
+      display: block;
+      max-width: 50%;
+      overflow: scroll;
+      white-space: nowrap;
+      text-align: right;
+
+      & .button {
+        width: auto;
+        background-color: transparent;
+        color: var(--brightGreen);
+        box-shadow: none;
+        padding: 0 12px;
+        margin: 0;
+        display: inline-block;
+
+        &:hover,
+        &:active {
+          background-color: rgba(153, 153, 153, 0.2);
+        }
+
+        & .icon {
+          vertical-align: middle;
+          transform: translate(-4px, -2px);
+        }
+
+        @media only screen and (max-width: 800px) {
+          padding: 0 6px 0 12px;
+
+          & .label {
+            display: none;
+          }
+        }
+      }
+    }
+  }
 }
