@@ -120,6 +120,7 @@ At the moment the following features are in work and should be finished soon:
       * List Support
    * Components:
       * Dropdown Menu
+   * Style Guide
 
 ## Known Issues
 Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.
@@ -144,3 +145,7 @@ Please note that this boilerplate is built for web apps rather than public websi
    * [John Louie Biñas](https://codepen.io/johnlouie04/pen/LEoOGV)
 * nginx config rules
    * [H5BP](https://github.com/h5bp/server-configs-nginx)
+* Original Docs:
+   * [Code of Conduct](https://github.com/ionic-team/stencil/master/CODE_OF_CONDUCT.md)
+   * [Contributing](https://github.com/ionic-team/stencil/blob/master/.github/CONTRIBUTING.md)
+   * [Issue Template](https://raw.githubusercontent.com/ionic-team/stencil/master/.github/ISSUE_TEMPLATE.md)
