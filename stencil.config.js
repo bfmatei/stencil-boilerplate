@@ -6,6 +6,8 @@ exports.config = {
       /** Shared Components */
       components: [
         'app-form-text-input',
+        'app-form-checkbox',
+        'app-form-submit',
         'app-form',
         'app-icon',
         'app-link',
@@ -100,7 +102,10 @@ exports.config = {
     globIgnores: [
       'build/app/svg/*.js'
     ]
-  }
+  },
+  plugins: [
+    require('./plugins/postcss')()
+  ]
 };
 
 exports.devServer = {

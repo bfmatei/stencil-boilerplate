@@ -8,7 +8,7 @@ import noop from '~helpers/noop';
 
 @Component({
   tag: 'app-button',
-  styleUrl: 'app-button.scss'
+  styleUrl: 'app-button.pcss'
 })
 export class AppButton {
   @Prop()

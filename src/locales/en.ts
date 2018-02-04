@@ -10,6 +10,7 @@ export default {
   login: {
     username: 'Username',
     password: 'Password',
+    rememberMe: 'Remember Me',
     signIn: 'Sign In',
     tryUsername: 'Hint: try admin',
     tryPassword: 'Hint: try password',

@@ -1,13 +1,37 @@
-app-loader {
-  --containerBorderSize: 3px;
-  --innerContainerBorderSize: 1px;
-  --backgroundColor: var(--white);
+@import 'colors.css';
+@import 'sizes.css';
 
-  &.lighterMidnight {
-    --containerBorderSize: 0;
-    --innerContainerBorderSize: 0;
-    --backgroundColor: var(--lighterMidnight);
+@keyframes rotateLeft {
+  60%,
+  75%,
+  100% {
+    transform: rotate(360deg);
   }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateRight {
+  0%,
+  25%,
+  45% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+app-loader {
   display: none;
   margin-top: 0;
   margin-right: auto;
@@ -15,60 +39,30 @@ app-loader {
   max-width: 36px;
   max-height: 36px;
   overflow: hidden;
-  border: var(--innerContainerBorderSize) solid var(--darkerGray);
+  border: 1px solid var(--darkerGray);
   border-radius: 50%;
   transform: scale(0.7);
 
-  @keyframes rotateLeft {
-    60%,
-    75%,
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes rotate {
-    0% {
-      transform: rotate(0);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes rotateRight {
-    0%,
-    25%,
-    45% {
-      transform: rotate(0);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  .spinnerWrapper {
+  & .spinnerWrapper {
     position: relative;
     width: 36px;
     height: 36px;
     border-radius: 100%;
     left: calc(50% - 18px);
+
+    &:after {
+      content: '';
+      background: var(--white);
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+    }
   }
 
-  .spinnerWrapper:after {
-    content: '';
-    background: var(--backgroundColor);
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    position: absolute;
-    top: 5px;
-    left: 5px;
-  }
-
-  .rotator {
+  & .rotator {
     position: relative;
     width: 36px;
     border-radius: 36px;
@@ -83,13 +77,13 @@ app-loader {
       right: 0;
       bottom: 0;
       background: var(--brightGreen);
-      border: var(--containerBorderSize) solid var(--backgroundColor);
+      border: 3px solid var(--white);
       border-radius: 100%;
     }
   }
 
-  .innerSpin {
-    background: var(--backgroundColor);
+  & .innerSpin {
+    background: var(--white);
     height: 36px;
     width: 18px;
     animation: rotateLeft 2500ms infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
@@ -115,5 +109,25 @@ app-loader {
 
   &.active {
     display: block;
+  }
+
+  &.lighterMidnight {
+    border: 0;
+
+    & .rotator {
+      &:before {
+        border: 0;
+      }
+    }
+
+    & .spinnerWrapper {
+      &:after {
+        background: var(--lighterMidnight);
+      }
+    }
+
+    & .innerSpin {
+      background: var(--lighterMidnight);
+    }
   }
 }

@@ -6,4 +6,5 @@ export interface UserData {
   lastName: string;
   email: string;
   role?: string;
+  rememberMe?: boolean;
 }

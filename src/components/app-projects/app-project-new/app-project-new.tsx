@@ -4,7 +4,7 @@ import {
 
 @Component({
   tag: 'app-project-new',
-  styleUrl: 'app-project-new.scss'
+  styleUrl: 'app-project-new.pcss'
 })
 export class AppProjectNew {
   public render(): JSX.Element {

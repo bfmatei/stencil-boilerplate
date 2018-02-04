@@ -32,7 +32,7 @@ It features a couple of common principles and workflows that are used at the mom
       * Named values replacement
       * Component for quicker translations
    * Advanced CSS tehniques:
-      * SCSS pre-processor
+      * [PostCSS](http://postcss.org/) + [cssnext](http://cssnext.io/) = <3
       * Grid layout
       * Centralized variables
       * Material-UI-based styles
@@ -104,6 +104,7 @@ The orchestrators are singleton store instances which coordinate a specific piec
    * Supported Controls:
       * Text Input
       * Password Input
+      * Checkbox
       * Submit
 * Connected Router
    * Inspired by [react-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux)
@@ -116,10 +117,10 @@ The orchestrators are singleton store instances which coordinate a specific piec
 At the moment the following features are in work and should be finished soon:
    * Connected Forms: 
       * Rich Editor support
-      * Checkbox support
       * List Support
    * Components:
       * Dropdown Menu
+   * Style Guide
 
 ## Known Issues
 Please note that this boilerplate is built for web apps rather than public websites. This means that stuff like **server side rendering** are not enabled and the styles are specifically built for [WebKit](https://webkit.org/)-based browsers.
@@ -144,3 +145,7 @@ Please note that this boilerplate is built for web apps rather than public websi
    * [John Louie Biñas](https://codepen.io/johnlouie04/pen/LEoOGV)
 * nginx config rules
    * [H5BP](https://github.com/h5bp/server-configs-nginx)
+* Original Docs:
+   * [Code of Conduct](https://github.com/ionic-team/stencil/master/CODE_OF_CONDUCT.md)
+   * [Contributing](https://github.com/ionic-team/stencil/blob/master/.github/CONTRIBUTING.md)
+   * [Issue Template](https://raw.githubusercontent.com/ionic-team/stencil/master/.github/ISSUE_TEMPLATE.md)

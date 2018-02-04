@@ -3,8 +3,7 @@ import {
   Element,
   Method,
   Prop,
-  State,
-  Watch
+  State
 } from '@stencil/core';
 
 import {
@@ -59,22 +58,6 @@ export class AppFormTextInput {
   private $element: HTMLAppFormTextInputElement;
 
   private formValueChangeHandler: (field: string, value: string, err: string) => void;
-  private formPropChangeHandler: (field: string, prop: string, value: string | boolean, oldValue: string | boolean) => void;
-
-  @Watch('disabled')
-  public disabledChangeHandler(newValue: boolean, oldValue: boolean): void {
-    this.formPropChangeHandler(this.name, 'userDisabled', newValue, oldValue);
-  }
-
-  @Watch('message')
-  public messageChangeHandler(newValue: boolean, oldValue: boolean): void {
-    this.formPropChangeHandler(this.name, 'userMessage', newValue, oldValue);
-  }
-
-  @Watch('hasError')
-  public hasErrorChangeHandler(newValue: boolean, oldValue: boolean): void {
-    this.formPropChangeHandler(this.name, 'userError', newValue, oldValue);
-  }
 
   public fieldSelector(form: ConnectedForm, fieldName: string): ConnectedFormField {
     const field: ConnectedFormField = form && form.fields[fieldName] ? form.fields[fieldName] : {
@@ -103,12 +86,11 @@ export class AppFormTextInput {
   }
 
   @Method()
-  public register(reduxState: ConnectedForm, formValueChangeHandler: (field: string, value: string, err: string) => void, formPropChangeHandler: (field: string, prop: string, value: string | boolean, oldValue: string | boolean) => void): void {
+  public register(reduxState: ConnectedForm, formValueChangeHandler: (field: string, value: string | boolean, err: string) => void): void {
     this.reduxState = this.fieldSelector(reduxState, this.name);
     this.submitting = reduxState.submitting;
 
     this.formValueChangeHandler = formValueChangeHandler;
-    this.formPropChangeHandler = formPropChangeHandler;
   }
 
   @autobind
@@ -121,7 +103,7 @@ export class AppFormTextInput {
   }
 
   @Method()
-  public validate(value: string = this.reduxState.value): AppFormError {
+  public validate(value: string | boolean = this.reduxState.value): AppFormError {
     return {
       field: this.name,
       message: this.validators.reduce((err: string, validator: AppFormValidator) => {
@@ -139,15 +121,17 @@ export class AppFormTextInput {
       return null;
     }
 
+    const value: string = this.reduxState.value as string;
+
     return (
       <app-text-input
         name={this.name}
         label={this.label}
         fieldType={this.fieldType}
-        message={!this.reduxState.dirty || (this.reduxState.value.length === 0 && !this.reduxState.error) ? this.reduxState.userMessage : this.reduxState.message}
-        value={this.reduxState.value}
+        message={!this.reduxState.dirty || (value.length === 0 && !this.reduxState.error) ? this.reduxState.userMessage : this.reduxState.message}
+        value={value}
         disabled={this.reduxState.userDisabled || this.reduxState.disabled || this.submitting}
-        hasError={this.reduxState.userError || this.reduxState.error}
+        hasError={this.reduxState.userError || (this.reduxState.dirty && this.reduxState.error)}
         onValueChange={this.fieldValueChangeHandler}
       />
     );

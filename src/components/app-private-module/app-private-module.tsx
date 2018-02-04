@@ -23,7 +23,7 @@ import {
  */
 @Component({
   tag: 'app-private-module',
-  styleUrl: 'app-private-module.scss'
+  styleUrl: 'app-private-module.pcss'
 })
 export class AppPrivateModule {
   @Prop({

@@ -8,7 +8,7 @@ import noop from '~helpers/noop';
 
 @Component({
   tag: 'app-checkbox',
-  styleUrl: 'app-checkbox.scss'
+  styleUrl: 'app-checkbox.pcss'
 })
 export class AppCheckbox {
   @Prop()
@@ -28,6 +28,12 @@ export class AppCheckbox {
 
   @Prop()
   public disabled: boolean = false;
+
+  @Prop()
+  public hasError: boolean = false;
+
+  @Prop()
+  public message: string = '';
 
   @Listen('click')
   public elementClickHandler(evt: MouseEvent): void {

@@ -4,7 +4,7 @@ import {
 
 @Component({
   tag: 'app-dashboard',
-  styleUrl: 'app-dashboard.scss'
+  styleUrl: 'app-dashboard.pcss'
 })
 export class AppDashboard {
   public render(): JSX.Element {

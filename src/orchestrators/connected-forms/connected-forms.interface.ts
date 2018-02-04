@@ -3,7 +3,7 @@ export interface ConnectedFormField {
   dirty: boolean;
   disabled: boolean;
   userDisabled: boolean;
-  value: string;
+  value: string | boolean;
   error: boolean;
   userError: boolean;
   message: string;

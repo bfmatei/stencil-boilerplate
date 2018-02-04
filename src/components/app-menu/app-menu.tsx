@@ -24,7 +24,7 @@ import {
 
 @Component({
   tag: 'app-menu',
-  styleUrl: 'app-menu.scss'
+  styleUrl: 'app-menu.pcss'
 })
 export class AppMenu {
   @Prop({

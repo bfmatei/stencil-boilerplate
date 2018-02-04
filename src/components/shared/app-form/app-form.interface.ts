@@ -1,4 +1,4 @@
-export type HTMLAppFormFieldsElements = HTMLAppFormTextInputElement;
+export type HTMLAppFormFieldsElements = HTMLAppFormTextInputElement | HTMLAppFormCheckboxElement;
 
 export type HTMLAppFormSubmitElements = HTMLAppFormSubmitElement;
 
@@ -7,4 +7,4 @@ export interface AppFormError {
   message: string;
 }
 
-export type AppFormValidator = (value: string) => string;
+export type AppFormValidator = (value: string | boolean) => string;

@@ -12,7 +12,7 @@ import {
 
 @Component({
   tag: 'app-rich-editor-menu-item',
-  styleUrl: 'app-rich-editor-menu-item.scss'
+  styleUrl: 'app-rich-editor-menu-item.pcss'
 })
 export class AppRichEditorMenuItem {
   @Prop({

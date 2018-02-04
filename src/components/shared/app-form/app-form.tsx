@@ -15,7 +15,6 @@ import promisedNoop from '~helpers/promisedNoop';
 import {
   registerField,
   registerForm,
-  setFieldProp,
   setFieldValue,
   submitForm,
   SubmitFormError,
@@ -62,7 +61,6 @@ export class AppForm {
 
   private registerForm: typeof registerForm;
   private setFieldValue: typeof setFieldValue;
-  private setFieldProp: typeof setFieldProp;
   private submitForm: typeof submitForm;
   private submitFormSuccess: typeof submitFormSuccess;
   private submitFormError: typeof submitFormError;
@@ -93,7 +91,6 @@ export class AppForm {
       registerForm,
       registerField,
       setFieldValue,
-      setFieldProp,
       submitForm,
       submitFormSuccess,
       submitFormError
@@ -102,7 +99,7 @@ export class AppForm {
 
   public componentDidLoad(): void {
     const fields: ConnectedFormField[] = this.internalFields.map((field: HTMLAppFormFieldsElements): ConnectedFormField => {
-      field.register(this.reduxState, this.fieldValueChangeHandler, this.fieldPropChangeHandler);
+      field.register(this.reduxState, this.fieldValueChangeHandler);
 
       const validation: AppFormError = field.validate();
 
@@ -129,7 +126,7 @@ export class AppForm {
   @Watch('reduxState')
   public reduxStateChangeHandler(newValue: ConnectedForm): void {
     this.internalFields.forEach((field: HTMLAppFormFieldsElements) => {
-      field.register(newValue, this.fieldValueChangeHandler, this.fieldPropChangeHandler);
+      field.register(newValue, this.fieldValueChangeHandler);
     });
 
     this.submits.forEach((submits: HTMLAppFormSubmitElements) => {
@@ -146,15 +143,8 @@ export class AppForm {
   }
 
   @autobind
-  public fieldValueChangeHandler(field: string, value: string, err: string = ''): void {
+  public fieldValueChangeHandler(field: string, value: string | boolean, err: string = ''): void {
     this.setFieldValue(field, value, err, this.name);
-  }
-
-  @autobind
-  public fieldPropChangeHandler(field: string, prop: string, value: string | boolean, oldValue: string | boolean): void {
-    if (value !== oldValue) {
-      this.setFieldProp(field, prop, value, this.name);
-    }
   }
 
   @Method()
@@ -170,10 +160,10 @@ export class AppForm {
     const errors: AppFormError[] = this.internalFields.reduce((errorsCollection: AppFormError[], field: HTMLAppFormFieldsElements) => {
       const validation: AppFormError = field.validate();
 
-      return [
+      return validation.message ? [
         ...errorsCollection,
-        validation.message ? validation : undefined
-      ];
+        validation.message  ? validation : undefined
+      ] : errorsCollection;
     }, []);
 
     if (errors.length > 0) {

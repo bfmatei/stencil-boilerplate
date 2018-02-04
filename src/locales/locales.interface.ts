@@ -14,6 +14,7 @@ export interface LocalesMap extends I18nObject {
   login: {
     username: string;
     password: string;
+    rememberMe: string;
     signIn: string;
     tryUsername: string;
     tryPassword: string;

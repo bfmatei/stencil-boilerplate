@@ -37,7 +37,7 @@ import {
 
 @Component({
   tag: 'app-rich-editor',
-  styleUrl: 'app-rich-editor.scss'
+  styleUrl: 'app-rich-editor.pcss'
 })
 export class AppRichEditor {
   @Prop()

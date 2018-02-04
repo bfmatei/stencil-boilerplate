@@ -5,7 +5,7 @@ import {
 
 @Component({
   tag: 'app-rich-editor-label',
-  styleUrl: 'app-rich-editor-label.scss'
+  styleUrl: 'app-rich-editor-label.pcss'
 })
 export class AppRichEditorLabel {
   @Prop()

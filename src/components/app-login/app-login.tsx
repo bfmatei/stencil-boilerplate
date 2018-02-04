@@ -30,7 +30,7 @@ import {
 
 @Component({
   tag: 'app-login',
-  styleUrl: 'app-login.scss'
+  styleUrl: 'app-login.pcss'
 })
 export class AppLogin {
   @Prop({
@@ -78,11 +78,13 @@ export class AppLogin {
       setTimeout(() => {
         const {
           username,
-          password
+          password,
+          rememberMe
         } = form.fields;
 
-        const usernameValue: string = username.value;
-        const passwordValue: string = password.value;
+        const usernameValue: string = username.value as string;
+        const passwordValue: string = password.value as string;
+        const rememberMeValue: boolean = rememberMe.value as boolean;
 
         if (usernameValue !== 'admin') {
           reject([
@@ -105,7 +107,8 @@ export class AppLogin {
               user: usernameValue,
               name: `${usernameValue}Name`,
               lastName: `${usernameValue}LastName`,
-              email: `${usernameValue}@app.com`
+              email: `${usernameValue}@app.com`,
+              rememberMe: rememberMeValue
             });
           }
         }
@@ -117,7 +120,9 @@ export class AppLogin {
 
   @autobind
   private formSubmitSuccessHandler(data: UserData): void {
-    localStorage.setItem('user', JSON.stringify(data));
+    if (data.rememberMe) {
+      localStorage.setItem('user', JSON.stringify(data));
+    }
 
     this.setUser(data);
 
@@ -154,6 +159,11 @@ export class AppLogin {
           validators={[
             isRequired
           ]}
+        />
+        <app-form-checkbox
+          name='rememberMe'
+          label='login.rememberMe'
+          class='remember'
         />
         <app-form-submit label='login.signIn' />
       </app-form>
