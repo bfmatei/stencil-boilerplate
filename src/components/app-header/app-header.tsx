@@ -56,9 +56,15 @@ export class AppHeader {
 
   public render(): JSX.Element[] {
     return [
-      <app-icon name='menu' class='button menu' onClick={this.menuClickHandler} />,
-      <app-logo class='logo' onClick={this.logoClickHandler} />,
-      <app-icon name='github' class='button github' onClick={this.githubClickHandler} />
+      (
+        <app-icon name='menu' class='button menu' onClick={this.menuClickHandler} />
+      ),
+      (
+        <app-logo class='logo' onClick={this.logoClickHandler} />
+      ),
+      (
+        <app-icon name='github' class='button github' onClick={this.githubClickHandler} />
+      )
     ];
   }
 }

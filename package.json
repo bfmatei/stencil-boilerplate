@@ -47,6 +47,7 @@
     "postcss-url": "7.3.0",
     "stylelint": "8.4.0",
     "tslint": "5.9.1",
-    "tslint-language-service": "0.9.8"
+    "tslint-language-service": "0.9.8",
+    "tslint-react": "3.4.0"
   }
 }

@@ -1,9 +1,17 @@
+// tslint 5.8.0
+// tslint-react 3.4.0
 {
+  "lintOptions": {
+    "typeCheck": true
+  },
   "linterOptions": {
     "exclude": [
       "./src/components.d.ts"
     ]
   },
+  "rulesDirectory": [
+    "node_modules/tslint-react/rules"
+  ],
   "rules": {
     // TypeScript-specific
     "adjacent-overload-signatures": true,
@@ -317,6 +325,22 @@
       "allow-pascal-case",
       "allow-leading-underscore"
     ],
-    "whitespace": true
+    "whitespace": true,
+
+    // tslint-react
+    "jsx-alignment": true,
+    "jsx-ban-props": false,
+    "jsx-boolean-value": true,
+    "jsx-curly-spacing": [
+      true,
+      "never"
+    ],
+    "jsx-no-bind": true,
+    "jsx-no-lambda": true,
+    "jsx-no-multiline-js": false,
+    "jsx-no-string-ref": true,
+    "jsx-use-translation-function": false,
+    "jsx-self-close": true,
+    "jsx-wrap-multiline": true
   }
 }

@@ -55,8 +55,12 @@ export class AppPrivateModule {
     });
 
     return [
-      <app-header class='header-container' />,
-      <app-menu class='menu-container' />,
+      (
+        <app-header class='header-container' />
+      ),
+      (
+        <app-menu class='menu-container' />
+      ),
       (
         <section class={containerClassNames}>
           <app-route
