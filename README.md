@@ -32,7 +32,7 @@ It features a couple of common principles and workflows that are used at the mom
       * Named values replacement
       * Component for quicker translations
    * Advanced CSS tehniques:
-      * SCSS pre-processor
+      * [PostCSS](http://postcss.org/) + [cssnext](http://cssnext.io/) = <3
       * Grid layout
       * Centralized variables
       * Material-UI-based styles
@@ -104,6 +104,7 @@ The orchestrators are singleton store instances which coordinate a specific piec
    * Supported Controls:
       * Text Input
       * Password Input
+      * Checkbox
       * Submit
 * Connected Router
    * Inspired by [react-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux)
@@ -116,7 +117,6 @@ The orchestrators are singleton store instances which coordinate a specific piec
 At the moment the following features are in work and should be finished soon:
    * Connected Forms: 
       * Rich Editor support
-      * Checkbox support
       * List Support
    * Components:
       * Dropdown Menu

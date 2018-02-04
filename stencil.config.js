@@ -1,5 +1,3 @@
-const postcss = require('postcss');
-
 exports.config = {
   buildEs5: false,
   buildStats: true,
@@ -106,38 +104,7 @@ exports.config = {
     ]
   },
   plugins: [
-    {
-      name: 'postcss-loader',
-      transform(sourceText, importee) {
-        if (importee.indexOf('.pcss') !== -1) {
-          const promise = new Promise((resolve) => {
-            require('postcss')([
-              require('postcss-import')({
-                skipDuplicates: true,
-                path: [
-                  'src/styles/'
-                ]
-              }),
-              require('postcss-url')(),
-              require('postcss-cssnext')(),
-              require('postcss-reporter')()
-            ])
-              .process(sourceText, {
-                from: importee
-              })
-              .then((data) => {
-                resolve(data.css);
-              })
-          });
-
-          return promise;
-        } else {
-          return Promise.resolve({
-            code: sourceText
-          });
-        }
-      }
-    }
+    require('./plugins/postcss')()
   ]
 };
 
