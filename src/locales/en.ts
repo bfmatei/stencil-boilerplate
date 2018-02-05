@@ -21,7 +21,7 @@ export default {
   },
   projects: {
     projectsList: {
-      index: 'This is the list projects page',
+      index: 'Projects List',
       headerButtons: {
         refresh: 'Refresh Projects',
         add: 'Add Project'

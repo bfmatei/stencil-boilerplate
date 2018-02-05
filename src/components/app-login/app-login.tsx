@@ -165,7 +165,7 @@ export class AppLogin {
           label='login.rememberMe'
           class='remember'
         />
-        <app-form-submit label='login.signIn' />
+        <app-form-submit label='login.signIn' full={true} center={true} />
       </app-form>
     );
   }

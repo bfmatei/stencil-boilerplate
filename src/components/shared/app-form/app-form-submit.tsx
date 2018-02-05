@@ -31,6 +31,15 @@ export class AppFormSubmit {
   @Prop()
   public loading: boolean = false;
 
+  @Prop()
+  public center: boolean = false;
+
+  @Prop()
+  public swap: boolean = false;
+
+  @Prop()
+  public full: boolean  = false;
+
   @State()
   public reduxState: ConnectedForm = null;
 
@@ -69,6 +78,9 @@ export class AppFormSubmit {
         onClick={this.submitClickHandler}
         disabled={this.disabled || this.reduxState.error}
         loading={this.disabled || this.reduxState.submitting}
+        swap={this.swap}
+        center={this.center}
+        full={this.full}
       />
     );
   }

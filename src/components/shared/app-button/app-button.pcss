@@ -5,25 +5,63 @@ app-button {
   background-color: var(--brightGreen);
   color: var(--white);
   transition: background-color var(--animationDuration) var(--animationTiming);
-  box-shadow: var(--shadowColor);
+  box-shadow:
+    var(--shadowColor) 0 1px 6px,
+    var(--shadowColor) 0 1px 4px;
   box-sizing: border-box;
-  display: inline-block;
+  display: grid;
+  grid-template-areas: 'app-button-icon app-button-label';
   cursor: pointer;
   height: 36px;
-  line-height: 36px;
-  width: 100%;
+  width: fit-content;
   border-radius: 2px;
-  text-align: center;
   outline: none;
   font-size: 16px;
   border: 10px;
+  user-select: none;
+  align-items: center;
+  grid-gap: 10px;
+  padding: 0 10px;
 
   &:hover {
     background-color: var(--darkerGreen);
   }
 
+  & .icon {
+    grid-area: app-button-icon;
+  }
+
+  & .label {
+    grid-area: app-button-label;
+  }
+
   &.disabled {
     background-color: var(--lighterMidnight);
     pointer-events: none;
+  }
+
+  &.swap {
+    grid-template-areas: 'app-button-label app-button-icon';
+  }
+
+  &.center {
+    display: flex;
+    justify-content: center;
+
+    &.swap {
+      flex-flow: row-reverse;
+    }
+
+    & .icon {
+      grid-area: unset;
+    }
+
+    & .label {
+      grid-area: unset;
+    }
+  }
+
+  &.full {
+    width: 100%;
   }
 }

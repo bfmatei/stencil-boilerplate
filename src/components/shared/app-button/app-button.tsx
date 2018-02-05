@@ -26,23 +26,51 @@ export class AppButton {
   @Prop()
   public loading: boolean = false;
 
+  @Prop()
+  public swap: boolean = false;
+
+  @Prop()
+  public center: boolean = false;
+
+  @Prop()
+  public full: boolean = false;
+
   @Listen('click')
-  public clickHandler(evt: UIEvent): void {
+  protected clickHandler(evt: UIEvent): void {
     evt.preventDefault();
 
     this.onClick(evt);
   }
 
-  public hostData(): JSXElements.AppButtonAttributes {
+  protected hostData(): JSXElements.AppButtonAttributes {
     return {
       class: {
         disabled: this.disabled || this.loading,
-        loading: this.loading
+        loading: this.loading,
+        swap: this.swap,
+        center: this.center,
+        full: this.full
       }
     };
   }
 
-  public render(): JSX.Element | JSX.Element[] {
+  private renderIcon(): JSX.Element {
+    if (!this.icon) {
+      return null;
+    }
+
+    return (
+      <app-icon class='icon' name={this.icon} />
+    );
+  }
+
+  private renderLabel(): JSX.Element {
+    return (
+      <app-translate class='label' entry={this.label} />
+    );
+  }
+
+  protected render(): JSX.Element | JSX.Element[] {
     if (this.loading) {
       return (
         <app-loader backgroundColor='lighterMidnight' active={true} />
@@ -50,8 +78,8 @@ export class AppButton {
     }
 
     return [
-      this.icon ? <app-icon name={this.icon} /> : null,
-      <app-translate entry={this.label} />
+      this.renderIcon(),
+      this.renderLabel()
     ];
   }
 }

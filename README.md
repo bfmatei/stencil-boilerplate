@@ -48,6 +48,7 @@ The boilerplate project aims to ease the development of a project while keeping 
    * Disabled State (optional)
    * Pending State (optional)
    * Background Color Palette
+   * Layout adjustments (swap, full width, center)
 * Checkbox
    * Label(optional)
    * Custom Icon (optional)

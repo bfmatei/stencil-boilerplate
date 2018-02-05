@@ -1,4 +1,5 @@
 @import 'animations.pcss';
+@import 'colors.pcss';
 
 app-private-module {
   display: grid;
@@ -27,6 +28,7 @@ app-private-module {
     overflow-x: hidden;
     overflow-y: auto;
     transition: width var(--animationDuration) var(--animationTiming);
+    background-color: rgb(239, 243, 246);
 
     &.shrinked {
       width: calc(100vw - 260px);
