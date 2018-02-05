@@ -115,20 +115,18 @@ export class AppProjectsList {
           <h1 class='title'>
             <app-translate entry='projects.projectsList.index' />
           </h1>
-          <div class='buttons-container'>
-            <button class='button' onClick={this.refreshButtonClickHandler}>
-              <app-icon name='refresh' class='icon' />
-              <span class='label'>
-                <app-translate entry='projects.projectsList.headerButtons.refresh' />
-              </span>
-            </button>
-            <button class='button' onClick={this.addButtonClickHandler}>
-              <app-icon name='add' class='icon' />
-              <span class='label'>
-                <app-translate entry='projects.projectsList.headerButtons.add' />
-              </span>
-            </button>
-          </div>
+          <app-button
+            class='button refresh'
+            onClick={this.refreshButtonClickHandler}
+            icon='refresh'
+            label='projects.projectsList.headerButtons.refresh'
+          />
+          <app-button
+            class='button add'
+            onClick={this.addButtonClickHandler}
+            icon='add'
+            label='projects.projectsList.headerButtons.add'
+          />
         </header>
       ),
       (

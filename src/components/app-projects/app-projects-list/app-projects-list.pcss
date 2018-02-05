@@ -8,59 +8,36 @@ app-projects-list {
   box-shadow: var(--shadowColor);
   border-radius: 2px;
   color: var(--textColor);
-  display: flex;
+  display: grid;
+  grid-template:
+    'container-header'
+    'container-content'
+    'container-footer';
   width: 100%;
-  flex-wrap: wrap;
 
   & .header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-area: container-header;
+    grid-template: 'container-header-title container-header-button-left container-header-button-center container-header-button-right';
     padding: 16px;
     width: 100%;
     box-sizing: border-box;
 
     & .title {
+      grid-area: container-header-title;
       font-size: 24px;
       color: var(--textColor);
       display: block;
       line-height: 36px;
-      flex: 1;
     }
 
-    & .buttons-container {
-      flex: 1;
-      display: block;
-      max-width: 50%;
-      overflow: scroll;
-      white-space: nowrap;
-      text-align: right;
+    & .button {
+      &.refresh {
+        grid-area: container-header-button-center;
+      }
 
-      & .button {
-        width: auto;
-        background-color: transparent;
-        color: var(--brightGreen);
-        box-shadow: none;
-        padding: 0 12px;
-        margin: 0;
-        display: inline-block;
-
-        &:hover,
-        &:active {
-          background-color: rgba(153, 153, 153, 0.2);
-        }
-
-        & .icon {
-          vertical-align: middle;
-          transform: translate(-4px, -2px);
-        }
-
-        @media only screen and (max-width: 800px) {
-          padding: 0 6px 0 12px;
-
-          & .label {
-            display: none;
-          }
-        }
+      &.add {
+        grid-area: container-header-button-right;
       }
     }
   }

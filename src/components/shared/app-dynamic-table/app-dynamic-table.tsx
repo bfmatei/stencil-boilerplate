@@ -21,7 +21,7 @@ import {
 
 @Component({
   tag: 'app-dynamic-table',
-  styleUrl: 'style.pcss'
+  styleUrl: 'app-dynamic-table.pcss'
 })
 export class AppDynamicTable {
   @Prop()
