@@ -6,12 +6,12 @@ import {
   State
 } from '@stencil/core';
 
-import autobind from '../../../decorators/autobind';
-import noop from '../../../helpers/noop';
+import autobind from '~decorators/autobind';
+import noop from '~helpers/noop';
 import {
   ConnectedForm,
   ConnectedFormField
-} from '../../../orchestrators/connected-forms/connected-forms.interface';
+} from '~orchestrators/connected-forms/connected-forms.interface';
 
 import {
   AppFormError,

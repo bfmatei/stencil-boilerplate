@@ -7,7 +7,7 @@ import {
 } from '~components/app-menu/app-menu.actions';
 import {
   AppProjectsActionTypes
-} from '../components/app-projects/app-projects.actions';
+} from '~components/app-projects/app-projects.actions';
 import {
   ConfigActionTypes
 } from '~orchestrators/config/config.actions';

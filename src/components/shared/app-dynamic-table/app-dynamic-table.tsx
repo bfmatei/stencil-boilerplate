@@ -3,11 +3,11 @@ import {
   Prop
 } from '@stencil/core';
 
-import autobind from '../../../decorators/autobind';
+import autobind from '~decorators/autobind';
 import {
   calculateClassNames
-} from '../../../helpers/className';
-import noop from '../../../helpers/noop';
+} from '~helpers/className';
+import noop from '~helpers/noop';
 
 import {
   ButtonData,

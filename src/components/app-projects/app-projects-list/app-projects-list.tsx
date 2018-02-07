@@ -7,17 +7,17 @@ import {
   Store
 } from '@stencil/redux';
 
-import autobind from '../../../decorators/autobind';
-import {
-  push
-} from '../../../orchestrators/connected-router/connected-router.actions';
-import {
-  GlobalStoreState
-} from '../../../redux/store';
 import {
   deleteProject,
   refreshProjects
-} from '../app-projects.actions';
+} from '~components/app-projects/app-projects.actions';
+import autobind from '~decorators/autobind';
+import {
+  push
+} from '~orchestrators/connected-router/connected-router.actions';
+import {
+  GlobalStoreState
+} from '~redux/store';
 
 @Component({
   tag: 'app-projects-list',

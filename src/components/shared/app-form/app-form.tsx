@@ -127,7 +127,7 @@ export class AppForm {
     });
 
     this.submits.forEach((submits: HTMLAppFormSubmitElements) => {
-      submits.register(this.reduxState, this.submitClickHandler);
+      submits.register(newValue, this.submitClickHandler);
     });
   }
 
@@ -172,12 +172,14 @@ export class AppForm {
 
       this.submit(this.reduxState)
         .then((data: any) => {
-          this.submitFormSuccess(this.name);
           this.submitSuccess(data);
+
+          return this.submitFormSuccess(this.name);
         })
         .catch((err: AppFormError[]) => {
-          this.submitFormError(this.name, err);
           this.submitError(err);
+
+          return this.submitFormError(this.name, err);
         });
     }
   }
