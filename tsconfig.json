@@ -55,7 +55,7 @@
       ],
       "~types/*": [
         "src/types/*"
-      ],
+      ]
     }
   },
   "exclude": [
