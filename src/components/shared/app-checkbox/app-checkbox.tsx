@@ -4,7 +4,7 @@ import {
   Prop
 } from '@stencil/core';
 
-import noop from '../../../helpers/noop';
+import noop from '~helpers/noop';
 
 @Component({
   tag: 'app-checkbox',

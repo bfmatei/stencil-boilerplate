@@ -1,7 +1,7 @@
-import locales from '../../locales/locales';
+import locales from '~locales/locales';
 import {
   LocalesMap
-} from '../../locales/locales.interface';
+} from '~locales/locales.interface';
 
 import {
   I18nActions,

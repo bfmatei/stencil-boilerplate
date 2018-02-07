@@ -7,26 +7,26 @@ import {
   Store
 } from '@stencil/redux';
 
-import autobind from '../../decorators/autobind';
-import {
-  ConnectedForm
-} from '../../orchestrators/connected-forms/connected-forms.interface';
-import {
-  push
-} from '../../orchestrators/connected-router/connected-router.actions';
-import {
-  setUser
-} from '../../orchestrators/user/user.actions';
-import {
-  UserData
-} from '../../orchestrators/user/user.interface';
-import {
-  GlobalStoreState
-} from '../../redux/store';
 import {
   AppFormError
-} from '../shared/app-form/app-form.interface';
-import isRequired from '../shared/app-form/validators/is-required';
+} from '~components/shared/app-form/app-form.interface';
+import isRequired from '~components/shared/app-form/validators/is-required';
+import autobind from '~decorators/autobind';
+import {
+  ConnectedForm
+} from '~orchestrators/connected-forms/connected-forms.interface';
+import {
+  push
+} from '~orchestrators/connected-router/connected-router.actions';
+import {
+  setUser
+} from '~orchestrators/user/user.actions';
+import {
+  UserData
+} from '~orchestrators/user/user.interface';
+import {
+  GlobalStoreState
+} from '~redux/store';
 
 @Component({
   tag: 'app-login',

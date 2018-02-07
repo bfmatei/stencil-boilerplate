@@ -1,6 +1,6 @@
 import {
   AppFormError
-} from '../../components/shared/app-form/app-form.interface';
+} from '~components/shared/app-form/app-form.interface';
 
 import {
   ConnectedFormsActions,

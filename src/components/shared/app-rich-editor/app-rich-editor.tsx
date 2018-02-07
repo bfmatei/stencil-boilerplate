@@ -4,9 +4,9 @@ import {
   State
 } from '@stencil/core';
 
-import autobind from '../../../decorators/autobind';
-import convertRichEditorToString from '../../../helpers/convertRichEditorToString';
-import noop from '../../../helpers/noop';
+import autobind from '~decorators/autobind';
+import convertRichEditorToString from '~helpers/convertRichEditorToString';
+import noop from '~helpers/noop';
 
 import {
   alignCenterButton,

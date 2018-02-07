@@ -4,13 +4,13 @@ import {
 
 import {
   LocalesMap
-} from '../../locales/locales.interface';
+} from '~locales/locales.interface';
 import {
   ReduxAction
-} from '../../redux/actions';
+} from '~redux/actions';
 import {
   GlobalStoreState
-} from '../../redux/store';
+} from '~redux/store';
 
 export enum I18nActions {
   UPDATE_ENTRIES = 'UPDATE_ENTRIES'

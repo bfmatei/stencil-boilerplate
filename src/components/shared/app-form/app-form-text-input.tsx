@@ -6,17 +6,16 @@ import {
   State
 } from '@stencil/core';
 
-import autobind from '../../../decorators/autobind';
-import noop from '../../../helpers/noop';
-import {
-  ConnectedForm,
-  ConnectedFormField
-} from '../../../orchestrators/connected-forms/connected-forms.interface';
-
 import {
   AppFormError,
   AppFormValidator
-} from './app-form.interface';
+} from '~components/shared/app-form/app-form.interface';
+import autobind from '~decorators/autobind';
+import noop from '~helpers/noop';
+import {
+  ConnectedForm,
+  ConnectedFormField
+} from '~orchestrators/connected-forms/connected-forms.interface';
 
 @Component({
   tag: 'app-form-text-input'

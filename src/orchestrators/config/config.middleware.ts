@@ -3,13 +3,13 @@ import {
   Middleware
 } from 'redux';
 
-import locales from '../../locales/locales';
-import {
-  GlobalStoreState
-} from '../../redux/store';
+import locales from '~locales/locales';
 import {
   updateEntries
-} from '../i18n/i18n.actions';
+} from '~orchestrators/i18n/i18n.actions';
+import {
+  GlobalStoreState
+} from '~redux/store';
 
 import {
   ConfigActions

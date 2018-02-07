@@ -9,13 +9,13 @@ import {
 
 import {
   ConnectedRouterState
-} from '../../../orchestrators/connected-router/connected-router.reducer';
+} from '~orchestrators/connected-router/connected-router.reducer';
 import {
   GlobalStoreState
-} from '../../../redux/store';
+} from '~redux/store';
 import {
   ComponentProps
-} from '../../../types/componentProps';
+} from '~types/componentProps';
 
 @Component({
   tag: 'app-route'
