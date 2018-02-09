@@ -1,5 +1,5 @@
 exports.config = {
-  buildEs5: false,
+  buildEs5: true,
   buildStats: true,
   collections: [
     {
