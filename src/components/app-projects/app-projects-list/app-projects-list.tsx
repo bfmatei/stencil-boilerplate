@@ -6,6 +6,7 @@ import {
 import {
   Store
 } from '@stencil/redux';
+import Bind from 'lodash-decorators/bind';
 
 import {
   deleteProject,
@@ -57,7 +58,7 @@ export class AppProjectsList {
     });
   }
 
-  @autobind
+  @Bind()
   private refreshButtonClickHandler(): void {
     this.refreshProjects();
   }
