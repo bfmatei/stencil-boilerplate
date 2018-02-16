@@ -27,33 +27,36 @@
       {
         "name": "tslint-language-service"
       }
-    ]
-//    "paths": {
-//      "~assets/*": [
-//        "src/assets/*"
-//      ],
-//      "~components/*": [
-//        "src/components/*"
-//      ],
-//      "~decorators/*": [
-//        "src/decorators/*"
-//      ],
-//      "~helpers/*": [
-//        "src/helpers/*"
-//      ],
-//      "~locales": [
-//        "src/locales/*"
-//      ],
-//      "~orchestrators/*": [
-//        "src/orchestrators/*"
-//      ],
-//      "~redux/*": [
-//        "src/redux/*"
-//      ],
-//      "~styles/*": [
-//        "src/styles/*"
-//      ]
-//    }
+    ],
+    "paths": {
+      "~assets/*": [
+        "src/assets/*"
+      ],
+      "~components/*": [
+        "src/components/*"
+      ],
+      "~decorators/*": [
+        "src/decorators/*"
+      ],
+      "~helpers/*": [
+        "src/helpers/*"
+      ],
+      "~locales/*": [
+        "src/locales/*"
+      ],
+      "~orchestrators/*": [
+        "src/orchestrators/*"
+      ],
+      "~redux/*": [
+        "src/redux/*"
+      ],
+      "~styles/*": [
+        "src/styles/*"
+      ],
+      "~types/*": [
+        "src/types/*"
+      ]
+    }
   },
   "exclude": [
     "docs",

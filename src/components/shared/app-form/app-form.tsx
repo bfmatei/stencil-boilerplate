@@ -9,9 +9,9 @@ import {
   Store
 } from '@stencil/redux';
 
-import autobind from '../../../decorators/autobind';
-import noop from '../../../helpers/noop';
-import promisedNoop from '../../../helpers/promisedNoop';
+import autobind from '~decorators/autobind';
+import noop from '~helpers/noop';
+import promisedNoop from '~helpers/promisedNoop';
 import {
   registerField,
   registerForm,
@@ -20,14 +20,14 @@ import {
   SubmitFormError,
   submitFormError,
   submitFormSuccess
-} from '../../../orchestrators/connected-forms/connected-forms.actions';
+} from '~orchestrators/connected-forms/connected-forms.actions';
 import {
   ConnectedForm,
   ConnectedFormField
-} from '../../../orchestrators/connected-forms/connected-forms.interface';
+} from '~orchestrators/connected-forms/connected-forms.interface';
 import {
   GlobalStoreState
-} from '../../../redux/store';
+} from '~redux/store';
 
 import {
   AppFormError,
@@ -127,7 +127,7 @@ export class AppForm {
     });
 
     this.submits.forEach((submits: HTMLAppFormSubmitElements) => {
-      submits.register(this.reduxState, this.submitClickHandler);
+      submits.register(newValue, this.submitClickHandler);
     });
   }
 
@@ -172,12 +172,14 @@ export class AppForm {
 
       this.submit(this.reduxState)
         .then((data: any) => {
-          this.submitFormSuccess(this.name);
           this.submitSuccess(data);
+
+          return this.submitFormSuccess(this.name);
         })
         .catch((err: AppFormError[]) => {
-          this.submitFormError(this.name, err);
           this.submitError(err);
+
+          return this.submitFormError(this.name, err);
         });
     }
   }

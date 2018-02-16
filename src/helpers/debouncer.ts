@@ -1,4 +1,4 @@
-import autobind from '../decorators/autobind';
+import autobind from '~decorators/autobind';
 
 export default class Debouncer {
   public duration: number;

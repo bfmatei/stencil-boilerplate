@@ -1,6 +1,6 @@
 // tslint:disable:no-invalid-this
 
-import Debouncer from '../helpers/debouncer';
+import Debouncer from '~helpers/debouncer';
 
 export default function debounce(duration: number): MethodDecorator {
   return function (

@@ -4,10 +4,10 @@ import {
 
 import {
   ReduxAction
-} from '../../redux/actions';
+} from '~redux/actions';
 import {
   GlobalStoreState
-} from '../../redux/store';
+} from '~redux/store';
 
 export enum AppProjectsActions {
   DELETE_PROJECT = 'DELETE_PROJECT',

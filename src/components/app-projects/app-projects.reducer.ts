@@ -2,7 +2,7 @@ import {
   ColumnAlign,
   ColumnData,
   ColumnTypes
-} from '../shared/app-dynamic-table/app-dynamic-table.interface';
+} from '~components/shared/app-dynamic-table/app-dynamic-table.interface';
 
 import {
   AppProjectsActions,

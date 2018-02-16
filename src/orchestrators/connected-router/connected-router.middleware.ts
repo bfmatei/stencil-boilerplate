@@ -8,7 +8,7 @@ import {
 
 import {
   GlobalStoreState
-} from '../../redux/store';
+} from '~redux/store';
 
 import {
   ConnectedRouterActions

@@ -9,10 +9,10 @@ import {
 
 import {
   calculateClassNames
-} from '../../helpers/className';
+} from '~helpers/className';
 import {
   GlobalStoreState
-} from '../../redux/store';
+} from '~redux/store';
 
 /**
  * AppPrivateModule is a wrapper component for private modules.
