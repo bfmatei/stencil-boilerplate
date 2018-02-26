@@ -24,10 +24,11 @@
     "lint:ts": "tslint -p tsconfig.json -c tslint.json",
     "lint:styles": "stylelint \"src/**/*.{css,scss,less,pcss}\" --cache --cache-location \"./.stylelint-cache\"",
     "test": "jest --no-cache --verbose",
-    "test:watch": "jest --watch --no-cache --verbose"
+    "test:watch": "jest --watch --no-cache --verbose",
+    "install": "cd node_modules/@stencil/core && npm i && npm run build"
   },
   "dependencies": {
-    "@stencil/core": "0.4.0-1",
+    "@stencil/core": "file:../stencil",
     "@stencil/redux": "0.0.4",
     "@stencil/router": "0.0.23",
     "redux": "3.7.2",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@stencil/dev-server": "0.0.18",
+    "@stencil/postcss": "0.0.2",
     "@stencil/utils": "0.0.4",
     "@types/jest": "22.1.1",
     "jest": "22.2.1",
@@ -48,6 +50,7 @@
     "stylelint": "8.4.0",
     "tslint": "5.9.1",
     "tslint-language-service": "0.9.8",
-    "tslint-react": "3.4.0"
+    "tslint-react": "3.4.0",
+    "typescript": "^2.7.2"
   }
 }

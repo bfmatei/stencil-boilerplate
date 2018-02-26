@@ -1,14 +1,6 @@
 exports.config = {
   buildEs5: true,
   buildStats: true,
-  collections: [
-    {
-      name: '@stencil/router'
-    },
-    {
-      name: '@stencil/redux'
-    }
-  ],
   emptyDist: false,
   emptyWWW: true,
   enableCache: true,
@@ -29,7 +21,7 @@ exports.config = {
     ]
   },
   plugins: [
-    require('./plugins/postcss')({
+    require('@stencil/postcss')({
       plugins: [
         require('postcss-import')({
           skipDuplicates: true,
