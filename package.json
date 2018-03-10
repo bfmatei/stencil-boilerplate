@@ -24,33 +24,32 @@
     "lint:ts": "tslint -p tsconfig.json -c tslint.json",
     "lint:styles": "stylelint \"src/**/*.{css,scss,less,pcss}\" --cache --cache-location \"./.stylelint-cache\"",
     "test": "jest --no-cache --verbose",
-    "test:watch": "jest --watch --no-cache --verbose",
-    "install": "cd node_modules/@stencil/core && npm i && npm run build"
+    "test:watch": "jest --watch --no-cache --verbose"
   },
   "dependencies": {
     "@stencil/core": "file:../stencil",
     "@stencil/redux": "0.0.4",
-    "@stencil/router": "0.0.23",
+    "@stencil/router": "0.0.27",
     "redux": "3.7.2",
     "redux-devtools-extension": "2.13.2",
     "redux-thunk": "2.2.0"
   },
   "devDependencies": {
     "@stencil/dev-server": "0.0.18",
-    "@stencil/postcss": "0.0.2",
+    "@stencil/postcss": "0.0.3",
     "@stencil/utils": "0.0.4",
-    "@types/jest": "22.1.1",
-    "jest": "22.2.1",
-    "postcss": "6.0.17",
+    "@types/jest": "22.2.0",
+    "jest": "22.4.2",
+    "postcss": "6.0.19",
     "postcss-calc": "6.0.1",
     "postcss-cssnext": "3.1.0",
-    "postcss-import": "11.0.0",
+    "postcss-import": "11.1.0",
     "postcss-reporter": "5.0.0",
-    "postcss-url": "7.3.0",
-    "stylelint": "8.4.0",
+    "postcss-url": "7.3.1",
+    "stylelint": "9.1.1",
     "tslint": "5.9.1",
     "tslint-language-service": "0.9.8",
-    "tslint-react": "3.4.0",
-    "typescript": "^2.7.2"
+    "tslint-react": "3.5.1",
+    "typescript": "2.7.2"
   }
 }

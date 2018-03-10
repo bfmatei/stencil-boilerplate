@@ -4,6 +4,5 @@ export default function convertRichEditorToString(input: string): string {
     .replace(/&nbsp;/gi, ' ')
     .replace(/&amp;/gi, '&')
     .replace(/\n\n+/g, '\n\n')
-    .trimLeft()
-    .trimRight();
+    .trim();
 }

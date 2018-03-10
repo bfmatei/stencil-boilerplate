@@ -1,25 +1,26 @@
 exports.config = {
   buildEs5: true,
   buildStats: true,
-  emptyDist: false,
-  emptyWWW: true,
-  enableCache: true,
-  generateDistribution: false,
+  enableCache: false,
   generateDocs: false,
-  generateWWW: true,
   hydratedCssClass: 'hydrated',
   logLevel: 'info',
   namespace: 'app',
-  serviceWorker: {
-    skipWaiting: true,
-    clientsClaim: true,
-    globPatterns: [
-      '**/*.{js,css,json,html,ico,png,jpeg,svg,woff2}'
-    ],
-    globIgnores: [
-      'build/app/svg/*.js'
-    ]
-  },
+  outputTargets: [
+    {
+      type: 'www',
+      serviceWorker: {
+        skipWaiting: true,
+        clientsClaim: true,
+        globPatterns: [
+          '**/*.{js,css,json,html,ico,png,jpeg,svg,woff2}'
+        ],
+        globIgnores: [
+          'build/app/svg/*.js'
+        ]
+      }
+    }
+  ],
   plugins: [
     require('@stencil/postcss')({
       plugins: [
