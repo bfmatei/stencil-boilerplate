@@ -26,11 +26,23 @@ export class AppLoad {
 
   public componentWillLoad(): void {
     if ('serviceWorker' in this.window.navigator) {
-      this.window.navigator.serviceWorker.ready
-        .then(() => {
-          this.isLoading = false;
+      this.window.navigator.serviceWorker
+        .getRegistrations()
+        .then((registrations: ServiceWorkerRegistration[]) => {
+          if (registrations.length) {
+            this.window.navigator.serviceWorker.ready
+              .then(() => {
+                this.isLoading = false;
+              })
+              .catch(() => {
+                this.isLoading = false;
+              });
+          } else {
+            this.isLoading = false;
+          }
         })
         .catch(() => {
+          // TODO: Handle error
           this.isLoading = false;
         });
     }
