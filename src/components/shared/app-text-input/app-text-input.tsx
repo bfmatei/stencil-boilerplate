@@ -90,7 +90,7 @@ export class AppTextInput {
   public hostData(): JSXElements.AppTextInputAttributes {
     return {
       class: {
-        active: this.value.length > 0 || this.focused,
+        active: this.value.toString().length > 0 || this.focused,
         disabled: this.disabled,
         error: this.hasError
       }
